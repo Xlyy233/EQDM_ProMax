@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #303133;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .el-table {
+    font-size: 13px;
+  }
+  .el-pagination {
+    justify-content: center !important;
+  }
+}
+
+/* Nice scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #c0c4cc; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #909399; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Utility classes */
+.page-container { padding: 20px; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.page-title { font-size: 22px; font-weight: 600; margin: 0; color: #303133; }
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.gradient-primary { background: linear-gradient(135deg, #409EFF 0%, #67C23A 100%); }
+
+/* ====== 深色模式 ====== */
+html.dark {
+  background-color: #141414;
+  color: #e5eaf3;
+}
+
+html.dark #app {
+  background-color: #141414;
+}
+
+html.dark .page-container {
+  background-color: #141414;
+}
+
+html.dark .page-title {
+  color: #e5eaf3;
+}
+
+html.dark .stat-card {
+  background: #1d1e1f;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+html.dark .stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+html.dark .section-card {
+  background: #1d1e1f;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+html.dark .section-title {
+  color: #e5eaf3;
+  border-bottom-color: #363637;
+}
+
+html.dark .el-descriptions {
+  --el-descriptions-item-bordered-label-background: #262727;
+}
+
+html.dark .el-dialog {
+  --el-dialog-bg-color: #1d1e1f;
+}
+
+html.dark .card-title,
+html.dark .info-value {
+  color: #e5eaf3;
+}
+
+html.dark .card-equipment,
+html.dark .info-label,
+html.dark .last-date,
+html.dark .remark-text,
+html.dark .content-text {
+  color: #a3a6ad;
+}
+
+html.dark .card-body {
+  border-color: #363637;
+}
+
+html.dark .last-record-card {
+  background: linear-gradient(135deg, #1a2332, #1d1e1f);
+  border-left-color: #409EFF;
+}
+
+html.dark .last-record-title {
+  color: #e5eaf3;
+}
+
+html.dark .last-record-content,
+html.dark .last-record-time {
+  color: #a3a6ad;
+}
+
+html.dark .empty-state p {
+  color: #a3a6ad;
+}
+
+html.dark .status-tab {
+  background: #262727;
+  color: #a3a6ad;
+}
+
+html.dark .status-tab.active {
+  background: #409EFF;
+  color: #fff;
+}
+
+html.dark .qr-placeholder {
+  background: #262727;
+}
+
+html.dark .photo-item.upload-btn {
+  background: #262727;
+  border-color: #363637;
+}
+
+html.dark .plan-card {
+  box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+
+html.dark .plan-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+html.dark .qrcode-card {
+  box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+
+html.dark .qrcode-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+html.dark .welcome-card {
+  color: #fff !important;
+}
+
+html.dark .submit-row {
+  background: #1d1e1f;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}

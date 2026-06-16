@@ -1,0 +1,1065 @@
+[2026-06-16 00:03:02] [INFO ] ========================================
+[2026-06-16 00:03:02] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 00:03:02] [INFO ] ========================================
+[2026-06-16 00:03:02] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 00:03:02] [INFO ]   API 前缀: /api
+[2026-06-16 00:03:02] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 00:03:02] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 00:03:02] [INFO ]   运行环境: development
+[2026-06-16 00:03:02] [INFO ] ========================================
+[2026-06-16 00:03:02] [INFO ]   默认账号:
+[2026-06-16 00:03:02] [INFO ]     管理员: admin / admin123
+[2026-06-16 00:03:02] [INFO ]     部门经理: manager / manager123
+[2026-06-16 00:03:02] [INFO ]     员工共享: sa / 123456
+[2026-06-16 00:03:02] [INFO ] ========================================
+[2026-06-16 00:04:00] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 9ms - ::1
+[2026-06-16 00:04:00] [INFO ] GET /api/records?page=1&pageSize=10 200 1ms - ::1
+[2026-06-16 00:04:00] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-16 00:04:09] [INFO ] GET /api/equipments?page=1&pageSize=20 200 15ms - ::1
+[2026-06-16 00:05:56] [INFO ] GET / 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 00:05:56] [INFO ] GET /assets/index-CVUmErxb.css 200 8ms - ::ffff:192.168.102.14
+[2026-06-16 00:05:56] [INFO ] GET /assets/index-DHwmU_3K.js 200 18ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:10] [INFO ] GET /assets/index-sIRzcv4s.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:10] [INFO ] GET /favicon.svg 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:10] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] POST /api/auth/login 200 122ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /assets/index-B1InK3ZS.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /assets/record-jLUeRvHr.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /assets/maintenance-D3MAKeZg.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /assets/statistics-DofEgY_1.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /api/records?page=1&pageSize=10 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:06:50] [INFO ] GET /api/statistics/dashboard 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:07:03] [INFO ] GET /assets/scan-C87HXv4y.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:07:14] [INFO ] GET /assets/form-BgmPII1H.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:07:14] [INFO ] GET /assets/equipment-1Krx3fE3.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:07:15] [INFO ] GET /api/equipments?pageSize=999 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:19:19] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:19:19] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:19:20] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:19:49] [INFO ] ========================================
+[2026-06-16 00:19:49] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 00:19:49] [INFO ] ========================================
+[2026-06-16 00:19:49] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 00:19:49] [INFO ]   API 前缀: /api
+[2026-06-16 00:19:49] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 00:19:49] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 00:19:49] [INFO ]   运行环境: development
+[2026-06-16 00:19:49] [INFO ] ========================================
+[2026-06-16 00:19:49] [INFO ]   默认账号:
+[2026-06-16 00:19:49] [INFO ]     管理员: admin / admin123
+[2026-06-16 00:19:49] [INFO ]     部门经理: manager / manager123
+[2026-06-16 00:19:49] [INFO ]     员工共享: sa / 123456
+[2026-06-16 00:19:49] [INFO ] ========================================
+[2026-06-16 00:19:59] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 8ms - ::1
+[2026-06-16 00:19:59] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-06-16 00:19:59] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-16 00:20:04] [INFO ] GET /api/equipments?page=1&pageSize=20 200 11ms - ::1
+[2026-06-16 00:20:14] [INFO ] GET / 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:14] [INFO ] GET /assets/index-BXf0H2_I.css 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:14] [INFO ] GET /assets/index-CUu6w-US.js 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:20] [INFO ] GET / 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:28] [INFO ] GET /assets/index-BXf0H2_I.css 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:28] [INFO ] GET /assets/index-CUu6w-US.js 206 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:28] [INFO ] GET /assets/index-CUu6w-US.js 206 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:29] [INFO ] GET /assets/index-ClGCjYb-.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:29] [INFO ] GET /assets/record-BqV3MAJK.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:29] [INFO ] GET /assets/maintenance-DMDkECZL.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:29] [INFO ] GET /assets/statistics-eMHf8vVh.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:29] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:30] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:30] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:30] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:33] [INFO ] GET /assets/scan-FprZUEjZ.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:36] [INFO ] GET /assets/equipment-DhGlAhOk.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:36] [INFO ] GET /assets/form-CNcecR62.js 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:36] [INFO ] GET /assets/form-oRYGeA3T.css 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:36] [INFO ] GET /api/equipments?pageSize=999 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:20:36] [INFO ] GET /api/records?equipmentId=emqf95rukqce2&page=1&pageSize=1 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:21:41] [INFO ] GET /assets/index-K5CLsHfS.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:21:43] [INFO ] POST /api/auth/login 200 102ms - ::ffff:192.168.102.14
+[2026-06-16 00:21:43] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:21:43] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:21:43] [INFO ] GET /api/statistics/dashboard 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:23:05] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:23:12] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:23:25] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:23:37] [INFO ] GET /api/equipments?page=1&pageSize=20 304 3ms - ::1
+[2026-06-16 00:24:08] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:24:08] [INFO ] GET /api/equipments?page=1&pageSize=20 304 3ms - ::1
+[2026-06-16 00:27:12] [INFO ] GET /api/equipments?page=1&pageSize=20 304 3ms - ::1
+[2026-06-16 00:27:12] [INFO ] GET /api/equipments?page=1&pageSize=20 304 0ms - ::1
+[2026-06-16 00:38:58] [INFO ] ========================================
+[2026-06-16 00:38:58] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 00:38:58] [INFO ] ========================================
+[2026-06-16 00:38:58] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 00:38:58] [INFO ]   API 前缀: /api
+[2026-06-16 00:38:58] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 00:38:58] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 00:38:58] [INFO ]   运行环境: development
+[2026-06-16 00:38:58] [INFO ] ========================================
+[2026-06-16 00:38:58] [INFO ]   默认账号:
+[2026-06-16 00:38:58] [INFO ]     管理员: admin / admin123
+[2026-06-16 00:38:58] [INFO ]     部门经理: manager / manager123
+[2026-06-16 00:38:58] [INFO ]     员工共享: sa / 123456
+[2026-06-16 00:38:58] [INFO ] ========================================
+[2026-06-16 00:39:05] [INFO ] GET /api/equipments?page=1&pageSize=20 304 28ms - ::1
+[2026-06-16 00:39:05] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::1
+[2026-06-16 00:39:06] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-06-16 00:39:06] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-06-16 00:39:06] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-06-16 00:39:39] [INFO ] GET / 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:39] [INFO ] GET /assets/index-Gtpjyep6.css 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:39] [INFO ] GET /assets/index-BVikq107.js 200 11ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:50] [INFO ] GET /assets/index-4HQx13Mr.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:50] [INFO ] GET /favicon.svg 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:50] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] POST /api/auth/login 200 101ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /assets/index-D8EI4NbB.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /assets/record-CHXsHC1n.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /assets/index-BXSV598w.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /assets/maintenance-BSCbdb7V.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /assets/statistics-BZkDbZY9.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /api/statistics/dashboard 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /api/records?page=1&pageSize=10 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:39:58] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:40:02] [INFO ] GET /assets/equipment-CXPUqj6c.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:40:02] [INFO ] GET /assets/qrcode-kmf_ANGx.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:40:02] [INFO ] GET /api/equipments?page=1&pageSize=20 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:40:02] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:09] [INFO ] GET / 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:09] [INFO ] GET /assets/index-Gtpjyep6.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:09] [INFO ] GET /assets/index-BVikq107.js 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:30] [INFO ] GET / 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:30] [INFO ] GET /assets/index-BVikq107.js 206 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:30] [INFO ] GET /assets/index-Gtpjyep6.css 206 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:30] [INFO ] GET /assets/index-BVikq107.js 206 11ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:30] [INFO ] GET /assets/index-Gtpjyep6.css 206 6ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /assets/index-D8EI4NbB.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /assets/record-CHXsHC1n.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /assets/maintenance-BSCbdb7V.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /assets/statistics-BZkDbZY9.js 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /assets/index-BXSV598w.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:39] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/index-BVikq107.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/index-Gtpjyep6.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/index-BXSV598w.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/index-D8EI4NbB.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/record-CHXsHC1n.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/statistics-BZkDbZY9.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /assets/maintenance-BSCbdb7V.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:47] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:52] [INFO ] GET /assets/scan-JnVBtErh.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:55] [INFO ] GET /assets/form-DRvkhJlC.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:55] [INFO ] GET /assets/equipment-CXPUqj6c.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:55] [INFO ] GET /assets/form-oRYGeA3T.css 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:55] [INFO ] GET /api/equipments?pageSize=999 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:42:55] [INFO ] GET /api/records?equipmentId=emqf95rukqce2&page=1&pageSize=1 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:10] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:10] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:10] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:12] [INFO ] GET /assets/list-BL6JIYQ4.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:12] [INFO ] GET /assets/list-Cx5UzeU1.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:12] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:14] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:14] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:14] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:16] [INFO ] GET /assets/index-DqWYd8-Q.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:19] [INFO ] GET /api/equipments?pageSize=999 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:28] [INFO ] GET /api/equipments?pageSize=999 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 00:43:30] [INFO ] GET /api/equipments?pageSize=999 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:00:50] [INFO ] ========================================
+[2026-06-16 01:00:50] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 01:00:50] [INFO ] ========================================
+[2026-06-16 01:00:50] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 01:00:50] [INFO ]   API 前缀: /api
+[2026-06-16 01:00:50] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 01:00:50] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 01:00:50] [INFO ]   运行环境: development
+[2026-06-16 01:00:50] [INFO ] ========================================
+[2026-06-16 01:00:50] [INFO ]   默认账号:
+[2026-06-16 01:00:50] [INFO ]     管理员: admin / admin123
+[2026-06-16 01:00:50] [INFO ]     部门经理: manager / manager123
+[2026-06-16 01:00:50] [INFO ]     员工共享: sa / 123456
+[2026-06-16 01:00:50] [INFO ] ========================================
+[2026-06-16 01:01:34] [INFO ] GET / 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:34] [INFO ] GET /assets/index-BTGyrO8C.css 200 8ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:34] [INFO ] GET /assets/index-BAwpSDJr.js 200 15ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:45] [INFO ] GET /assets/index-Bk7pseMj.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:45] [INFO ] GET /assets/index-BXSV598w.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /assets/maintenance-njWpWuH3.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /assets/record-DHz89ooY.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /assets/statistics-DlaMGa39.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /favicon.svg 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /api/statistics/dashboard 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /api/records?page=1&pageSize=10 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:46] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:49] [INFO ] GET /assets/qrcode-DSRq5CCH.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:49] [INFO ] GET /assets/equipment-DwTsaQkW.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:50] [INFO ] GET /api/equipments?page=1&pageSize=20 200 19ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:50] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:57] [INFO ] GET /template 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:57] [INFO ] GET /assets/index-BAwpSDJr.js 200 11ms - ::ffff:192.168.102.14
+[2026-06-16 01:01:57] [INFO ] GET /assets/index-BTGyrO8C.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:01] [INFO ] GET /template 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:02] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:02] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:02] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:20] [INFO ] GET /assets/scan-JnVBtErh.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:26] [INFO ] GET /record 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:26] [INFO ] GET /assets/index-BAwpSDJr.js 206 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:26] [INFO ] GET /assets/index-BTGyrO8C.css 200 11ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:26] [INFO ] GET /assets/index-BAwpSDJr.js 206 7ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:46] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:46] [INFO ] GET /assets/index-BTGyrO8C.css 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:46] [INFO ] GET /assets/index-BAwpSDJr.js 206 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:46] [INFO ] GET /assets/index-BAwpSDJr.js 206 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /assets/record-DHz89ooY.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /assets/index-Bk7pseMj.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /assets/maintenance-njWpWuH3.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /assets/statistics-DlaMGa39.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /assets/index-BXSV598w.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:51] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:55] [INFO ] GET /assets/scan-vRn9nosg.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:58] [INFO ] GET /assets/form-B9FTRMw4.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:58] [INFO ] GET /assets/equipment-DwTsaQkW.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:58] [INFO ] GET /assets/form-BYbcyLiF.css 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:02:58] [INFO ] GET /assets/recordTemplates-CD7AXBth.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:03:00] [INFO ] GET /api/equipments?pageSize=999 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:03:00] [INFO ] GET /api/records?equipmentId=emqf95rukqce2&page=1&pageSize=1 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:13:44] [INFO ] ========================================
+[2026-06-16 01:13:44] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 01:13:44] [INFO ] ========================================
+[2026-06-16 01:13:44] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 01:13:44] [INFO ]   API 前缀: /api
+[2026-06-16 01:13:44] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 01:13:44] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 01:13:44] [INFO ]   运行环境: development
+[2026-06-16 01:13:44] [INFO ] ========================================
+[2026-06-16 01:13:44] [INFO ]   默认账号:
+[2026-06-16 01:13:44] [INFO ]     管理员: admin / admin123
+[2026-06-16 01:13:44] [INFO ]     部门经理: manager / manager123
+[2026-06-16 01:13:44] [INFO ]     员工共享: sa / 123456
+[2026-06-16 01:13:44] [INFO ] ========================================
+[2026-06-16 01:14:20] [INFO ] GET / 200 13ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:21] [INFO ] GET /assets/index-LbLJq7C8.css 200 8ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:21] [INFO ] GET /assets/index-Bm6j2-Fl.js 200 15ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /assets/index-CtCoR8_5.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /assets/statistics-DQYKAzs7.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /assets/record-Beuc2-Ef.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /assets/maintenance-1TgSnyH6.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /favicon.svg 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /api/records?page=1&pageSize=10 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /api/statistics/dashboard 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:32] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:41] [INFO ] GET /assets/equipment-D6g2whAz.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:41] [INFO ] GET /assets/qrcode-Bm_NRpe3.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:42] [INFO ] GET /api/equipments?page=1&pageSize=20 200 14ms - ::ffff:192.168.102.14
+[2026-06-16 01:14:42] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:24] [INFO ] GET /equipment-qrcode 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:25] [INFO ] GET /assets/index-DVx7DFru.js 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:25] [INFO ] GET /assets/index-Bt1QceEk.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:36] [INFO ] GET /assets/qrcode-BnaigFal.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:36] [INFO ] GET /assets/qrcode-C3SzFT90.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:36] [INFO ] GET /assets/equipment-CW9wecQU.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:36] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:17:36] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:31] [INFO ] GET /equipment-qrcode 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:32] [INFO ] GET /assets/index-BQz0opyL.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:32] [INFO ] GET /assets/index-LbLJq7C8.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:44] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:44] [INFO ] GET /assets/qrcode-D7grk4nq.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:44] [INFO ] GET /assets/equipment-B60Js1U9.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:44] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:44] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:52] [INFO ] GET /assets/list-EIml9pcX.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:52] [INFO ] GET /assets/list-Cx5UzeU1.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:52] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:52] [INFO ] GET /assets/record-C_rGpblF.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:52] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:54] [INFO ] GET /assets/list-CKi855eu.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:54] [INFO ] GET /assets/maintenance-Cbvg_yWf.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:54] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&keyword= 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:54] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:56] [INFO ] GET /assets/detail-DEEGGYUt.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:56] [INFO ] GET /api/maintenance-plans/new 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:59] [INFO ] DELETE /api/maintenance-plans/new 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:59] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&keyword= 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:43:59] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&keyword= 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:24] [INFO ] GET /maintenance/new 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:25] [INFO ] GET /assets/index-LbLJq7C8.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:25] [INFO ] GET /assets/index-DlXRSZb-.js 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/form-PVI5778e.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/form-UeDEMKP6.css 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/maintenance-marAcICK.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/equipment-BWMTnsb0.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/user-Dl4gHDI9.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /assets/index-BXSV598w.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /api/users?pageSize=999 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:36] [INFO ] GET /api/equipments?pageSize=999 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:54] [INFO ] GET /assets/list-VCM9BQJD.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:54] [INFO ] GET /assets/list-BSDoolOA.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:54] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:55] [INFO ] GET /assets/calendar-CMdSiPIS.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:56] [INFO ] GET /api/maintenance-plans?pageSize=999 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:57] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:57] [INFO ] GET /assets/index-DQtEcavG.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:57] [INFO ] GET /assets/statistics-C6GvYh4v.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:51:57] [INFO ] GET /assets/index-B8MRR2c_.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/monthly?year=2026&month=6 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/trend?days=30 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/department 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/cost?months=6 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:00] [INFO ] GET /api/statistics/record-type-distribution 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:19] [INFO ] GET /assets/record-CchUY-oQ.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:19] [INFO ] GET /assets/index-B70jccaP.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:41] [INFO ] GET /assets/list-PAqA0yDy.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:43] [INFO ] GET /assets/list-Cx5UzeU1.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:43] [INFO ] GET /assets/list-o7EzimRJ.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:44] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:46] [INFO ] GET /assets/form-_a65Tbv5.css 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:46] [INFO ] GET /assets/form-rfjY9zjE.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:46] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 01:52:46] [INFO ] GET /api/equipments?pageSize=999 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:13] [INFO ] GET /assets/index-HgjjTDkl.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:13] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:13] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:13] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:14] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:14] [INFO ] GET /assets/qrcode-f050EyJs.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:11:15] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:16:56] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:16:56] [INFO ] GET /assets/index-LbLJq7C8.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:16:56] [INFO ] GET /assets/index-Bawkp1Bh.js 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /assets/index-DCvSj-AP.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /assets/record-Codwhbd_.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /assets/maintenance-DLxHvh3S.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /assets/statistics-CygY_LdY.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:08] [INFO ] GET /api/statistics/dashboard 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:14] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:14] [INFO ] GET /assets/equipment-CdqguOIN.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:14] [INFO ] GET /assets/qrcode-bUZYiX-T.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:14] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:15] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:15] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:17:15] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:23:48] [INFO ] GET / 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:23:49] [INFO ] GET /assets/index-CwTCEu_P.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:23:49] [INFO ] GET /assets/index-BLQWj2th.js 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /assets/index-BnF4FcbH.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /assets/record-B0WGYloF.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /assets/maintenance-B62BpxHt.js 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /assets/statistics-Dvr1lXJt.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /assets/index-BXSV598w.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:00] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:14] [INFO ] GET /assets/list-CzSAOL2c.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:14] [INFO ] GET /assets/equipment-BI_zxXFL.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:14] [INFO ] GET /assets/qrcode-DHB4BZuC.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:14] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:16] [INFO ] GET /assets/list-Cx5UzeU1.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:16] [INFO ] GET /assets/list-JAvpMs_K.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:17] [INFO ] GET /assets/list-DzepWiGx.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:17] [INFO ] GET /assets/list-BSDoolOA.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:17] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:19] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:19] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:21] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:21] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:25] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:25] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:25] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:34] [INFO ] GET /assets/list-DAG0q59B.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:34] [INFO ] GET /assets/list-XmUOnSQT.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:34] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:36] [INFO ] GET /assets/index--01XG6ou.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:42] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:43] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:44] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:44] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:44] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:44] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:24:44] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:27] [INFO ] GET /api/equipments?page=1&pageSize=20 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:28] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:29] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:30] [INFO ] GET /assets/index-DGMLau6K.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:30] [INFO ] GET /assets/index-B8MRR2c_.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:34] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:34] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:34] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:34] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:34] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:51] [INFO ] GET /api/statistics/department 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:53] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:26:53] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:06] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:06] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:06] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/department 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/trend?days=30 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:14] [INFO ] GET /api/statistics/cost?months=6 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:25] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:25] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:26] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:26] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:26] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:46] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:46] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/department 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:47] [INFO ] GET /api/statistics/record-type-distribution 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:52] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:52] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:27:52] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:07] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:07] [INFO ] GET /assets/index-DX3gsg_U.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:07] [INFO ] GET /assets/index-CgLW4wJs.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /assets/index-Bfyu7tLk.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /assets/record-B0RFfPjJ.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /assets/index-BXSV598w.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /assets/maintenance-yyphd7kA.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /assets/statistics-CVp-SYrN.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:31:18] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:42] [INFO ] GET /assets/index-Cg0JdCft.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:44] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:44] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:44] [INFO ] GET /api/statistics/dashboard 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:46] [INFO ] GET /assets/qrcode-B6XDebEh.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:46] [INFO ] GET /assets/equipment-DnKlCzwn.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:46] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:46] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:47] [INFO ] GET /assets/list-dkZmwMfV.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:48] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:48] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:32:48] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:47] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:48] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:48] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:49] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:49] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:49] [INFO ] GET /api/statistics/dashboard 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:54] [INFO ] GET /assets/qrcode-BDzvbXqV.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:54] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/index-DX3gsg_U.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/index-Bfyu7tLk.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/index-BXSV598w.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/record-B0RFfPjJ.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/maintenance-yyphd7kA.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /assets/statistics-CVp-SYrN.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:34:59] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:00] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:00] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:00] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:01] [INFO ] GET /assets/qrcode-BDzvbXqV.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:01] [INFO ] GET /assets/qrcode-B6XDebEh.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:01] [INFO ] GET /assets/equipment-DnKlCzwn.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:01] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:02] [INFO ] GET /assets/list-Cx5UzeU1.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:02] [INFO ] GET /assets/list-B9vaXQF_.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:02] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:03] [INFO ] GET /assets/list-BSDoolOA.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:03] [INFO ] GET /assets/list-CU9hK_Xr.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:03] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:03] [INFO ] GET /assets/index-B8MRR2c_.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:03] [INFO ] GET /assets/index-D-CKLCyE.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 7ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/trend?days=30 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/department 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:06] [INFO ] GET /api/statistics/record-type-distribution 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:08] [INFO ] GET /assets/index-Cg0JdCft.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:09] [INFO ] GET /assets/list-XmUOnSQT.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:09] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:09] [INFO ] GET /assets/list-JjGM9HrD.js 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:10] [INFO ] GET /assets/list-dkZmwMfV.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:10] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:10] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:11] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:11] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:35:11] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:10] [INFO ] GET /assets/index-zIwsXk0c.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:12] [INFO ] POST /api/auth/login 200 105ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:12] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:12] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:12] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:17] [INFO ] GET /assets/index-DVU2n_JJ.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:17] [INFO ] GET /assets/index-pMSuYJ3e.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:17] [INFO ] GET /api/logs?page=1&pageSize=20 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:22] [INFO ] GET /api/logs?page=1&pageSize=20 304 8ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:23] [INFO ] GET /api/logs?page=1&pageSize=20 304 8ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:25] [INFO ] GET /api/logs?page=1&pageSize=20 304 7ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:26] [INFO ] GET /api/logs?page=1&pageSize=20 304 9ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:29] [INFO ] GET /api/logs?page=1&pageSize=20 304 9ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:31] [INFO ] GET /api/logs?page=1&pageSize=20 304 7ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:35] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:35] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:35] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:38] [INFO ] GET /assets/list-YpjyIDkC.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:38] [INFO ] GET /assets/user-Bpjqc3Fl.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:38] [INFO ] GET /api/users?page=1&pageSize=10&keyword= 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:53] [INFO ] PUT /api/users/u006 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 02:39:54] [INFO ] GET /api/users?page=1&pageSize=10&keyword= 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:02] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:02] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:02] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:04] [INFO ] GET /api/users?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/trend?days=30 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/department 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/cost?months=6 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:18] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:19] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:20] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:21] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:22] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:22] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:36] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:36] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:36] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:37] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:44] [INFO ] GET /api/equipments?page=2&pageSize=20 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:47] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:48] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:48] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:48] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:58] [INFO ] POST /api/auth/login 200 86ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:58] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:58] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:40:58] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:01] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:01] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:01] [INFO ] GET /api/equipments?page=1&pageSize=20 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:02] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:02] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/dashboard 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/trend?days=30 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/department 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:03] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:07] [INFO ] GET /assets/form-CZrWKJNC.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:07] [INFO ] GET /assets/form-_a65Tbv5.css 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:07] [INFO ] GET /api/equipments?pageSize=999 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:15] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:17] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:41] [INFO ] GET / 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:41] [INFO ] GET /assets/index-CgLW4wJs.css 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:41] [INFO ] GET /assets/index-DX3gsg_U.js 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /assets/index-Bfyu7tLk.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /assets/record-B0RFfPjJ.js 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /assets/maintenance-yyphd7kA.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /assets/statistics-CVp-SYrN.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /api/statistics/dashboard 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:55] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/index-DX3gsg_U.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/statistics-CVp-SYrN.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/maintenance-yyphd7kA.js 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/record-B0RFfPjJ.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/index-BXSV598w.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /assets/index-Bfyu7tLk.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:41:59] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/index-DX3gsg_U.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/record-B0RFfPjJ.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/statistics-CVp-SYrN.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/maintenance-yyphd7kA.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/index-BXSV598w.js 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /assets/index-Bfyu7tLk.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:00] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:21] [INFO ] ========================================
+[2026-06-16 02:42:21] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 02:42:21] [INFO ] ========================================
+[2026-06-16 02:42:21] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 02:42:21] [INFO ]   API 前缀: /api
+[2026-06-16 02:42:21] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 02:42:21] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 02:42:21] [INFO ]   运行环境: development
+[2026-06-16 02:42:21] [INFO ] ========================================
+[2026-06-16 02:42:21] [INFO ]   默认账号:
+[2026-06-16 02:42:21] [INFO ]     管理员: admin / admin123
+[2026-06-16 02:42:21] [INFO ]     部门经理: manager / manager123
+[2026-06-16 02:42:21] [INFO ]     员工共享: sa / 123456
+[2026-06-16 02:42:21] [INFO ] ========================================
+[2026-06-16 02:42:36] [INFO ] GET / 200 13ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:36] [INFO ] GET /assets/index-CgLW4wJs.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:36] [INFO ] GET /assets/index-DX3gsg_U.js 200 10ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /assets/index-Bfyu7tLk.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /assets/index-BXSV598w.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /assets/record-B0RFfPjJ.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /assets/maintenance-yyphd7kA.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /assets/statistics-CVp-SYrN.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /favicon.svg 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 8ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /api/statistics/dashboard 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:47] [INFO ] GET /api/records?page=1&pageSize=10 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:55] [INFO ] GET /assets/list-CU9hK_Xr.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:55] [INFO ] GET /assets/list-BSDoolOA.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:55] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:56] [INFO ] GET /assets/equipment-DnKlCzwn.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:56] [INFO ] GET /assets/list-dkZmwMfV.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:59] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 200 12ms - ::ffff:192.168.102.14
+[2026-06-16 02:42:59] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:04] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:04] [INFO ] GET /assets/qrcode-B6XDebEh.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:04] [INFO ] GET /api/equipments?page=1&pageSize=20 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:46] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:46] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:43:46] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:00] [INFO ] GET /api/equipments?page=1&pageSize=20 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:04] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:04] [INFO ] GET /assets/index-DX3gsg_U.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:04] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:04] [INFO ] GET /assets/index-BXSV598w.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:04] [INFO ] GET /assets/index-Bfyu7tLk.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /assets/record-B0RFfPjJ.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /assets/maintenance-yyphd7kA.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /assets/statistics-CVp-SYrN.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:05] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/index-DX3gsg_U.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/index-CgLW4wJs.css 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/record-B0RFfPjJ.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/index-BXSV598w.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/index-Bfyu7tLk.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/statistics-CVp-SYrN.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /assets/maintenance-yyphd7kA.js 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:08] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:10] [INFO ] GET /assets/scan-CgFuWokR.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:12] [INFO ] GET /assets/form-_a65Tbv5.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:12] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:12] [INFO ] GET /assets/form-CZrWKJNC.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:12] [INFO ] GET /assets/equipment-DnKlCzwn.js 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:13] [INFO ] GET /api/equipments?pageSize=999 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:44:13] [INFO ] GET /api/records?equipmentId=emqf95rupg6kl&page=1&pageSize=1 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:30] [INFO ] POST /api/records 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:30] [INFO ] GET /assets/list-B9vaXQF_.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:30] [INFO ] GET /assets/list-Cx5UzeU1.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:30] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:37] [INFO ] GET /assets/detail-SGceAiSH.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:37] [INFO ] GET /assets/detail-BAvHrcA6.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:37] [INFO ] GET /api/records/rmqg1i11y1o3d 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/%22 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/[ 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/t 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/d 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/a 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/: 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/i 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/m 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/g 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/e 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/j 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/p 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/; 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/b 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/s 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/6 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/4 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/, 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/9 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/A 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/Q 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/S 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/k 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/Z 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/J 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/R 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/B 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/D 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/H 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/Y 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/U 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/N 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/X 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/1 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/T 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/0 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/E 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/I 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/w 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/n 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/y 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/C 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/F 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/h 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/W 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/3 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/L 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/l 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/8 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/K 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/P 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/V 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/c 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/x 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/5 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/M 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/o 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:39] [INFO ] GET /record/v 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/G 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/u 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/2 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/O 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/z 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/+ 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/f 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/q 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/7 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/= 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/r 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:40] [INFO ] GET /record/] 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /equipment-qrcode 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /assets/index-DX3gsg_U.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /assets/equipment-DnKlCzwn.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /assets/qrcode-B6XDebEh.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /assets/qrcode-BDzvbXqV.css 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /api/equipments?page=1&pageSize=20 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:45:59] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:02] [INFO ] GET /assets/list-B9vaXQF_.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:02] [INFO ] GET /assets/index-BXSV598w.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:02] [INFO ] GET /assets/list-Cx5UzeU1.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:02] [INFO ] GET /assets/record-B0RFfPjJ.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:02] [INFO ] GET /api/records?page=1&pageSize=10 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:04] [INFO ] GET /assets/detail-BAvHrcA6.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:04] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:04] [INFO ] GET /assets/detail-SGceAiSH.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:04] [INFO ] GET /api/records/rmqg1i11y1o3d 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/%22 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/d 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/[ 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/a 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/t 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/: 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/i 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/m 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/g 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/e 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/j 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/p 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/; 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/b 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/s 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/4 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/6 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/, 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/9 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/A 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/Q 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/R 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/J 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/B 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/S 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/Z 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/k 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/D 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/H 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/Y 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/X 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/N 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:05] [INFO ] GET /record/U 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/1 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/E 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/0 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/T 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/I 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/w 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/h 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/n 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/F 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/W 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/C 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/y 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/3 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/L 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/l 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/8 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/P 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/K 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/V 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/x 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/c 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/M 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/o 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/5 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/v 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/G 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/u 200 0ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/2 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/z 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/O 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/+ 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/f 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/7 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/q 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/= 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/r 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:46:06] [INFO ] GET /record/] 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:17] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:17] [INFO ] GET /assets/index-CgLW4wJs.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:17] [INFO ] GET /assets/index-D7n_ezZN.js 200 11ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /assets/index-NMmAZMuI.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /assets/record-lPFvyhHx.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /assets/maintenance-CO2PlG-3.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /assets/statistics-CnKAfVLo.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 02:54:28] [INFO ] GET /api/statistics/dashboard 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:04:37] [INFO ] GET / 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:04:37] [INFO ] GET /assets/index-D7n_ezZN.js 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 03:04:37] [INFO ] GET /assets/index-CgLW4wJs.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:26] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:26] [INFO ] GET /assets/index-CgLW4wJs.css 206 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:26] [INFO ] GET /assets/index-D7n_ezZN.js 206 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:26] [INFO ] GET /assets/index-CgLW4wJs.css 206 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:26] [INFO ] GET /assets/index-D7n_ezZN.js 206 9ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:31] [INFO ] GET /assets/index-NMmAZMuI.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /assets/record-lPFvyhHx.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /assets/maintenance-CO2PlG-3.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /assets/statistics-CnKAfVLo.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /api/statistics/dashboard 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:32] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:48] [INFO ] GET /assets/list-Cx5UzeU1.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:48] [INFO ] GET /assets/list-BpEfyRZj.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:48] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:49] [INFO ] GET /assets/detail-W7pgv28A.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:49] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:50] [INFO ] GET /assets/detail-SGceAiSH.css 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:50] [INFO ] GET /api/records/rmqg1i11y1o3d 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/d 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/[ 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/%22 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/a 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/t 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/: 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/i 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/m 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/g 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/e 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/p 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/; 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/j 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/b 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:51] [INFO ] GET /record/s 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/6 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/4 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/, 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/9 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/Q 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/A 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/S 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/k 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/J 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/Z 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/R 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/B 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/D 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/H 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/U 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/Y 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/N 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/X 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/0 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/1 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/T 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/E 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/I 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/w 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/n 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/F 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/C 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/y 200 7ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/h 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/W 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/3 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/8 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/L 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/l 200 6ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/K 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/P 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/V 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/c 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/x 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/M 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/5 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/o 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/v 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/G 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/u 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/z 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/O 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/2 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/+ 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/f 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/7 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/q 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/r 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/= 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:52] [INFO ] GET /record/] 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:56] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:58] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:58] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:05:58] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:01] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:02] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:02] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:02] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:32] [INFO ] GET /assets/form-0vdgIPih.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:32] [INFO ] GET /assets/equipment-CNxic3f2.js 200 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:32] [INFO ] GET /assets/form-DBdwvBkn.css 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:32] [INFO ] GET /api/equipments?pageSize=999 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:42] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:42] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:42] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:06:46] [INFO ] GET /api/equipments?pageSize=999 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:07:01] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:07:01] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:07:01] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/index-D7n_ezZN.js 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/index-BXSV598w.js 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/index-NMmAZMuI.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/maintenance-CO2PlG-3.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/record-lPFvyhHx.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /assets/statistics-CnKAfVLo.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /favicon.svg 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:09] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET / 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/index-CgLW4wJs.css 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/index-D7n_ezZN.js 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/maintenance-CO2PlG-3.js 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/index-NMmAZMuI.js 304 4ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/record-lPFvyhHx.js 304 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/index-BXSV598w.js 304 6ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /assets/statistics-CnKAfVLo.js 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:10] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:11] [INFO ] GET /api/statistics/dashboard 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:11] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:08:11] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:31] [INFO ] GET / 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:31] [INFO ] GET /assets/index-CXEcIubn.js 200 5ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:31] [INFO ] GET /assets/index-Bq23dyAW.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /assets/index-CsqOpv58.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /assets/record-DhUdm42V.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /assets/maintenance-z4-oAHjG.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /assets/statistics-BPP_UB5p.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /assets/index-BXSV598w.js 200 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:42] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:46] [INFO ] GET /assets/index-DO_zT3qj.js 200 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:46] [INFO ] GET /assets/index-DUIarMxO.css 200 3ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:59] [INFO ] GET /api/records?page=1&pageSize=10 304 1ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:59] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 03:16:59] [INFO ] GET /api/statistics/dashboard 304 0ms - ::ffff:192.168.102.14
+[2026-06-16 03:19:06] [INFO ] GET /api/health 200 1ms - ::1
+[2026-06-16 03:23:58] [INFO ] ========================================
+[2026-06-16 03:23:58] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 03:23:58] [INFO ] ========================================
+[2026-06-16 03:23:58] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 03:23:58] [INFO ]   API 前缀: /api
+[2026-06-16 03:23:58] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 03:23:58] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 03:23:58] [INFO ]   运行环境: production
+[2026-06-16 03:23:58] [INFO ] ========================================
+[2026-06-16 03:23:58] [INFO ]   默认账号:
+[2026-06-16 03:23:58] [INFO ]     管理员: admin / admin123
+[2026-06-16 03:23:58] [INFO ]     部门经理: manager / manager123
+[2026-06-16 03:23:58] [INFO ]     员工共享: sa / 123456
+[2026-06-16 03:23:58] [INFO ] ========================================
+[2026-06-16 03:24:12] [INFO ] GET /api/health 200 3ms - ::1
+[2026-06-16 04:01:21] [INFO ] ========================================
+[2026-06-16 04:01:21] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 04:01:21] [INFO ] ========================================
+[2026-06-16 04:01:21] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 04:01:21] [INFO ]   API 前缀: /api
+[2026-06-16 04:01:21] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 04:01:21] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 04:01:21] [INFO ]   运行环境: production
+[2026-06-16 04:01:21] [INFO ] ========================================
+[2026-06-16 04:01:21] [INFO ]   默认账号:
+[2026-06-16 04:01:21] [INFO ]     管理员: admin / admin123
+[2026-06-16 04:01:21] [INFO ]     部门经理: manager / manager123
+[2026-06-16 04:01:21] [INFO ]     员工共享: sa / 123456
+[2026-06-16 04:01:21] [INFO ] ========================================
+[2026-06-16 04:01:32] [INFO ] GET / 200 6ms - ::1
+[2026-06-16 05:24:22] [INFO ] ========================================
+[2026-06-16 05:24:22] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-16 05:24:22] [INFO ] ========================================
+[2026-06-16 05:24:22] [INFO ]   服务地址: http://localhost:3000
+[2026-06-16 05:24:22] [INFO ]   API 前缀: /api
+[2026-06-16 05:24:22] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-16 05:24:22] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-16 05:24:22] [INFO ]   运行环境: production
+[2026-06-16 05:24:22] [INFO ] ========================================
+[2026-06-16 05:24:22] [INFO ]   默认账号:
+[2026-06-16 05:24:22] [INFO ]     管理员: admin / admin123
+[2026-06-16 05:24:22] [INFO ]     部门经理: manager / manager123
+[2026-06-16 05:24:22] [INFO ]     员工共享: sa / 123456
+[2026-06-16 05:24:22] [INFO ] ========================================
+[2026-06-16 05:24:33] [INFO ] GET /api/health 200 3ms - ::1

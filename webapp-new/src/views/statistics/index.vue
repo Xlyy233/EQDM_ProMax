@@ -1,0 +1,411 @@
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { canViewStatistics, loadFromStorage, isLoggedIn } from '@/stores/user'
+import { ElMessage } from 'element-plus'
+import * as statisticsApi from '@/api/statistics'
+import type {
+  DashboardData, StatisticsData, TrendData,
+  DepartmentStats, CostAnalysis, PieChartData
+} from '@/types'
+import * as echarts from 'echarts/core'
+import { LineChart, BarChart, PieChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components'
+import { CanvasRenderer } from 'echarts/renderers'
+import { use } from 'echarts/core'
+
+use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
+
+const router = useRouter()
+const timeRange = ref('month')
+const loading = ref(false)
+
+const dashboardData = ref<DashboardData | null>(null)
+const monthlyData = ref<StatisticsData | null>(null)
+const trendData = ref<TrendData[]>([])
+const departmentStats = ref<DepartmentStats[]>([])
+const costAnalysis = ref<CostAnalysis | null>(null)
+const typeDistribution = ref<PieChartData[]>([])
+
+const currentYear = ref(new Date().getFullYear())
+const currentMonth = ref(new Date().getMonth() + 1)
+
+const yearOptions = computed(() => {
+  const y = new Date().getFullYear()
+  const list = []
+  for (let i = y - 3; i <= y; i++) list.push(i)
+  return list
+})
+
+async function loadAllData() {
+  loading.value = true
+  try {
+    const [dashRes, monthRes, trendRes, deptRes, costRes, typeRes] = await Promise.all([
+      statisticsApi.getDashboardOverview(),
+      statisticsApi.getStatistics(currentYear.value, currentMonth.value),
+      statisticsApi.getTrendData(timeRange.value === 'week' ? 7 : timeRange.value === 'month' ? 30 : timeRange.value === 'quarter' ? 90 : 365),
+      statisticsApi.getDepartmentStats(),
+      statisticsApi.getCostAnalysis(6),
+      statisticsApi.getRecordTypeDistribution()
+    ])
+    dashboardData.value = dashRes.data
+    monthlyData.value = monthRes.data
+    trendData.value = trendRes.data || []
+    departmentStats.value = deptRes.data || []
+    costAnalysis.value = costRes.data
+    typeDistribution.value = typeRes.data || []
+    renderTrendChart()
+    renderTypePieChart()
+    renderDeptBarChart()
+    renderCostChart()
+  } catch (e) {
+  } finally { loading.value = false }
+}
+
+function onTimeRangeChange() { loadAllData() }
+function onYearMonthChange() { loadAllData() }
+
+let trendChartInstance: echarts.ECharts | null = null
+let pieChartInstance: echarts.ECharts | null = null
+let deptChartInstance: echarts.ECharts | null = null
+let costChartInstance: echarts.ECharts | null = null
+
+function renderTrendChart() {
+  const dom = document.getElementById('trend-chart')
+  if (!dom) return
+  if (!trendChartInstance) {
+    trendChartInstance = echarts.init(dom)
+  }
+  trendChartInstance.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['维修', '保养', '巡检', '改善'], top: 0 },
+    grid: { top: 40, right: 20, bottom: 30, left: 40 },
+    xAxis: { type: 'category', data: trendData.value.map(d => d.date.slice(5)), axisLabel: { rotate: 45, fontSize: 10 } },
+    yAxis: { type: 'value', minInterval: 1 },
+    series: [
+      { name: '维修', type: 'line', data: trendData.value.map(d => d.repair), smooth: true, color: '#ef4444' },
+      { name: '保养', type: 'line', data: trendData.value.map(d => d.maintenance), smooth: true, color: '#3b82f6' },
+      { name: '巡检', type: 'line', data: trendData.value.map(d => d.inspection), smooth: true, color: '#10b981' },
+      { name: '改善', type: 'line', data: trendData.value.map(d => d.improvement || 0), smooth: true, color: '#f59e0b' }
+    ]
+  }, true)
+}
+
+function renderTypePieChart() {
+  const dom = document.getElementById('type-pie-chart')
+  if (!dom) return
+  if (!pieChartInstance) {
+    pieChartInstance = echarts.init(dom)
+  }
+  pieChartInstance.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+    legend: { orient: 'vertical', right: 8, top: 'center' },
+    series: [{
+      type: 'pie', radius: ['45%', '75%'], center: ['38%', '50%'],
+      label: { show: false },
+      emphasis: { label: { show: true } },
+      data: typeDistribution.value.map(d => ({ name: d.name, value: d.value, itemStyle: { color: d.color } }))
+    }]
+  }, true)
+}
+
+function renderDeptBarChart() {
+  const dom = document.getElementById('dept-bar-chart')
+  if (!dom) return
+  if (!deptChartInstance) {
+    deptChartInstance = echarts.init(dom)
+  }
+  deptChartInstance.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['维修次数', '保养次数', '故障率%'], top: 0 },
+    grid: { top: 40, right: 20, bottom: 30, left: 40 },
+    xAxis: { type: 'category', data: departmentStats.value.map(d => d.department), axisLabel: { rotate: 30, fontSize: 10 } },
+    yAxis: [
+      { type: 'value', name: '次数', minInterval: 1 },
+      { type: 'value', name: '故障率%', min: 0, max: 100 }
+    ],
+    series: [
+      { name: '维修次数', type: 'bar', data: departmentStats.value.map(d => d.repairCount), color: '#ef4444' },
+      { name: '保养次数', type: 'bar', data: departmentStats.value.map(d => d.maintenanceCount), color: '#3b82f6' },
+      { name: '故障率%', type: 'line', yAxisIndex: 1, data: departmentStats.value.map(d => d.failureRate), color: '#f59e0b' }
+    ]
+  }, true)
+}
+
+function renderCostChart() {
+  const dom = document.getElementById('cost-chart')
+  if (!dom) return
+  if (!costChartInstance) {
+    costChartInstance = echarts.init(dom)
+  }
+  const monthlyCosts = costAnalysis.value?.monthlyCosts || []
+  costChartInstance.setOption({
+    tooltip: { trigger: 'axis' },
+    grid: { top: 10, right: 20, bottom: 30, left: 50 },
+    xAxis: { type: 'category', data: monthlyCosts.map(d => d.month), axisLabel: { rotate: 30, fontSize: 10 } },
+    yAxis: { type: 'value', name: '元' },
+    series: [{
+      type: 'bar', data: monthlyCosts.map(d => d.cost),
+      itemStyle: { color: '#6366f1', borderRadius: [4, 4, 0, 0] }
+    }]
+  }, true)
+}
+
+onMounted(() => {
+  loadFromStorage()
+  if (!isLoggedIn()) { router.replace('/login'); return }
+  if (!canViewStatistics()) { ElMessage.error('您没有权限访问此页面'); router.replace('/'); return }
+  loadAllData()
+})
+</script>
+
+<template>
+  <div class="page-container">
+    <div class="page-header">
+      <h2 class="page-title">统计分析</h2>
+    </div>
+
+    <div v-loading="loading">
+      <!-- 时间范围 -->
+      <div class="filter-bar">
+        <div class="time-tabs">
+          <el-radio-group v-model="timeRange" size="small" @change="onTimeRangeChange">
+            <el-radio-button value="week">近7天</el-radio-button>
+            <el-radio-button value="month">近30天</el-radio-button>
+            <el-radio-button value="quarter">近90天</el-radio-button>
+            <el-radio-button value="year">近1年</el-radio-button>
+          </el-radio-group>
+        </div>
+        <div class="month-picker">
+          <el-select v-model="currentYear" style="width:110px;" @change="onYearMonthChange">
+            <el-option v-for="y in yearOptions" :key="y" :value="y" :label="y+'年'" />
+          </el-select>
+          <el-select v-model="currentMonth" style="width:90px;margin-left:8px;" @change="onYearMonthChange">
+            <el-option v-for="m in 12" :key="m" :value="m" :label="m+'月'" />
+          </el-select>
+        </div>
+      </div>
+
+      <!-- KPI 卡片 -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-value">{{ dashboardData?.totalEquipments || 0 }}</div>
+          <div class="kpi-label">设备总数</div>
+          <div class="kpi-sub">在用{{ dashboardData?.inUseCount || 0 }} / 停用{{ dashboardData?.stoppedCount || 0 }} / 报废{{ dashboardData?.scrappedCount || 0 }}</div>
+        </div>
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-value">{{ dashboardData?.monthlyMaintenanceCount || 0 }}</div>
+          <div class="kpi-label">本月保养</div>
+          <div class="kpi-sub">巡检{{ dashboardData?.monthlyInspectionCount || 0 }}次</div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-value">{{ dashboardData?.monthlyRepairCount || 0 }}</div>
+          <div class="kpi-label">本月维修</div>
+          <div class="kpi-sub">故障率{{ monthlyData?.monthlyFailureRate || 0 }}%</div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-value">{{ dashboardData?.mttr || 0 }}h</div>
+          <div class="kpi-label">MTTR</div>
+          <div class="kpi-sub">可用率{{ dashboardData?.availabilityRate || 0 }}%</div>
+        </div>
+      </div>
+
+      <!-- 趋势图 + 类型饼图 -->
+      <el-row :gutter="16" class="chart-row">
+        <el-col :xs="24" :lg="14">
+          <div class="chart-card">
+            <h4>运维趋势</h4>
+            <div id="trend-chart" style="height:320px;"></div>
+          </div>
+        </el-col>
+        <el-col :xs="24" :lg="10">
+          <div class="chart-card">
+            <h4>记录类型分布</h4>
+            <div id="type-pie-chart" style="height:320px;"></div>
+          </div>
+        </el-col>
+      </el-row>
+
+      <!-- 部门对比 -->
+      <div class="chart-card" v-if="departmentStats.length > 0">
+        <h4>部门对比分析</h4>
+        <div id="dept-bar-chart" style="height:320px;"></div>
+      </div>
+
+      <!-- 成本分析 + 设备故障率排行 -->
+      <el-row :gutter="16" class="chart-row">
+        <el-col :xs="24" :lg="12">
+          <div class="chart-card">
+            <h4>费用分析
+              <span class="cost-summary">
+                总费用: ¥{{ costAnalysis?.totalCost || 0 }} | 人工: ¥{{ costAnalysis?.laborCost || 0 }} | 配件: ¥{{ costAnalysis?.partsCost || 0 }}
+              </span>
+            </h4>
+            <div id="cost-chart" style="height:320px;" v-if="(costAnalysis?.monthlyCosts || []).length > 0"></div>
+            <el-empty v-else description="暂无费用数据" :image-size="80" />
+          </div>
+        </el-col>
+        <el-col :xs="24" :lg="12">
+          <div class="chart-card">
+            <h4>设备故障率排行 TOP10</h4>
+            <div style="max-height:320px;overflow:auto;">
+              <table class="rank-table" v-if="(monthlyData?.equipmentFailureRates || []).length > 0">
+                <thead>
+                  <tr><th>#</th><th>设备名称</th><th>维修次数</th><th>巡检次数</th><th>故障率</th></tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(e, i) in monthlyData?.equipmentFailureRates" :key="e.equipmentId" :class="{ 'top3': i < 3 }">
+                    <td class="rank-num">{{ i + 1 }}</td>
+                    <td class="rank-name">{{ e.equipmentName }}</td>
+                    <td>{{ e.repairCount }}</td>
+                    <td>{{ e.inspectionCount }}</td>
+                    <td>{{ e.failureRate }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <el-empty v-else description="暂无数据" :image-size="80" />
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+
+      <!-- 易损件统计 -->
+      <div class="chart-card" v-if="(monthlyData?.vulnerableParts || []).length > 0">
+        <h4>易损件统计</h4>
+        <table class="rank-table">
+          <thead>
+            <tr><th>#</th><th>配件名称</th><th>更换次数</th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="(p, i) in monthlyData?.vulnerableParts" :key="i" :class="{ 'top3': i < 3 }">
+              <td class="rank-num">{{ i + 1 }}</td>
+              <td class="rank-name">{{ p.partName }}</td>
+              <td>{{ p.replaceCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.time-tabs :deep(.el-radio-button__inner) {
+  padding: 6px 14px;
+}
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border-left: 4px solid #dcdfe6;
+  background: linear-gradient(to right, #fff, #fafafa);
+}
+
+.kpi-card.kpi-blue { border-left-color: #3b82f6; background: linear-gradient(to right, #f0f6ff, #fff); }
+.kpi-card.kpi-red { border-left-color: #ef4444; background: linear-gradient(to right, #fef2f2, #fff); }
+.kpi-card.kpi-green { border-left-color: #10b981; background: linear-gradient(to right, #ecfdf5, #fff); }
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #303133;
+  line-height: 1.2;
+}
+
+.kpi-label {
+  font-size: 13px;
+  color: #909399;
+  margin-top: 4px;
+}
+
+.kpi-sub {
+  font-size: 11px;
+  color: #c0c4cc;
+  margin-top: 2px;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 24px 16px;
+}
+
+.chart-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #303133;
+  margin: 0 0 8px;
+}
+
+.cost-summary {
+  font-size: 12px;
+  font-weight: 400;
+  color: #909399;
+  margin-left: 12px;
+}
+
+.chart-row {
+  margin: 0 -8px 16px;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.rank-table th {
+  background: #f5f7fa;
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #606266;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.rank-table td {
+  padding: 9px 12px;
+  text-align: center;
+  border-bottom: 1px solid #f5f7fa;
+  color: #606266;
+}
+
+.rank-table .rank-num {
+  font-weight: 700;
+  color: #c0c4cc;
+  width: 40px;
+}
+
+.rank-table .top3 .rank-num { color: #f59e0b; }
+.rank-table .rank-name { text-align: left; font-weight: 500; color: #303133; }
+
+/* 移动端 */
+@media (max-width: 768px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); padding: 0 12px; gap: 10px; }
+  .kpi-card { padding: 12px 14px; }
+  .kpi-value { font-size: 22px; }
+  .chart-card { margin: 0 12px 12px; padding: 14px; }
+  .filter-bar { padding: 12px; }
+  .month-picker { margin-top: 8px; }
+  .chart-card h4 { font-size: 14px; }
+}
+</style>

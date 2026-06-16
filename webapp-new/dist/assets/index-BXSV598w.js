@@ -1,0 +1,1 @@
+const e={in_use:"在用",stopped:"停用",scrapped:"报废"},a={repair:"维修",maintenance:"保养",inspection:"巡检",improvement:"改善"},p={completed:"已完成",approved:"已审核",pending:"待处理"},t={employee:"普通员工",manager:"部门经理",admin:"系统管理员"},s={daily:"每天",weekly:"每周",monthly:"每月",quarterly:"每季度",yearly:"每年"},n={active:"进行中",paused:"已暂停",completed:"已完成"};export{a,p as b,s as c,n as m,t as r,e as s};
