@@ -21,7 +21,7 @@ Write-Host ""
 
 # Build flat list of all files to include (recursive for directories)
 $includeFiles = @()
-$skipFolders = @('node_modules', '.git')
+$skipFolders = @('node_modules', '.git', 'data', 'uploads', 'logs')
 $skipExtensions = @('.zip', '.log')
 
 function Add-FolderContents($folderPath, $basePath) {

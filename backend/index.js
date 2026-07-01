@@ -16,6 +16,9 @@ const exportRoutes = require('./routes/export');
 const exportExcelRoutes = require('./routes/export-excel');
 const scanRoutes = require('./routes/scan');
 const logRoutes = require('./routes/logs');
+const attachmentRoutes = require('./routes/attachments');
+const knowledgeRoutes = require('./routes/knowledge');
+const notificationRoutes = require('./routes/notifications');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -83,6 +86,15 @@ app.use('/api/export', exportRoutes);
 app.use('/api/export-excel', exportExcelRoutes);
 app.use('/api/scan', scanRoutes);
 app.use('/api/logs', logRoutes);
+app.use('/api/attachments', attachmentRoutes);
+app.use('/api/knowledge', knowledgeRoutes);
+app.use('/api/notifications', notificationRoutes);
+
+// 静态文件：上传的附件
+const uploadsPath = path.join(__dirname, 'uploads');
+if (fs.existsSync(uploadsPath)) {
+  app.use('/uploads', express.static(uploadsPath));
+}
 
 // 服务前端静态文件（生产环境）
 const distPath = path.join(__dirname, '..', 'webapp-new', 'dist');
@@ -130,20 +142,25 @@ if (db.getAll('users').length === 0) {
 
 // 启动服务
 app.listen(PORT, () => {
-  logger.info('========================================');
-  logger.info('  设备台账与运维管理系统 - 后端服务');
-  logger.info('========================================');
-  logger.info(`  服务地址: http://localhost:${PORT}`);
-  logger.info(`  API 前缀: /api`);
-  logger.info(`  健康检查: http://localhost:${PORT}/api/health`);
-  logger.info(`  数据文件: ./data/eqdm.json`);
-  logger.info(`  运行环境: ${NODE_ENV}`);
-  logger.info('========================================');
-  logger.info('  默认账号:');
-  logger.info('    管理员: admin / admin123');
-  logger.info('    部门经理: manager / manager123');
-  logger.info('    员工共享: sa / 123456');
-  logger.info('========================================');
+  // 启动信息始终显示在控制台
+  const startupMsg = [
+    '========================================',
+    '  设备台账与运维管理系统 - 后端服务',
+    '========================================',
+    `  服务地址: http://localhost:${PORT}`,
+    `  API 前缀: /api`,
+    `  健康检查: http://localhost:${PORT}/api/health`,
+    `  数据文件: ./data/eqdm.json`,
+    `  运行环境: ${NODE_ENV}`,
+    '========================================',
+    '  默认账号:',
+    '    管理员: admin / admin123',
+    '    部门经理: manager / manager123',
+    '    员工共享: sa / 123456',
+    '========================================'
+  ];
+  startupMsg.forEach(msg => console.log(msg));
+  startupMsg.forEach(msg => logger.info(msg));
 });
 
 module.exports = app;

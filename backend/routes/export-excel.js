@@ -13,7 +13,7 @@ const MAX_IMAGE_WIDTH = 120;            // 图片最大宽度(px)
 const MAX_IMAGE_HEIGHT = 90;            // 图片最大高度(px)
 const IMAGE_CELL_WIDTH = 18;            // 图片列宽(字符数)
 const IMAGE_ROW_HEIGHT = 75;            // 图片行高(pt)
-const PHOTO_START_COL = 8;              // 图片起始列索引(从0开始，H列)
+const PHOTO_START_COL = 16;             // 图片起始列索引(1开始，P列)
 const MAX_PHOTOS_PER_ROW = 5;           // 每行最多展示图片数
 
 /**
@@ -101,8 +101,16 @@ async function generateExcel(records, startDate, endDate) {
     { header: '维修类型', key: 'type', width: 12 },
     { header: '状态', key: 'status', width: 12 },
     { header: '描述', key: 'description', width: 35 },
-    { header: '创建人', key: 'createdBy', width: 14 },
-    { header: '创建时间', key: 'createdAt', width: 20 },
+    { header: '维修人员', key: 'personnel', width: 14 },
+    { header: '开始时间', key: 'startTime', width: 20 },
+    { header: '结束时间', key: 'endTime', width: 20 },
+    { header: '是否停机', key: 'isStopped', width: 12 },
+    { header: '停机时长', key: 'stopDuration', width: 14 },
+    { header: '是否更换配件', key: 'partsReplaced', width: 14 },
+    { header: '更换配件详情', key: 'partsReplacedDetail', width: 25 },
+    { header: '故障描述', key: 'faultDescription', width: 35 },
+    { header: '故障原因', key: 'faultCause', width: 30 },
+    { header: '解决办法', key: 'solution', width: 30 },
     // 图片列：最多预留 MAX_PHOTOS_PER_ROW 列
     ...Array.from({ length: MAX_PHOTOS_PER_ROW }, (_, i) => ({
       header: i === 0 ? '图片' : '',
@@ -147,11 +155,22 @@ async function generateExcel(records, startDate, endDate) {
     row.getCell(3).value = typeMap[record.type] || record.type || '';
     row.getCell(4).value = statusMap[record.status] || record.status || '';
     row.getCell(5).value = record.description || record.content || record.title || '';
-    row.getCell(6).value = record.createdByName || record.createdBy || '';
-    row.getCell(7).value = record.createdAt || '';
+    row.getCell(6).value = record.personnel || '';
+    row.getCell(7).value = record.startTime || '';
+    row.getCell(8).value = record.endTime || '';
+    row.getCell(9).value = record.isStopped === 'yes' ? '是' : '否';
+    row.getCell(10).value = record.isStopped === 'yes' && record.stopDuration
+      ? (record.stopDuration + (record.stopDurationUnit === 'hours' ? '小时' : '分钟'))
+      : '';
+    row.getCell(11).value = record.partsReplaced === 'yes' ? '是' : '否';
+    row.getCell(12).value = record.partsReplaced === 'yes' ? (record.partsReplacedDetail || '') : '';
+    row.getCell(13).value = record.faultDescription || record.description || record.content || '';
+    row.getCell(14).value = record.faultCause || '';
+    row.getCell(15).value = record.solution || '';
 
     // 设置文本单元格样式
-    for (let c = 1; c <= 7; c++) {
+    const textColCount = 15;
+    for (let c = 1; c <= textColCount; c++) {
       const cell = row.getCell(c);
       cell.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
       cell.border = {
@@ -207,7 +226,7 @@ async function generateExcel(records, startDate, endDate) {
   // 自动筛选
   worksheet.autoFilter = {
     from: { row: 1, column: 1 },
-    to: { row: 1, column: 7 }
+    to: { row: 1, column: 15 }
   };
 
   // 写入文件 buffer
@@ -226,7 +245,10 @@ router.get('/records', authMiddleware, async (req, res) => {
     // 查询记录
     let list = db.getAll('records');
     if (startTime) list = list.filter(r => r.createdAt >= startTime);
-    if (endTime) list = list.filter(r => r.createdAt <= endTime);
+    if (endTime) {
+      const endDate = endTime + ' 23:59:59';
+      list = list.filter(r => r.createdAt <= endDate);
+    }
     if (type) list = list.filter(r => r.type === type);
     if (equipmentId) list = list.filter(r => r.equipmentId === equipmentId);
 
@@ -236,7 +258,7 @@ router.get('/records', authMiddleware, async (req, res) => {
     }
 
     if (list.length === 0) {
-      return res.status(404).json(error('该时间范围内无记录数据', 404));
+      return res.json(error('该时间范围内无记录数据'));
     }
 
     // 获取设备信息补充编号
@@ -244,17 +266,11 @@ router.get('/records', authMiddleware, async (req, res) => {
     const equipMap = {};
     equipments.forEach(e => { equipMap[e.id] = e; });
 
-    // 获取用户信息补充创建人名称
-    const users = db.getAll('users');
-    const userMap = {};
-    users.forEach(u => { userMap[u.id] = u; });
-
     // 补充字段
     const enrichedRecords = list.map(r => ({
       ...r,
       equipmentCode: (equipMap[r.equipmentId] && equipMap[r.equipmentId].code) || r.equipmentCode || '',
       equipmentName: r.equipmentName || (equipMap[r.equipmentId] && equipMap[r.equipmentId].name) || '',
-      createdByName: (userMap[r.createdBy] && userMap[r.createdBy].name) || r.createdBy || '',
       description: r.content || r.title || r.description || ''
     }));
 

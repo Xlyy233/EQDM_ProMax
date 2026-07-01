@@ -1,199 +1,173 @@
 # ============================================================================
-#  Equipment Management System - Robust PowerShell Starter
-# ----------------------------------------------------------------------------
-#  Features:
-#   - Error-handled (script won't auto-close on failure)
-#   - Looks for node.exe in multiple common locations
-#   - Auto-installs dependencies on first run
-#   - Works from any folder path (with spaces, with Chinese chars)
+#  EQDM ProMax - Server Startup
 # ============================================================================
+$ErrorActionPreference = 'Stop'
+$Host.UI.RawUI.WindowTitle = 'EQDM ProMax Server'
 
-$ErrorActionPreference = 'Continue'
-
-# ----------------------------------------------------------------------------
-#  Helpers
-# ----------------------------------------------------------------------------
-function Write-Step([string]$msg, [string]$color = 'Cyan') {
-    Write-Host ""
-    Write-Host ">> $msg" -ForegroundColor $color
-}
-function Write-Ok([string]$msg) {
-    Write-Host "   [OK] $msg" -ForegroundColor Green
-}
-function Write-Warn([string]$msg) {
-    Write-Host "   [!]  $msg" -ForegroundColor Yellow
-}
-function Write-Err([string]$msg) {
-    Write-Host "   [X]  $msg" -ForegroundColor Red
-}
-function Read-KeyOrPause {
-    Write-Host ""
-    try {
-        Write-Host "Press any key to close this window..." -ForegroundColor Gray
-        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    } catch {
-        Read-Host "Or just press Enter"
-    }
-}
-
-# ----------------------------------------------------------------------------
-#  Banner
-# ----------------------------------------------------------------------------
-Clear-Host
-Write-Host "======================================================" -ForegroundColor Cyan
-Write-Host "   Equipment Management System - Service Startup" -ForegroundColor Cyan
-Write-Host "======================================================" -ForegroundColor Cyan
-
-# ----------------------------------------------------------------------------
-#  Resolve paths
-# ----------------------------------------------------------------------------
+# --- Resolve paths ---
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $BackendDir = Join-Path $ScriptDir 'backend'
 
-Write-Step "Resolving file paths"
-Write-Ok "Script folder  : $ScriptDir"
-Write-Ok "Backend folder : $BackendDir"
+Write-Host "======================================================" -ForegroundColor Cyan
+Write-Host "   Equipment Management System - Service Startup" -ForegroundColor Cyan
+Write-Host "======================================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "   Script : $ScriptDir" -ForegroundColor Gray
+Write-Host "   Backend: $BackendDir" -ForegroundColor Gray
 
 if (-not (Test-Path $BackendDir)) {
-    Write-Err "Backend folder NOT FOUND: $BackendDir"
-    Read-KeyOrPause
+    Write-Host "   [ERROR] Backend folder not found: $BackendDir" -ForegroundColor Red
+    Read-Host "Press Enter to exit"
     exit 1
 }
 
-# ----------------------------------------------------------------------------
-#  Find Node.js (look in many places)
-# ----------------------------------------------------------------------------
-Write-Step "Looking for Node.js"
+# --- Find Node.js ---
+Write-Host ""
+Write-Host ">> Looking for Node.js..." -ForegroundColor Cyan
 
-$candidatePaths = @(
-    (Join-Path $ScriptDir 'runtime\nodejs\node.exe'),                    # EQDM_ProMax/runtime/nodejs
-    (Join-Path (Split-Path -Parent $ScriptDir) 'runtime\nodejs\node.exe'),  # ../runtime/nodejs
-    (Join-Path $ScriptDir 'nodejs\node.exe'),                           # EQDM_ProMax/nodejs
-    (Join-Path $ScriptDir '6月\nodejs\node.exe'),                       # EQDM_ProMax/6月/nodejs
-    (Join-Path (Split-Path -Parent $ScriptDir) '6月\nodejs\node.exe'),  # ../6月/nodejs
-    (Join-Path $ScriptDir '6 yue\nodejs\node.exe'),                     # fallback english
+$NodeExe = $null
+$candidates = @(
+    (Join-Path $ScriptDir 'runtime\nodejs\node.exe'),
+    (Join-Path (Split-Path -Parent $ScriptDir) 'runtime\nodejs\node.exe'),
+    (Join-Path $ScriptDir 'nodejs\node.exe'),
+    (Join-Path $ScriptDir '6月\nodejs\node.exe'),
+    (Join-Path (Split-Path -Parent $ScriptDir) '6月\nodejs\node.exe'),
+    (Join-Path $ScriptDir '6 yue\nodejs\node.exe'),
     (Join-Path (Split-Path -Parent $ScriptDir) '6 yue\nodejs\node.exe')
 )
 
-$NodeExe = $null
-foreach ($cand in $candidatePaths) {
-    if (Test-Path $cand) {
-        $NodeExe = $cand
-        Write-Ok "Found portable Node.js: $cand"
+foreach ($c in $candidates) {
+    if (Test-Path $c) {
+        $NodeExe = $c
+        Write-Host "   [OK] Portable: $c" -ForegroundColor Green
         break
-    } else {
-        Write-Warn "Not found: $cand"
     }
 }
 
-# Also try system-wide node
 if (-not $NodeExe) {
     try {
-        $sysNode = Get-Command node -ErrorAction Stop
-        $NodeExe = $sysNode.Source
-        Write-Ok "Found system Node.js: $NodeExe"
+        $NodeExe = (Get-Command node -ErrorAction Stop).Source
+        Write-Host "   [OK] System: $NodeExe" -ForegroundColor Green
     } catch {
-        Write-Warn "No system Node.js in PATH"
+        Write-Host "   [ERROR] Node.js not found!" -ForegroundColor Red
+        Write-Host "   Please put node.exe in: $ScriptDir\runtime\nodejs\" -ForegroundColor Gray
+        Read-Host "Press Enter to exit"
+        exit 1
     }
 }
 
-if (-not $NodeExe) {
-    Write-Err "Node.js was NOT FOUND in any of the expected locations."
-    Write-Host ""
-    Write-Host "Please do ONE of the following:"
-    Write-Host ""
-    Write-Host "  [A] Put the downloaded node.js files inside this project:"
-    Write-Host "      1. Inside the EQDM_ProMax folder, create a new folder called:  runtime"
-    Write-Host "      2. Copy the contents of your downloaded nodejs ZIP into: runtime\nodejs\"
-    Write-Host "      3. Make sure this file exists: EQDM_ProMax\runtime\nodejs\node.exe"
-    Write-Host ""
-    Write-Host "  [B] OR install Node.js from https://nodejs.org/ (use the installer)"
-    Write-Host ""
-    Write-Host "Current project folder is: $ScriptDir"
-    Read-KeyOrPause
-    exit 1
-}
-
-# Add node.js folder to PATH so "npm" also works
+# Add Node.js dir to PATH
 $NodeDir = Split-Path $NodeExe
-$env:PATH = "$NodeDir;" + $env:PATH
-Write-Ok "Node.js path added to session PATH: $NodeDir"
+$env:PATH = "$NodeDir;$env:PATH"
 
-# Verify it actually runs
+# Verify Node.js works
 $null = & $NodeExe --version 2>&1
-Write-Ok "Node.js runs successfully"
+Write-Host "   [OK] Node.js verified" -ForegroundColor Green
 
-# ----------------------------------------------------------------------------
-#  Get LAN IP
-# ----------------------------------------------------------------------------
-Write-Step "Reading network configuration"
-$LocalIP = ""
-try {
-    $net = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction Stop `
-        | Where-Object { $_.InterfaceAlias -notmatch 'Loopback' -and $_.IPAddress -notlike '169.254.*' } `
-        | Select-Object -First 1
-    if ($net) { $LocalIP = $net.IPAddress; Write-Ok "Local IP: $LocalIP" }
-    else { Write-Warn "No network adapter found (offline?)" }
-} catch {
-    Write-Warn "Cannot determine IP: $($_.Exception.Message)"
-}
+# --- Install dependencies if needed ---
+Write-Host ""
+Write-Host ">> Checking dependencies..." -ForegroundColor Cyan
+$NodeModules = Join-Path $BackendDir 'node_modules'
 
-# ----------------------------------------------------------------------------
-#  Install dependencies on first run
-# ----------------------------------------------------------------------------
-Write-Step "Checking dependencies"
-$NodeModulesDir = Join-Path $BackendDir 'node_modules'
-if (-not (Test-Path $NodeModulesDir)) {
-    Write-Warn "First run - installing dependencies. This takes 1-2 minutes. Please wait..."
-    try {
-        Push-Location $BackendDir
-        & $NodeExe (Join-Path $NodeDir 'npm') install --production 2>&1 | ForEach-Object {
-            Write-Host "   | $_" -ForegroundColor Gray
-        }
-        Pop-Location
-        if (Test-Path $NodeModulesDir) {
-            Write-Ok "Dependencies installed"
-        } else {
-            Write-Err "npm install failed - node_modules still missing"
-            Read-KeyOrPause
-            exit 1
-        }
-    } catch {
-        Write-Err "npm install crashed: $($_.Exception.Message)"
-        Read-KeyOrPause
+if (-not (Test-Path $NodeModules)) {
+    Write-Host "   Installing dependencies, please wait..." -ForegroundColor Yellow
+    $npm = Join-Path $NodeDir 'npm'
+    if (-not (Test-Path "$npm.cmd")) { $npm = "$npm.cmd" }
+    $installLog = & $NodeExe $npm install --production 2>&1
+    if (Test-Path $NodeModules) {
+        Write-Host "   [OK] Dependencies installed" -ForegroundColor Green
+    } else {
+        Write-Host "   [ERROR] npm install failed" -ForegroundColor Red
+        Write-Host "   $installLog" -ForegroundColor Gray
+        Read-Host "Press Enter to exit"
         exit 1
     }
 } else {
-    Write-Ok "Dependencies already installed"
+    Write-Host "   [OK] Dependencies ready" -ForegroundColor Green
 }
 
-# ----------------------------------------------------------------------------
-#  Start the backend server
-# ----------------------------------------------------------------------------
-Write-Step "Starting the web server"
+# --- Get LAN IP ---
 Write-Host ""
-Write-Host "   ============================================================"
-Write-Host "   Open your web browser and visit one of these addresses:"
+Write-Host ">> Network info..." -ForegroundColor Cyan
+$LocalIP = ''
+
+# 过滤虚拟网卡，优先取真实物理网卡（不放在 try/catch 里，PS 5.1 解析会出错）
+$virtualPatterns = @('Loopback', 'vEthernet', 'VirtualBox', 'VMware', 'VPN', 'Bluetooth', 'Teredo', 'Tunnel', 'Pseudo', 'Hyper-V')
+$adapters = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+    Where-Object {
+        $ip = $_.IPAddress
+        $alias = $_.InterfaceAlias
+        if ($ip -like '169.254.*' -or $ip -like '127.*') { return $false }
+        foreach ($pat in $virtualPatterns) {
+            if ($alias -match $pat) { return $false }
+        }
+        return $true
+    } |
+    Sort-Object InterfaceMetric
+
+if ($adapters) {
+    $LocalIP = $adapters[0].IPAddress
+    Write-Host "   [OK] LAN IP: $LocalIP ($($adapters[0].InterfaceAlias))" -ForegroundColor Green
+    if ($adapters.Count -gt 1) {
+        for ($i = 1; $i -lt $adapters.Count; $i++) {
+            Write-Host "        Also: $($adapters[$i].IPAddress) ($($adapters[$i].InterfaceAlias))" -ForegroundColor Gray
+        }
+    }
+} else {
+    Write-Host "   [!]  No LAN IP detected" -ForegroundColor Yellow
+}
+
+# --- Start the server ---
 Write-Host ""
-Write-Host "   On this computer : http://localhost:3000"
+Write-Host "========================================================" -ForegroundColor Cyan
+Write-Host "   Open your browser and visit:"
+Write-Host ""
+Write-Host "   This PC : http://localhost:3000" -ForegroundColor Green
 if ($LocalIP) {
-    Write-Host "   On the LAN       : http://$($LocalIP):3000"
+    Write-Host "   LAN     : http://${LocalIP}:3000" -ForegroundColor Green
 }
 Write-Host ""
-Write-Host "   To STOP the server, close this window or press Ctrl+C"
-Write-Host "   ============================================================"
+Write-Host "   Close this window to STOP the server" -ForegroundColor Gray
+Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""
+
+# Use .NET Process class directly (more reliable than Start-Process cmdlet)
+$psi = New-Object System.Diagnostics.ProcessStartInfo
+$psi.FileName = $NodeExe
+$psi.Arguments = 'index.js'
+$psi.WorkingDirectory = $BackendDir
+$psi.UseShellExecute = $false
+$psi.CreateNoWindow = $true
 
 try {
-    Set-Location $BackendDir
-    & $NodeExe index.js
+    $process = [System.Diagnostics.Process]::Start($psi)
+    
+    if (-not $process -or -not $process.Id) {
+        Write-Host "   [ERROR] Failed to start server" -ForegroundColor Red
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
+    
+    Write-Host "   [Server started] PID: $($process.Id)" -ForegroundColor Green
+    Write-Host "   [Press Enter to stop the server]" -ForegroundColor Gray
+    Write-Host ""
+    
+    Read-Host
+    
+    Write-Host ""
+    Write-Host "   Stopping server..." -ForegroundColor Yellow
+    $process.Kill()
+    $process.WaitForExit(5000) | Out-Null
+    Write-Host "   [Server stopped]" -ForegroundColor Green
 } catch {
-    Write-Err "Server crashed: $($_.Exception.Message)"
-    Read-KeyOrPause
-    exit 1
+    Write-Host "   [ERROR] $($_.Exception.Message)" -ForegroundColor Red
+} finally {
+    if ($process -and -not $process.HasExited) {
+        $process.Kill()
+    }
+    if ($process) { $process.Dispose() }
 }
 
-# If node exits normally, pause before closing
 Write-Host ""
-Write-Host "[Server exited. This window will stay open for 10 seconds or you can close it now.]" -ForegroundColor Gray
-Start-Sleep -Seconds 10
+Write-Host "Press Enter to close this window..." -ForegroundColor Gray
+Read-Host

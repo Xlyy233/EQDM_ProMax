@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getCurrentUser, loadFromStorage, isLoggedIn } from '@/stores/user'
+import { getKnowledgeList, deleteKnowledge, type KnowledgeItem, getImageUrl } from '@/api/knowledge'
 
-interface Knowledge {
-  id: string
-  title: string
-  content: string
-  category: string
-  author: string
-  createdAt: string
-  updatedAt: string
-  tags: string[]
-}
+const router = useRouter()
 
 const categories = [
   { id: 'all', label: '全部', icon: 'Grid' },
@@ -22,139 +15,101 @@ const categories = [
   { id: 'bestpractice', label: '最佳实践', icon: 'Medal' },
 ]
 
-const STORAGE_KEY = 'eqdm_knowledge_base'
-
 const searchTerm = ref('')
 const selectedCategory = ref('all')
-const knowledges = ref<Knowledge[]>([])
-const showModal = ref(false)
-const editingItem = ref<Knowledge | null>(null)
-const expandedIds = ref<Set<string>>(new Set())
-
-// 编辑表单
-const form = ref({
-  title: '',
-  content: '',
-  category: 'tech',
-  author: '',
-  tags: ''
-})
-
-const editableCategories = computed(() => categories.filter(c => c.id !== 'all'))
-
-const filteredKnowledges = computed(() => {
-  return knowledges.value.filter(item => {
-    const term = searchTerm.value.toLowerCase()
-    const matchesSearch = !term ||
-      item.title.toLowerCase().includes(term) ||
-      item.content.toLowerCase().includes(term) ||
-      item.tags.some(t => t.toLowerCase().includes(term))
-    const matchesCategory = selectedCategory.value === 'all' || item.category === selectedCategory.value
-    return matchesSearch && matchesCategory
-  })
-})
-
-function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    knowledges.value = raw ? JSON.parse(raw) : []
-  } catch {
-    knowledges.value = []
-  }
-}
-
-function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(knowledges.value))
-}
-
-function openAdd() {
-  editingItem.value = null
-  form.value = { title: '', content: '', category: 'tech', author: '', tags: '' }
-  showModal.value = true
-}
-
-function openEdit(item: Knowledge) {
-  editingItem.value = item
-  form.value = {
-    title: item.title,
-    content: item.content,
-    category: item.category,
-    author: item.author,
-    tags: item.tags.join(', ')
-  }
-  showModal.value = true
-}
-
-function handleSubmit() {
-  if (!form.value.title.trim() || !form.value.content.trim() || !form.value.author.trim()) {
-    ElMessage.warning('请填写标题、内容和作者')
-    return
-  }
-  const now = new Date().toISOString().split('T')[0]
-  const tags = form.value.tags.split(',').map(t => t.trim()).filter(Boolean)
-
-  if (editingItem.value) {
-    const idx = knowledges.value.findIndex(k => k.id === editingItem.value!.id)
-    if (idx >= 0) {
-      knowledges.value[idx] = {
-        ...knowledges.value[idx],
-        title: form.value.title.trim(),
-        content: form.value.content.trim(),
-        category: form.value.category,
-        author: form.value.author.trim(),
-        tags,
-        updatedAt: now
-      }
-    }
-    ElMessage.success('更新成功')
-  } else {
-    knowledges.value.unshift({
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      title: form.value.title.trim(),
-      content: form.value.content.trim(),
-      category: form.value.category,
-      author: form.value.author.trim(),
-      tags,
-      createdAt: now,
-      updatedAt: now
-    })
-    ElMessage.success('添加成功')
-  }
-  saveData()
-  showModal.value = false
-}
-
-function handleDelete(item: Knowledge) {
-  ElMessageBox.confirm(`确定删除「${item.title}」？`, '确认', { type: 'warning' }).then(() => {
-    knowledges.value = knowledges.value.filter(k => k.id !== item.id)
-    saveData()
-    ElMessage.success('删除成功')
-  }).catch(() => {})
-}
-
-function toggleExpand(id: string) {
-  const newSet = new Set(expandedIds.value)
-  if (newSet.has(id)) newSet.delete(id)
-  else newSet.add(id)
-  expandedIds.value = newSet
-}
-
-function isExpanded(id: string) {
-  return expandedIds.value.has(id)
-}
+const page = ref(1)
+const pageSize = ref(20)
+const loading = ref(false)
+const total = ref(0)
+const knowledges = ref<KnowledgeItem[]>([])
+const currentUser = ref<{ id: string; realName?: string; username?: string } | null>(null)
 
 function getCategoryLabel(id: string) {
   return categories.find(c => c.id === id)?.label || id
 }
 
+async function loadData() {
+  loading.value = true
+  try {
+    const res = await getKnowledgeList({
+      page: page.value,
+      pageSize: pageSize.value,
+      category: selectedCategory.value !== 'all' ? selectedCategory.value : undefined,
+      keyword: searchTerm.value.trim() || undefined
+    })
+    knowledges.value = res.data.list
+    total.value = res.data.total
+  } catch (err) {
+    console.error('加载失败', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+function handleSearch() {
+  page.value = 1
+  loadData()
+}
+
+function changeCategory(category: string) {
+  selectedCategory.value = category
+  page.value = 1
+  loadData()
+}
+
+function gotoDetail(item: KnowledgeItem) {
+  router.push(`/knowledge/${item.id}`)
+}
+
+function gotoCreate() {
+  router.push('/knowledge/new')
+}
+
+function handleEdit(item: KnowledgeItem, e: MouseEvent) {
+  e.stopPropagation()
+  router.push(`/knowledge/${item.id}/edit`)
+}
+
+function handleDelete(item: KnowledgeItem, e: MouseEvent) {
+  e.stopPropagation()
+  ElMessageBox.confirm(`确定删除「${item.title}」？删除后无法恢复。`, '确认删除', {
+    type: 'warning'
+  }).then(async () => {
+    try {
+      await deleteKnowledge(item.id)
+      ElMessage.success('删除成功')
+      loadData()
+    } catch (err) {
+      console.error('删除失败', err)
+    }
+  }).catch(() => {})
+}
+
+function handlePageChange(newPage: number) {
+  page.value = newPage
+  loadData()
+}
+
+function handlePageSizeChange(newSize: number) {
+  pageSize.value = newSize
+  page.value = 1
+  loadData()
+}
+
+function getCoverUrl(item: KnowledgeItem): string | null {
+  if (!item.images || item.images.length === 0) return null
+  if (item.coverImageId) {
+    const cover = item.images.find(img => img.id === item.coverImageId)
+    if (cover) return getImageUrl(cover.url)
+  }
+  return getImageUrl(item.images[0].url)
+}
+
 onMounted(() => {
   loadFromStorage()
   if (!isLoggedIn()) return
+  currentUser.value = getCurrentUser()
   loadData()
-  const user = getCurrentUser()
-  if (user) {
-    form.value.author = user.realName || user.username || ''
-  }
 })
 </script>
 
@@ -177,6 +132,8 @@ onMounted(() => {
             :prefix-icon="Search"
             size="large"
             clearable
+            @clear="handleSearch"
+            @keyup.enter="handleSearch"
           />
         </div>
       </div>
@@ -189,7 +146,7 @@ onMounted(() => {
         :key="cat.id"
         class="kb-cat-tab"
         :class="{ active: selectedCategory === cat.id }"
-        @click="selectedCategory = cat.id"
+        @click="changeCategory(cat.id)"
       >
         <el-icon :size="16"><component :is="cat.icon" /></el-icon>
         {{ cat.label }}
@@ -198,38 +155,40 @@ onMounted(() => {
 
     <!-- 操作栏 -->
     <div class="kb-toolbar">
-      <span class="kb-count">共 {{ filteredKnowledges.length }} 条知识</span>
-      <el-button type="primary" @click="openAdd">
-        <el-icon><Plus /></el-icon> 添加知识
+      <span class="kb-count">共 {{ total }} 条知识</span>
+      <el-button type="primary" @click="gotoCreate">
+        <el-icon><Plus /></el-icon> 发布知识
       </el-button>
     </div>
 
-    <!-- 知识卡片列表 -->
-    <div class="kb-grid">
+    <!-- 信息流列表 -->
+    <div class="kb-list" v-loading="loading">
       <div
-        v-for="item in filteredKnowledges"
+        v-for="item in knowledges"
         :key="item.id"
         class="kb-card"
+        @click="gotoDetail(item)"
       >
-        <div class="kb-card-header">
-          <div class="kb-card-meta">
-            <el-tag size="small" type="primary">{{ getCategoryLabel(item.category) }}</el-tag>
-            <span class="kb-card-author">
-              <el-icon :size="14"><User /></el-icon>
-              {{ item.author }}
-            </span>
-          </div>
-          <div class="kb-card-actions">
-            <el-button text size="small" @click="openEdit(item)">
-              <el-icon><Edit /></el-icon>
-            </el-button>
-            <el-button text size="small" type="danger" @click="handleDelete(item)">
-              <el-icon><Delete /></el-icon>
-            </el-button>
-          </div>
+        <div class="kb-card-meta">
+          <el-tag size="small" type="primary">{{ getCategoryLabel(item.category) }}</el-tag>
+          <span class="kb-card-author">
+            <el-icon :size="14"><User /></el-icon>
+            {{ item.author }}
+          </span>
+          <span class="kb-card-date">{{ item.createdAt.slice(0, 10) }}</span>
         </div>
 
-        <h3 class="kb-card-title" @click="toggleExpand(item.id)">{{ item.title }}</h3>
+        <h2 class="kb-card-title">{{ item.title }}</h2>
+
+        <div class="kb-card-content-row">
+          <div class="kb-card-summary">
+            {{ item.summary || item.content.slice(0, 150) }}
+            {{ (item.summary || item.content).length > 150 ? '...' : '' }}
+          </div>
+          <div v-if="getCoverUrl(item)" class="kb-card-cover">
+            <img :src="getCoverUrl(item)" alt="封面" />
+          </div>
+        </div>
 
         <div class="kb-card-tags" v-if="item.tags.length > 0">
           <el-tag
@@ -241,76 +200,49 @@ onMounted(() => {
           >{{ tag }}</el-tag>
         </div>
 
-        <div class="kb-card-body" :class="{ expanded: isExpanded(item.id) }">
-          <div class="kb-card-content">{{ item.content }}</div>
-        </div>
-
-        <el-button
-          v-if="item.content.length > 150"
-          link
-          type="primary"
-          size="small"
-          class="kb-expand-btn"
-          @click="toggleExpand(item.id)"
-        >
-          <el-icon><component :is="isExpanded(item.id) ? 'ArrowUp' : 'ArrowDown'" /></el-icon>
-          {{ isExpanded(item.id) ? '收起' : '展开全文' }}
-        </el-button>
-
         <div class="kb-card-footer">
-          <span class="kb-date">创建于 {{ item.createdAt }}</span>
-          <span v-if="item.createdAt !== item.updatedAt" class="kb-date">更新于 {{ item.updatedAt }}</span>
+          <div class="kb-stats">
+            <span class="kb-stat">
+              <el-icon><ThumbUp /></el-icon>
+              {{ item.likeCount || 0 }}
+            </span>
+            <span class="kb-stat">
+              <el-icon><ChatDotRound /></el-icon>
+              {{ item.commentCount || 0 }}
+            </span>
+          </div>
+          <div class="kb-actions" v-if="currentUser && currentUser.id === item.authorId">
+            <el-button text size="small" @click="handleEdit(item, $event)">
+              <el-icon><Edit /></el-icon> 编辑
+            </el-button>
+            <el-button text size="small" type="danger" @click="handleDelete(item, $event)">
+              <el-icon><Delete /></el-icon> 删除
+            </el-button>
+          </div>
         </div>
       </div>
 
-      <div v-if="filteredKnowledges.length === 0" class="kb-empty">
+      <div v-if="total === 0 && !loading" class="kb-empty">
         <el-icon :size="64" color="#c0c4cc"><Reading /></el-icon>
-        <p>{{ searchTerm || selectedCategory !== 'all' ? '没有找到匹配的知识条目' : '还没有知识记录，点击上方按钮添加第一条知识' }}</p>
+        <p>{{ searchTerm || selectedCategory !== 'all' ? '没有找到匹配的知识条目' : '还没有知识记录，点击上方按钮发布第一条知识' }}</p>
+        <el-button type="primary" size="large" @click="gotoCreate" style="margin-top: 20px;">
+          发布第一条知识
+        </el-button>
       </div>
     </div>
 
-    <!-- 添加/编辑弹窗 -->
-    <el-dialog
-      v-model="showModal"
-      :title="editingItem ? '编辑知识' : '添加知识'"
-      width="640px"
-      :close-on-click-modal="false"
-      destroy-on-close
-    >
-      <el-form label-width="60px">
-        <el-form-item label="标题" required>
-          <el-input v-model="form.title" placeholder="请输入知识标题" />
-        </el-form-item>
-        <el-form-item label="分类">
-          <el-select v-model="form.category" style="width:100%;">
-            <el-option
-              v-for="cat in editableCategories"
-              :key="cat.id"
-              :value="cat.id"
-              :label="cat.label"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="作者" required>
-          <el-input v-model="form.author" placeholder="请输入您的姓名" />
-        </el-form-item>
-        <el-form-item label="标签">
-          <el-input v-model="form.tags" placeholder="多个标签用逗号分隔" />
-        </el-form-item>
-        <el-form-item label="内容" required>
-          <el-input
-            v-model="form.content"
-            type="textarea"
-            :rows="8"
-            placeholder="请详细描述您要分享的知识..."
-          />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <el-button @click="showModal = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">保存</el-button>
-      </template>
-    </el-dialog>
+    <!-- 分页 -->
+    <div class="kb-pagination" v-if="total > pageSize">
+      <el-pagination
+        v-model:current-page="page"
+        v-model:page-size="pageSize"
+        :total="total"
+        :page-sizes="[10, 20, 50]"
+        layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handlePageSizeChange"
+        @current-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 
@@ -414,10 +346,10 @@ onMounted(() => {
   font-weight: 500;
 }
 
-/* ====== 卡片网格 ====== */
-.kb-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+/* ====== 信息流列表 ====== */
+.kb-list {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -426,26 +358,20 @@ onMounted(() => {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .kb-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-}
-
-.kb-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
 }
 
 .kb-card-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 
@@ -457,77 +383,96 @@ onMounted(() => {
   color: #909399;
 }
 
-.kb-card-actions {
-  display: flex;
-  gap: 2px;
-  flex-shrink: 0;
+.kb-card-date {
+  font-size: 13px;
+  color: #c0c4cc;
 }
 
 .kb-card-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #303133;
-  margin: 0 0 8px;
-  cursor: pointer;
+  margin: 0 0 12px;
   line-height: 1.4;
+  transition: color 0.2s;
 }
 
-.kb-card-title:hover {
+.kb-card:hover .kb-card-title {
   color: #409EFF;
+}
+
+.kb-card-content-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.kb-card-summary {
+  flex: 1;
+  font-size: 14px;
+  color: #606266;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.kb-card-cover {
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f7fa;
+}
+
+.kb-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .kb-card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .kb-tag {
   font-size: 12px;
 }
 
-.kb-card-body {
-  max-height: 72px;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  margin-bottom: 8px;
-}
-
-.kb-card-body.expanded {
-  max-height: 600px;
-}
-
-.kb-card-content {
-  font-size: 14px;
-  color: #606266;
-  line-height: 1.7;
-  white-space: pre-wrap;
-}
-
-.kb-expand-btn {
-  align-self: flex-start;
-  margin-bottom: 8px;
-  padding: 0;
-}
-
 .kb-card-footer {
-  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-top: 12px;
   border-top: 1px solid #f0f0f0;
-  display: flex;
-  gap: 16px;
-  font-size: 12px;
-  color: #c0c4cc;
 }
 
-.kb-date {
-  white-space: nowrap;
+.kb-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.kb-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #909399;
+}
+
+.kb-actions {
+  display: flex;
+  gap: 8px;
 }
 
 /* ====== 空状态 ====== */
 .kb-empty {
-  grid-column: 1 / -1;
   text-align: center;
   padding: 80px 0;
   color: #909399;
@@ -536,6 +481,13 @@ onMounted(() => {
 .kb-empty p {
   margin-top: 12px;
   font-size: 14px;
+}
+
+/* ====== 分页 ====== */
+.kb-pagination {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* ====== 深色模式 ====== */
@@ -558,19 +510,15 @@ html.dark .kb-card {
   box-shadow: 0 1px 8px rgba(0,0,0,0.25);
 }
 
-html.dark .kb-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-}
-
 html.dark .kb-card-title {
   color: #e5eaf3;
 }
 
-html.dark .kb-card-title:hover {
+html.dark .kb-card:hover .kb-card-title {
   color: #409EFF;
 }
 
-html.dark .kb-card-content {
+html.dark .kb-card-summary {
   color: #a3a6ad;
 }
 
@@ -578,10 +526,7 @@ html.dark .kb-card-footer {
   border-color: #363637;
 }
 
-html.dark .kb-date {
-  color: #6b6e75;
-}
-
+html.dark .kb-card-date,
 html.dark .kb-card-author {
   color: #6b6e75;
 }
@@ -605,17 +550,23 @@ html.dark .kb-count {
     font-size: 20px;
   }
 
-  .kb-grid {
-    grid-template-columns: 1fr;
+  .kb-card-content-row {
+    flex-direction: column;
   }
 
-  .kb-categories {
-    gap: 6px;
+  .kb-card-cover {
+    width: 100%;
+    height: 160px;
   }
 
-  .kb-cat-tab {
-    padding: 6px 14px;
-    font-size: 13px;
+  .kb-card-footer {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .kb-pagination {
+    justify-content: center;
   }
 }
 </style>

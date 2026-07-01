@@ -1,0 +1,318 @@
+[2026-06-30 00:00:50] [INFO ] ========================================
+[2026-06-30 00:00:50] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 00:00:50] [INFO ] ========================================
+[2026-06-30 00:00:50] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 00:00:50] [INFO ]   API 前缀: /api
+[2026-06-30 00:00:50] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 00:00:50] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 00:00:50] [INFO ]   运行环境: production
+[2026-06-30 00:00:50] [INFO ] ========================================
+[2026-06-30 00:00:50] [INFO ]   默认账号:
+[2026-06-30 00:00:50] [INFO ]     管理员: admin / admin123
+[2026-06-30 00:00:50] [INFO ]     部门经理: manager / manager123
+[2026-06-30 00:00:50] [INFO ]     员工共享: sa / 123456
+[2026-06-30 00:00:50] [INFO ] ========================================
+[2026-06-30 00:01:38] [INFO ] GET / 200 15ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/index-X1NEY4gZ.css 200 10ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/index-xYdH4o7V.js 200 25ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/index-BXSV598w.js 200 4ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/index-DCTPTmoq.js 200 6ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/maintenance-BWXHFRLs.js 200 8ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/record-BnE3s75p.js 200 10ms - ::1
+[2026-06-30 00:01:38] [INFO ] GET /assets/statistics-BufRPcll.js 200 11ms - ::1
+[2026-06-30 00:01:39] [INFO ] GET /api/records?page=1&pageSize=10 200 8ms - ::1
+[2026-06-30 00:01:39] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-30 00:01:39] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-30 00:01:39] [INFO ] GET /favicon.svg 200 2ms - ::1
+[2026-06-30 00:01:42] [INFO ] GET /assets/index-BJszEM3w.js 200 2ms - ::1
+[2026-06-30 00:01:42] [INFO ] GET /assets/index-DUIarMxO.css 200 4ms - ::1
+[2026-06-30 00:02:08] [INFO ] POST /api/auth/login 200 99ms - ::1
+[2026-06-30 00:02:08] [INFO ] GET /api/records?page=1&pageSize=10 200 7ms - ::1
+[2026-06-30 00:02:08] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 0ms - ::1
+[2026-06-30 00:02:08] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-30 00:02:10] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 4ms - ::1
+[2026-06-30 00:02:39] [INFO ] POST /api/knowledge/upload 200 230ms - ::1
+[2026-06-30 00:02:59] [INFO ] POST /api/knowledge/upload 200 157ms - ::1
+[2026-06-30 00:03:08] [INFO ] POST /api/knowledge 200 57ms - ::1
+[2026-06-30 00:03:09] [INFO ] GET /api/knowledge/undefined 200 6ms - ::1
+[2026-06-30 00:03:09] [INFO ] GET /api/knowledge/undefined/comments 200 1ms - ::1
+[2026-06-30 00:03:30] [INFO ] GET /api/knowledge/undefined 304 4ms - ::1
+[2026-06-30 00:03:30] [INFO ] GET /api/knowledge/undefined/comments 304 2ms - ::1
+[2026-06-30 00:03:31] [INFO ] GET /api/knowledge/undefined 304 6ms - ::1
+[2026-06-30 00:03:31] [INFO ] GET /api/knowledge/undefined/comments 304 1ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/dashboard 304 7ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/monthly?year=2026&month=6 200 1ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/trend?days=30 200 1ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/cost?months=6 200 1ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/record-type-distribution 200 5ms - ::1
+[2026-06-30 00:03:33] [INFO ] GET /api/statistics/parts-replacement 200 2ms - ::1
+[2026-06-30 00:03:35] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 5ms - ::1
+[2026-06-30 00:03:37] [INFO ] GET /api/knowledge?page=1&pageSize=20&category=workflow 200 3ms - ::1
+[2026-06-30 00:03:38] [INFO ] GET /api/knowledge?page=1&pageSize=20 304 4ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET / 304 2ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/index-X1NEY4gZ.css 304 1ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/index-xYdH4o7V.js 304 2ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/index-DCTPTmoq.js 304 1ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/index-BXSV598w.js 304 3ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/record-BnE3s75p.js 304 5ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/maintenance-BWXHFRLs.js 304 6ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /assets/statistics-BufRPcll.js 304 7ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /api/records?page=1&pageSize=10 304 8ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-06-30 00:03:52] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-30 00:03:54] [INFO ] GET /assets/index-DUIarMxO.css 304 2ms - ::1
+[2026-06-30 00:03:54] [INFO ] GET /assets/index-BJszEM3w.js 304 2ms - ::1
+[2026-06-30 00:20:29] [INFO ] GET /api/records?page=1&pageSize=10 200 4ms - ::1
+[2026-06-30 00:20:29] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 0ms - ::1
+[2026-06-30 00:20:29] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-30 00:20:31] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 3ms - ::1
+[2026-06-30 00:20:47] [INFO ] POST /api/knowledge/upload 200 2ms - ::1
+[2026-06-30 00:20:55] [INFO ] POST /api/knowledge/upload 200 1ms - ::1
+[2026-06-30 00:21:11] [INFO ] POST /api/knowledge/upload 200 1ms - ::1
+[2026-06-30 00:21:13] [INFO ] POST /api/knowledge 200 158ms - ::1
+[2026-06-30 00:21:13] [INFO ] GET /api/knowledge/undefined 200 4ms - ::1
+[2026-06-30 00:21:13] [INFO ] GET /api/knowledge/undefined/comments 200 3ms - ::1
+[2026-06-30 00:26:59] [INFO ] ========================================
+[2026-06-30 00:26:59] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 00:26:59] [INFO ] ========================================
+[2026-06-30 00:26:59] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 00:26:59] [INFO ]   API 前缀: /api
+[2026-06-30 00:26:59] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 00:26:59] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 00:26:59] [INFO ]   运行环境: production
+[2026-06-30 00:26:59] [INFO ] ========================================
+[2026-06-30 00:26:59] [INFO ]   默认账号:
+[2026-06-30 00:26:59] [INFO ]     管理员: admin / admin123
+[2026-06-30 00:26:59] [INFO ]     部门经理: manager / manager123
+[2026-06-30 00:26:59] [INFO ]     员工共享: sa / 123456
+[2026-06-30 00:26:59] [INFO ] ========================================
+[2026-06-30 00:36:01] [INFO ] ========================================
+[2026-06-30 00:36:01] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 00:36:01] [INFO ] ========================================
+[2026-06-30 00:36:01] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 00:36:01] [INFO ]   API 前缀: /api
+[2026-06-30 00:36:01] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 00:36:01] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 00:36:01] [INFO ]   运行环境: production
+[2026-06-30 00:36:01] [INFO ] ========================================
+[2026-06-30 00:36:01] [INFO ]   默认账号:
+[2026-06-30 00:36:01] [INFO ]     管理员: admin / admin123
+[2026-06-30 00:36:01] [INFO ]     部门经理: manager / manager123
+[2026-06-30 00:36:01] [INFO ]     员工共享: sa / 123456
+[2026-06-30 00:36:01] [INFO ] ========================================
+[2026-06-30 00:39:14] [INFO ] GET /equipment 200 12ms - ::1
+[2026-06-30 00:39:14] [INFO ] GET /assets/index-X1NEY4gZ.css 200 10ms - ::1
+[2026-06-30 00:39:14] [INFO ] GET /assets/index-xYdH4o7V.js 200 16ms - ::1
+[2026-06-30 00:39:14] [INFO ] GET /assets/index-BXSV598w.js 200 3ms - ::1
+[2026-06-30 00:39:14] [INFO ] GET /assets/equipment-BqsaQPNO.js 200 5ms - ::1
+[2026-06-30 00:39:14] [INFO ] GET /assets/list-B3o_4f3-.js 200 11ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 200 19ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /favicon.svg 200 4ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0udcd92 200 2ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ug9ug2 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ukij7n 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ummo9e 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0upvh4b 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ushnlr 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0uvi2uk 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0uyskuk 200 2ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0v0dtg7 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0v3gqx6 200 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0udcd92 304 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ug9ug2 304 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ummo9e 304 3ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0uyskuk 304 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0v0dtg7 304 3ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0v3gqx6 304 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0uvi2uk 304 1ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ukij7n 304 0ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0upvh4b 304 0ms - ::1
+[2026-06-30 00:39:15] [INFO ] GET /api/attachments/equipment/emqwcj0ushnlr 304 2ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /assets/maintenance-BWXHFRLs.js 200 2ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /assets/statistics-BufRPcll.js 200 4ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /assets/record-BnE3s75p.js 200 6ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /assets/index-DCTPTmoq.js 200 8ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-06-30 00:39:16] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-30 00:39:18] [INFO ] GET /assets/index-DTkmiqEP.js 200 2ms - ::1
+[2026-06-30 00:39:19] [INFO ] GET /assets/index-BJszEM3w.js 200 3ms - ::1
+[2026-06-30 00:39:19] [INFO ] GET /assets/index-DUIarMxO.css 200 4ms - ::1
+[2026-06-30 00:39:32] [INFO ] GET /api/records?page=1&pageSize=10 200 6ms - ::1
+[2026-06-30 00:39:32] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-30 00:39:32] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-30 00:39:34] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 3ms - ::1
+[2026-06-30 00:39:36] [INFO ] GET /api/knowledge/kmqzwiem8bh5t 200 3ms - ::1
+[2026-06-30 00:39:36] [INFO ] GET /api/knowledge/kmqzwiem8bh5t/comments 200 1ms - ::1
+[2026-06-30 00:39:40] [INFO ] POST /api/knowledge/kmqzwiem8bh5t/like 200 190ms - ::1
+[2026-06-30 00:39:48] [INFO ] POST /api/knowledge/kmqzwiem8bh5t/comments 200 83ms - ::1
+[2026-06-30 00:39:49] [INFO ] GET /api/knowledge/kmqzwiem8bh5t/comments 200 6ms - ::1
+[2026-06-30 00:39:53] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 3ms - ::1
+[2026-06-30 00:40:00] [INFO ] GET /api/knowledge/kmqzwiem8bh5t 200 6ms - ::1
+[2026-06-30 00:40:00] [INFO ] GET /api/knowledge/kmqzwiem8bh5t/comments 304 1ms - ::1
+[2026-06-30 00:40:08] [INFO ] GET /api/knowledge?page=1&pageSize=20 304 3ms - ::1
+[2026-06-30 00:40:33] [INFO ] POST /api/knowledge/upload 200 87ms - ::1
+[2026-06-30 00:40:33] [INFO ] GET /uploads/knowledge/mqzx79o39jc0.jpg 200 2ms - ::1
+[2026-06-30 00:40:42] [INFO ] POST /api/knowledge/upload 200 94ms - ::1
+[2026-06-30 00:40:42] [INFO ] GET /uploads/knowledge/mqzx7grhcvon.png 200 2ms - ::1
+[2026-06-30 00:40:56] [INFO ] POST /api/knowledge 200 59ms - ::1
+[2026-06-30 00:40:57] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb 200 3ms - ::1
+[2026-06-30 00:40:57] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb/comments 200 4ms - ::1
+[2026-06-30 00:41:02] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 4ms - ::1
+[2026-06-30 00:41:06] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb 304 6ms - ::1
+[2026-06-30 00:41:06] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb/comments 304 0ms - ::1
+[2026-06-30 00:41:22] [INFO ] GET /api/knowledge?page=1&pageSize=20 304 4ms - ::1
+[2026-06-30 00:41:37] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb 304 6ms - ::1
+[2026-06-30 00:41:37] [INFO ] GET /api/knowledge/kmqzx7ri7sqdb/comments 304 0ms - ::1
+[2026-06-30 00:41:38] [INFO ] GET /api/knowledge?page=1&pageSize=20 304 2ms - ::1
+[2026-06-30 00:41:42] [INFO ] DELETE /api/knowledge/kmqzx7ri7sqdb 200 229ms - ::1
+[2026-06-30 00:41:42] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 1ms - ::1
+[2026-06-30 00:41:45] [INFO ] DELETE /api/knowledge/kmqzwiem8bh5t 200 97ms - ::1
+[2026-06-30 00:41:45] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 7ms - ::1
+[2026-06-30 00:41:48] [INFO ] DELETE /api/knowledge/kmqzvv5p6ar0c 200 87ms - ::1
+[2026-06-30 00:41:48] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 4ms - ::1
+[2026-06-30 00:42:44] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 3ms - ::1
+[2026-06-30 00:42:49] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-06-30 00:42:49] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-06-30 00:42:49] [INFO ] GET /api/statistics/dashboard 200 0ms - ::1
+[2026-06-30 00:42:51] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-06-30 00:42:53] [INFO ] GET /api/equipments?pageSize=999 200 5ms - ::1
+[2026-06-30 00:42:56] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1 200 5ms - ::1
+[2026-06-30 00:43:23] [INFO ] POST /api/records 200 82ms - ::1
+[2026-06-30 00:43:23] [INFO ] GET /api/records?page=1&pageSize=10 200 6ms - ::1
+[2026-06-30 00:43:26] [INFO ] GET /api/records?page=1&pageSize=10 304 4ms - ::1
+[2026-06-30 00:43:26] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::1
+[2026-06-30 00:43:26] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-30 00:43:29] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 3ms - ::1
+[2026-06-30 00:43:31] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 3ms - ::1
+[2026-06-30 00:43:32] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 5ms - ::1
+[2026-06-30 00:43:32] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 4ms - ::1
+[2026-06-30 00:43:33] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 3ms - ::1
+[2026-06-30 00:43:42] [WARN ] GET /api/export-excel/records?startTime=Mon%20Jun%2001%202026%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&endTime=Tue%20Jun%2030%202026%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4) 404 5ms - ::1
+[2026-06-30 00:43:48] [WARN ] GET /api/export-excel/records?startTime=Mon%20Jun%2001%202026%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&endTime=Tue%20Jun%2030%202026%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4) 404 3ms - ::1
+[2026-06-30 00:45:12] [INFO ] POST /api/auth/login 200 72ms - ::1
+[2026-06-30 00:45:12] [INFO ] GET /api/export-excel/records 200 40ms - ::1
+[2026-06-30 00:45:23] [INFO ] POST /api/auth/login 200 67ms - ::1
+[2026-06-30 00:45:23] [INFO ] GET /api/export-excel/records 200 11ms - ::1
+[2026-06-30 00:45:32] [INFO ] POST /api/auth/login 200 66ms - ::1
+[2026-06-30 00:45:32] [INFO ] GET /api/export-excel/records 200 8ms - ::1
+[2026-06-30 00:46:00] [INFO ] POST /api/auth/login 200 66ms - ::1
+[2026-06-30 00:46:02] [INFO ] GET /api/export-excel/records 200 9ms - ::1
+[2026-06-30 00:46:55] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 6ms - ::1
+[2026-06-30 00:48:52] [INFO ] POST /api/auth/login 200 98ms - ::1
+[2026-06-30 00:48:54] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 7ms - ::1
+[2026-06-30 00:49:04] [INFO ] POST /api/auth/login 200 104ms - ::1
+[2026-06-30 00:49:04] [WARN ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 404 4ms - ::1
+[2026-06-30 00:49:21] [INFO ] GET /api/health 200 1ms - ::1
+[2026-06-30 00:49:21] [WARN ] GET /api/equipments?page=1&pageSize=1 401 1ms - ::1
+[2026-06-30 00:50:28] [INFO ] ========================================
+[2026-06-30 00:50:28] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 00:50:28] [INFO ] ========================================
+[2026-06-30 00:50:28] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 00:50:28] [INFO ]   API 前缀: /api
+[2026-06-30 00:50:28] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 00:50:28] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 00:50:28] [INFO ]   运行环境: production
+[2026-06-30 00:50:28] [INFO ] ========================================
+[2026-06-30 00:50:28] [INFO ]   默认账号:
+[2026-06-30 00:50:28] [INFO ]     管理员: admin / admin123
+[2026-06-30 00:50:28] [INFO ]     部门经理: manager / manager123
+[2026-06-30 00:50:28] [INFO ]     员工共享: sa / 123456
+[2026-06-30 00:50:28] [INFO ] ========================================
+[2026-06-30 00:50:42] [INFO ] POST /api/auth/login 200 139ms - ::1
+[2026-06-30 00:50:43] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 7ms - ::1
+[2026-06-30 00:50:55] [INFO ] POST /api/auth/login 200 117ms - ::1
+[2026-06-30 00:50:55] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 5ms - ::1
+[2026-06-30 00:51:54] [INFO ] ========================================
+[2026-06-30 00:51:54] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 00:51:54] [INFO ] ========================================
+[2026-06-30 00:51:54] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 00:51:54] [INFO ]   API 前缀: /api
+[2026-06-30 00:51:54] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 00:51:54] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 00:51:54] [INFO ]   运行环境: production
+[2026-06-30 00:51:54] [INFO ] ========================================
+[2026-06-30 00:51:54] [INFO ]   默认账号:
+[2026-06-30 00:51:54] [INFO ]     管理员: admin / admin123
+[2026-06-30 00:51:54] [INFO ]     部门经理: manager / manager123
+[2026-06-30 00:51:54] [INFO ]     员工共享: sa / 123456
+[2026-06-30 00:51:54] [INFO ] ========================================
+[2026-06-30 00:52:09] [INFO ] POST /api/auth/login 200 152ms - ::1
+[2026-06-30 00:52:09] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 66ms - ::1
+[2026-06-30 00:59:59] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 19ms - ::1
+[2026-06-30 01:53:47] [INFO ] ========================================
+[2026-06-30 01:53:47] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 01:53:47] [INFO ] ========================================
+[2026-06-30 01:53:47] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 01:53:47] [INFO ]   API 前缀: /api
+[2026-06-30 01:53:47] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 01:53:47] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 01:53:47] [INFO ]   运行环境: production
+[2026-06-30 01:53:47] [INFO ] ========================================
+[2026-06-30 01:53:47] [INFO ]   默认账号:
+[2026-06-30 01:53:47] [INFO ]     管理员: admin / admin123
+[2026-06-30 01:53:47] [INFO ]     部门经理: manager / manager123
+[2026-06-30 01:53:47] [INFO ]     员工共享: sa / 123456
+[2026-06-30 01:53:47] [INFO ] ========================================
+[2026-06-30 01:54:03] [INFO ] POST /api/auth/login 200 74ms - ::1
+[2026-06-30 01:54:04] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 34ms - ::1
+[2026-06-30 02:06:33] [INFO ] ========================================
+[2026-06-30 02:06:33] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 02:06:33] [INFO ] ========================================
+[2026-06-30 02:06:33] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 02:06:33] [INFO ]   API 前缀: /api
+[2026-06-30 02:06:33] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 02:06:33] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 02:06:33] [INFO ]   运行环境: production
+[2026-06-30 02:06:33] [INFO ] ========================================
+[2026-06-30 02:06:33] [INFO ]   默认账号:
+[2026-06-30 02:06:33] [INFO ]     管理员: admin / admin123
+[2026-06-30 02:06:33] [INFO ]     部门经理: manager / manager123
+[2026-06-30 02:06:33] [INFO ]     员工共享: sa / 123456
+[2026-06-30 02:06:33] [INFO ] ========================================
+[2026-06-30 02:06:50] [INFO ] POST /api/auth/login 200 81ms - ::1
+[2026-06-30 02:06:50] [INFO ] GET /api/export-excel/records?startTime=2026-06-01&endTime=2026-06-30 200 36ms - ::1
+[2026-06-30 02:20:47] [INFO ] ========================================
+[2026-06-30 02:20:47] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-30 02:20:47] [INFO ] ========================================
+[2026-06-30 02:20:47] [INFO ]   服务地址: http://localhost:3000
+[2026-06-30 02:20:47] [INFO ]   API 前缀: /api
+[2026-06-30 02:20:47] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-30 02:20:47] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-30 02:20:47] [INFO ]   运行环境: production
+[2026-06-30 02:20:47] [INFO ] ========================================
+[2026-06-30 02:20:47] [INFO ]   默认账号:
+[2026-06-30 02:20:47] [INFO ]     管理员: admin / admin123
+[2026-06-30 02:20:47] [INFO ]     部门经理: manager / manager123
+[2026-06-30 02:20:47] [INFO ]     员工共享: sa / 123456
+[2026-06-30 02:20:47] [INFO ] ========================================
+[2026-06-30 02:27:59] [INFO ] GET /api/health 200 3ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET / 200 8ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/index-X1NEY4gZ.css 200 8ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/index-t7N5O1ot.js 200 16ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/index-XOYqVXwi.js 200 4ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/record-BJPVHR0F.js 200 5ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/index-BXSV598w.js 200 8ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/maintenance-C8scCdS3.js 200 8ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /assets/statistics-TbFlYZJ8.js 200 8ms - ::1
+[2026-06-30 02:29:44] [INFO ] GET /api/records?page=1&pageSize=10 200 7ms - ::1
+[2026-06-30 02:29:45] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-30 02:29:45] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-30 02:29:45] [INFO ] GET /favicon.svg 200 2ms - ::1
+[2026-06-30 02:29:51] [INFO ] GET /assets/list-CQvHMLnT.js 200 2ms - ::1
+[2026-06-30 02:29:51] [INFO ] GET /assets/list-Cx5UzeU1.css 200 3ms - ::1
+[2026-06-30 02:29:51] [INFO ] GET /api/records?page=1&pageSize=10 304 4ms - ::1
+[2026-06-30 02:29:53] [INFO ] GET /assets/detail-BvQigi2d.js 200 3ms - ::1
+[2026-06-30 02:29:53] [INFO ] GET /assets/recordTemplates-xo0Azx7r.js 200 4ms - ::1
+[2026-06-30 02:29:53] [INFO ] GET /assets/detail-C1cO366G.css 200 4ms - ::1
+[2026-06-30 02:29:53] [INFO ] GET /api/records/rmqzxawkn15yx 200 4ms - ::1
+[2026-06-30 02:29:57] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-06-30 02:29:58] [INFO ] GET /assets/form-DXyB8sJ_.js 200 3ms - ::1
+[2026-06-30 02:29:58] [INFO ] GET /assets/equipment-D1YHrBVl.js 200 4ms - ::1
+[2026-06-30 02:29:58] [INFO ] GET /assets/form-DkfINcVJ.css 200 5ms - ::1
+[2026-06-30 02:29:58] [INFO ] GET /api/equipments?pageSize=999 200 19ms - ::1
+[2026-06-30 02:30:01] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1 200 5ms - ::1
+[2026-06-30 02:30:19] [INFO ] POST /api/records 200 143ms - ::1
+[2026-06-30 02:30:20] [INFO ] GET /api/records?page=1&pageSize=10 200 1ms - ::1
+[2026-06-30 02:30:21] [INFO ] GET /api/records/rmr014fr2i44f 200 3ms - ::1

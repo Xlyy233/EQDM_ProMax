@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import type { StatisticsData, DashboardData, TrendData, EquipmentKPI, DepartmentStats, CostAnalysis, PieChartData, ApiResponse } from '@/types'
+import type { StatisticsData, DashboardData, TrendData, EquipmentKPI, DepartmentStats, CostAnalysis, PieChartData, PartsReplacementData, ApiResponse } from '@/types'
 
 export async function getStatistics(year: number, month: number): Promise<ApiResponse<StatisticsData>> {
   const res = await request.get('/statistics/monthly', { params: { year, month } })
@@ -33,5 +33,10 @@ export async function getCostAnalysis(months: number): Promise<ApiResponse<CostA
 
 export async function getRecordTypeDistribution(): Promise<ApiResponse<PieChartData[]>> {
   const res = await request.get('/statistics/record-type-distribution')
+  return res.data
+}
+
+export async function getPartsReplacement(): Promise<ApiResponse<PartsReplacementData>> {
+  const res = await request.get('/statistics/parts-replacement')
   return res.data
 }

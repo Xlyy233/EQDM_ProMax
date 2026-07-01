@@ -2,11 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage } from 'element-plus'
-import { Plus, Upload, Search } from '@element-plus/icons-vue'
+import { Plus, Upload, Search, View, UploadFilled, Document, Loading, Close } from '@element-plus/icons-vue'
 import { canManageEquipment, loadFromStorage, isLoggedIn } from '@/stores/user'
 import { statusMap } from '@/types'
-import type { Equipment, EquipmentStatus } from '@/types'
+import type { Equipment, EquipmentStatus, EquipmentAttachment } from '@/types'
 import * as equipmentApi from '@/api/equipment'
+import * as attachmentApi from '@/api/attachment'
 import * as XLSX from 'xlsx'
 
 const router = useRouter()
@@ -21,6 +22,14 @@ const showImportDialog = ref(false)
 const importStep = ref<'select' | 'preview' | 'result'>('select')
 const importData = ref<Partial<Equipment>[]>([])
 const importSuccess = ref(false)
+const importResultMsg = ref('')
+
+// 附件相关
+const attachmentMap = ref<Record<string, EquipmentAttachment[]>>({})
+const attachmentLoading = ref<Record<string, boolean>>({})
+const previewVisible = ref(false)
+const previewUrl = ref('')
+const previewName = ref('')
 
 // 权限校验：普通员工不能访问
 const hasPermission = canManageEquipment()
@@ -44,7 +53,61 @@ function loadData() {
   equipmentApi.getEquipments({ page: page.value, pageSize: pageSize.value, keyword: keyword.value }).then(res => {
     list.value = res.data?.list || []
     total.value = res.data?.total || 0
+    // 加载每台设备的附件
+    loadAttachments()
   }).catch(() => {}).finally(() => { loading.value = false })
+}
+
+// 批量加载所有设备的附件（一次请求，避免N+1）
+function loadAttachments() {
+  const ids = list.value.map(eq => eq.id).filter(Boolean)
+  if (ids.length === 0) return
+  attachmentApi.getBatchAttachments(ids).then(res => {
+    const map = res.data || {}
+    for (const id of ids) {
+      attachmentMap.value[id] = map[id] || []
+    }
+  }).catch(() => {})
+}
+
+// 上传附件（支持批量）
+function handleFileUpload(eq: Equipment, event: Event) {
+  const input = event.target as HTMLInputElement
+  const files = Array.from(input.files || [])
+  if (files.length === 0) return
+
+  attachmentLoading.value[eq.id] = true
+  attachmentApi.uploadAttachment(eq.id, files).then(res => {
+    ElMessage.success(res.message || '上传成功')
+    attachmentApi.getAttachments(eq.id).then(r => {
+      attachmentMap.value[eq.id] = r.data || []
+    })
+  }).catch(() => {}).finally(() => {
+    attachmentLoading.value[eq.id] = false
+    input.value = ''
+  })
+}
+
+// 删除附件
+function handleDeleteAttachment(eq: Equipment, att: EquipmentAttachment) {
+  ElMessageBox.confirm(`确定删除"${att.originalName}"？`, '确认', { type: 'warning' }).then(() => {
+    attachmentApi.deleteAttachment(att.id).then(() => {
+      ElMessage.success('已删除')
+      attachmentMap.value[eq.id] = (attachmentMap.value[eq.id] || []).filter(a => a.id !== att.id)
+    }).catch(() => {})
+  }).catch(() => {})
+}
+
+// 预览图片
+function handlePreview(eq: Equipment, att: EquipmentAttachment) {
+  if (attachmentApi.isImageFile(att.mimeType)) {
+    previewUrl.value = attachmentApi.getAttachmentUrl(eq.id, att.fileName)
+    previewName.value = att.originalName
+    previewVisible.value = true
+  } else {
+    // 非图片文件直接打开
+    window.open(attachmentApi.getAttachmentUrl(eq.id, att.fileName), '_blank')
+  }
 }
 
 function handleSearch() { page.value = 1; loadData() }
@@ -117,25 +180,28 @@ function parseExcelFile(file: File) {
       const workbook = XLSX.read(data, { type: 'array' })
       const sheetName = workbook.SheetNames[0]
       const sheet = workbook.Sheets[sheetName]
-      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as any[][]
+      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' }) as any[][]
 
       const result: Partial<Equipment>[] = []
+      // 只检测第一行是否为表头，避免把数据行误判为表头
       let startIndex = 0
-      for (let i = 0; i < jsonData.length; i++) {
-        const row = jsonData[i]
-        if (!row || row.length === 0) continue
-        const firstCell = String(row[0] || '').trim()
-        const thirdCell = String(row[3] || '').trim()
-        const isHeader = firstCell === '关键设备' || firstCell.includes('设备')
-          || thirdCell === '新设备编码' || thirdCell.includes('设备编码') || thirdCell.includes('编码')
-        if (!isHeader) { startIndex = i; break }
+      const firstRow = jsonData[0]
+      if (firstRow && firstRow.length > 0) {
+        const firstCell = String(firstRow[0] || '').trim()
+        const thirdCell = String(firstRow[3] || '').trim()
+        if (firstCell === '关键设备' || firstCell.includes('设备')
+          || thirdCell === '新设备编码' || thirdCell.includes('设备编码')) {
+          startIndex = 1
+        }
       }
 
+      let skippedCount = 0
       for (let i = startIndex; i < jsonData.length; i++) {
         const row = jsonData[i]
         if (!row || row.length === 0) continue
         const deviceCode = String(row[3] || '').trim()
-        if (!deviceCode) continue
+        const deviceName = String(row[6] || '').trim()
+        if (!deviceCode || !deviceName) { skippedCount++; continue }
         result.push({
           keyEquipment: String(row[0] || '').trim(),
           productionLineCode: String(row[1] || '').trim(),
@@ -164,6 +230,24 @@ function parseExcelFile(file: File) {
         ElMessage.warning('文件中没有有效数据')
         return
       }
+      if (skippedCount > 0) {
+        ElMessage.warning(`已自动跳过 ${skippedCount} 条数据（设备编号或名称为空）`)
+      }
+      // 检测重复编号
+      const codeMap = new Map<string, number>()
+      result.forEach((item, idx) => {
+        const code = item.code!
+        if (codeMap.has(code)) {
+          codeMap.set(code, (codeMap.get(code) || 1) + 1)
+        } else {
+          codeMap.set(code, 1)
+        }
+      })
+      const duplicates: string[] = []
+      codeMap.forEach((count, code) => { if (count > 1) duplicates.push(code) })
+      if (duplicates.length > 0) {
+        ElMessage.warning(`文件中有 ${duplicates.length} 个重复的设备编号：${duplicates.join(', ')}，导入时会被跳过`)
+      }
       importData.value = result
       importStep.value = 'preview'
       showImportDialog.value = true
@@ -181,6 +265,7 @@ async function confirmImport() {
     const res = await equipmentApi.batchAddEquipment(importData.value as Equipment[])
     if (res) {
       importSuccess.value = true
+      importResultMsg.value = res.message || ''
       importStep.value = 'result'
       loadData()
     } else {
@@ -194,11 +279,11 @@ async function confirmImport() {
 function closeImportDialog() {
   showImportDialog.value = false
   importData.value = []
+  importResultMsg.value = ''
   importStep.value = 'select'
   importSuccess.value = false
 }
 
-onMounted(loadData)
 </script>
 
 <template>
@@ -240,6 +325,61 @@ onMounted(loadData)
           <el-tag :type="row.status==='in_use'?'success':row.status==='stopped'?'warning':'danger'" size="small">{{ statusMap[row.status] || row.status }}</el-tag>
         </template>
       </el-table-column>
+      <el-table-column label="附件" width="180" align="center">
+        <template #default="{ row }">
+          <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center;">
+            <!-- 附件缩略图列表 -->
+            <template v-for="att in (attachmentMap[row.id] || [])" :key="att.id">
+              <!-- 图片：显示缩略图 -->
+              <div
+                v-if="attachmentApi.isImageFile(att.mimeType)"
+                style="position:relative;cursor:pointer;width:40px;height:40px;border-radius:4px;overflow:hidden;border:1px solid #e4e7ed;flex-shrink:0;"
+                @click.stop="handlePreview(row, att)"
+              >
+                <img
+                  :src="attachmentApi.getAttachmentUrl(row.id, att.fileName)"
+                  :alt="att.originalName"
+                  style="width:100%;height:100%;object-fit:cover;"
+                  :title="att.originalName"
+                  loading="lazy"
+                />
+                <span
+                  style="position:absolute;top:0;right:0;background:#f56c6c;border-radius:0 0 0 4px;padding:1px 3px;cursor:pointer;line-height:1;"
+                  @click.stop="handleDeleteAttachment(row, att)"
+                  title="删除附件"
+                >
+                  <el-icon :size="12" color="#fff"><Close /></el-icon>
+                </span>
+              </div>
+              <!-- 非图片：显示文件类型图标 -->
+              <div
+                v-else
+                style="position:relative;cursor:pointer;width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;background:#f5f7fa;border:1px solid #e4e7ed;flex-shrink:0;"
+                @click.stop="handlePreview(row, att)"
+                :title="att.originalName"
+              >
+                <el-icon :size="18" color="#909399"><Document /></el-icon>
+                <span
+                  style="position:absolute;top:0;right:0;background:#f56c6c;border-radius:0 0 0 4px;padding:1px 3px;cursor:pointer;line-height:1;"
+                  @click.stop="handleDeleteAttachment(row, att)"
+                  title="删除附件"
+                >
+                  <el-icon :size="12" color="#fff"><Close /></el-icon>
+                </span>
+              </div>
+            </template>
+            <!-- 上传按钮 -->
+            <label
+              :style="{cursor:'pointer',width:'40px',height:'40px',borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',background:'#f5f7fa',border:'1px dashed #dcdfe6',flexShrink:0,opacity:attachmentLoading[row.id]?0.5:1}"
+              :title="attachmentLoading[row.id] ? '上传中...' : '上传附件'"
+            >
+              <el-icon v-if="!attachmentLoading[row.id]" :size="16" color="#909399"><UploadFilled /></el-icon>
+              <el-icon v-else :size="16" color="#909399" class="is-loading"><Loading /></el-icon>
+              <input type="file" multiple style="display:none" @change="(e: Event) => handleFileUpload(row, e)" :disabled="attachmentLoading[row.id]" />
+            </label>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="150" fixed="right" v-if="canManageEquipment()">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click.stop="router.push(`/equipment/${row.id}/edit`)">编辑</el-button>
@@ -250,7 +390,7 @@ onMounted(loadData)
 
     <div style="margin-top:16px;display:flex;justify-content:flex-end;">
       <el-pagination
-        v-model:current-page="page" v-model:page-size="pageSize"
+        :current-page="page" :page-size="pageSize"
         :total="total" :page-sizes="[10,20,50]" layout="total,sizes,prev,pager,next"
         @current-change="handlePageChange" @size-change="handleSizeChange"
       />
@@ -306,7 +446,15 @@ onMounted(loadData)
         <p style="color:#909399;">
           {{ importSuccess ? `成功导入 ${importData.length} 台设备数据` : '请检查文件格式后重试' }}
         </p>
+        <p v-if="importResultMsg" style="color:#E6A23C;margin-top:4px;">{{ importResultMsg }}</p>
         <el-button type="primary" @click="closeImportDialog">完成</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 图片预览弹窗 -->
+    <el-dialog v-model="previewVisible" :title="previewName" width="80%" :close-on-click-modal="true" destroy-on-close>
+      <div style="text-align:center;max-height:70vh;overflow:auto;">
+        <img :src="previewUrl" :alt="previewName" style="max-width:100%;max-height:70vh;object-fit:contain;" />
       </div>
     </el-dialog>
   </div>

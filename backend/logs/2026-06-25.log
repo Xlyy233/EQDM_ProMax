@@ -1,0 +1,170 @@
+[2026-06-25 08:33:37] [INFO ] ========================================
+[2026-06-25 08:33:37] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-25 08:33:37] [INFO ] ========================================
+[2026-06-25 08:33:37] [INFO ]   服务地址: http://localhost:3000
+[2026-06-25 08:33:37] [INFO ]   API 前缀: /api
+[2026-06-25 08:33:37] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-25 08:33:37] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-25 08:33:37] [INFO ]   运行环境: production
+[2026-06-25 08:33:37] [INFO ] ========================================
+[2026-06-25 08:33:37] [INFO ]   默认账号:
+[2026-06-25 08:33:37] [INFO ]     管理员: admin / admin123
+[2026-06-25 08:33:37] [INFO ]     部门经理: manager / manager123
+[2026-06-25 08:33:37] [INFO ]     员工共享: sa / 123456
+[2026-06-25 08:33:37] [INFO ] ========================================
+[2026-06-25 09:22:15] [INFO ] ========================================
+[2026-06-25 09:22:15] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-25 09:22:15] [INFO ] ========================================
+[2026-06-25 09:22:15] [INFO ]   服务地址: http://localhost:3000
+[2026-06-25 09:22:15] [INFO ]   API 前缀: /api
+[2026-06-25 09:22:15] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-25 09:22:15] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-25 09:22:15] [INFO ]   运行环境: production
+[2026-06-25 09:22:15] [INFO ] ========================================
+[2026-06-25 09:22:15] [INFO ]   默认账号:
+[2026-06-25 09:22:15] [INFO ]     管理员: admin / admin123
+[2026-06-25 09:22:15] [INFO ]     部门经理: manager / manager123
+[2026-06-25 09:22:15] [INFO ]     员工共享: sa / 123456
+[2026-06-25 09:22:15] [INFO ] ========================================
+[2026-06-25 09:22:20] [INFO ] GET / 200 9ms - ::1
+[2026-06-25 09:22:20] [INFO ] GET /assets/index-Bq23dyAW.css 200 4ms - ::1
+[2026-06-25 09:22:20] [INFO ] GET /assets/index-DpFAEa4F.js 200 9ms - ::1
+[2026-06-25 09:22:20] [INFO ] GET /assets/index-BMry1yhb.js 200 2ms - ::1
+[2026-06-25 09:22:20] [INFO ] GET /favicon.svg 200 2ms - ::1
+[2026-06-25 09:22:20] [INFO ] GET /favicon.svg 304 2ms - ::1
+[2026-06-25 09:22:25] [INFO ] POST /api/auth/login 200 113ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /assets/index-dCNaRWMP.js 200 5ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /assets/index-BXSV598w.js 200 5ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /assets/record-DHtlWKF4.js 200 6ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /assets/maintenance-D-tOWE7w.js 200 5ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /assets/statistics-vCikqRHF.js 200 6ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-06-25 09:22:25] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /assets/list-DKYvdKI1.js 200 5ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /assets/equipment-CB8Noaq4.js 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 200 17ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 200 2ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rus0344 200 2ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 200 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 0ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 2ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 2ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:22:28] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 1ms - ::1
+[2026-06-25 09:22:30] [INFO ] GET /assets/detail-Baa9y_PN.js 200 3ms - ::1
+[2026-06-25 09:22:30] [INFO ] GET /api/equipments/emqf95rukqce2 200 2ms - ::1
+[2026-06-25 09:22:54] [INFO ] POST /api/attachments/equipment/emqf95rukqce2 200 12ms - ::1
+[2026-06-25 09:22:55] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 200 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 0ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 3ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:22:57] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 0ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 0ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 0ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:22:58] [INFO ] GET /uploads/equipment/emqf95rukqce2/mqtanrm0ya0r.png 200 1ms - ::1
+[2026-06-25 09:23:02] [INFO ] GET /api/equipments/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 0ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 0ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 0ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 0ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:23:05] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 0ms - ::1
+[2026-06-25 09:23:13] [INFO ] GET /api/equipments/emqf95rupg6kl 200 2ms - ::1
+[2026-06-25 09:23:18] [INFO ] POST /api/attachments/equipment/emqf95rupg6kl 200 7ms - ::1
+[2026-06-25 09:23:18] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 200 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 0ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 2ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 2ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 2ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:23:20] [INFO ] GET /uploads/equipment/emqf95rupg6kl/mqtao9ieusyk.jpg 200 14ms - ::1
+[2026-06-25 09:23:25] [INFO ] GET /api/equipments/emqf95rurw5so 200 2ms - ::1
+[2026-06-25 09:23:44] [INFO ] POST /api/attachments/equipment/emqf95rurw5so 200 10ms - ::1
+[2026-06-25 09:23:44] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 200 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 2ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 0ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 0ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 3ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rukqce2 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruvj2cu 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruxxgc5 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rupg6kl 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rurw5so 304 3ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rus0344 304 2ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruuqhhq 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruzo0rt 304 0ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95ruw5wmi 304 1ms - ::1
+[2026-06-25 09:23:46] [INFO ] GET /api/attachments/equipment/emqf95rv1v9fz 304 1ms - ::1
+[2026-06-25 09:23:48] [INFO ] GET /uploads/equipment/emqf95rurw5so/mqtaou3mqo80.pdf 200 5ms - ::1
+[2026-06-25 09:23:48] [INFO ] GET /favicon.ico 200 4ms - ::1

@@ -71,10 +71,9 @@ async function handleLogin() {
       </el-form>
 
       <div style="border-top:1px solid #f0f0f0;padding-top:20px;margin-top:8px;">
-        <p style="font-size:13px;color:#909399;text-align:center;margin-bottom:12px;">测试账号</p>
+        <p style="font-size:13px;color:#909399;text-align:center;margin-bottom:12px;">请选择以下对应账号登录</p>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div v-for="acc in [
-            { role:'管理员', u:'admin', p:'admin123', color:'#409EFF' },
             { role:'部门经理', u:'manager', p:'manager123', color:'#67C23A' },
             { role:'员工共享', u:'sa', p:'123456', color:'#E6A23C' }
           ]" :key="acc.u"

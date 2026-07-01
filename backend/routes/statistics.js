@@ -9,30 +9,39 @@ router.get('/dashboard', authMiddleware, (req, res) => {
   const equipments = db.getAll('equipments');
   const records = db.getAll('records');
 
-  const totalEquipments = equipments.length;
-  const inUseCount = equipments.filter(e => e.status === 'in_use').length;
-  const stoppedCount = equipments.filter(e => e.status === 'stopped').length;
-  const scrappedCount = equipments.filter(e => e.status === 'scrapped').length;
-
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  const monthlyRepair = records.filter(r => r.type === 'repair' && (r.createdAt || '').startsWith(currentMonth)).length;
-  const monthlyMaintenance = records.filter(r => r.type === 'maintenance' && (r.createdAt || '').startsWith(currentMonth)).length;
-  const monthlyInspection = records.filter(r => r.type === 'inspection' && (r.createdAt || '').startsWith(currentMonth)).length;
-
-  const repairRecords = records.filter(r => r.type === 'repair' && r.startTime && r.endTime);
-  let mttr = 0;
-  if (repairRecords.length > 0) {
-    let totalHours = 0;
-    for (const r of repairRecords) {
-      const diff = (new Date(r.endTime).getTime() - new Date(r.startTime).getTime()) / 3600000;
-      if (diff > 0) totalHours += diff;
-    }
-    mttr = Math.round((totalHours / repairRecords.length) * 10) / 10;
+  // 单次遍历设备，同时统计所有状态
+  let inUseCount = 0, stoppedCount = 0, scrappedCount = 0;
+  for (const e of equipments) {
+    if (e.status === 'in_use') inUseCount++;
+    else if (e.status === 'stopped') stoppedCount++;
+    else if (e.status === 'scrapped') scrappedCount++;
   }
+  const totalEquipments = equipments.length;
 
+  // 单次遍历记录，同时统计所有指标
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  let monthlyRepair = 0, monthlyMaintenance = 0, monthlyInspection = 0;
+  let pendingRecords = 0, completedRecords = 0;
+  let repairHours = 0, repairCount = 0;
+
+  for (const r of records) {
+    const isCurrentMonth = (r.createdAt || '').startsWith(currentMonth);
+    if (r.type === 'repair') {
+      if (isCurrentMonth) monthlyRepair++;
+      if (r.startTime && r.endTime) {
+        const diff = (new Date(r.endTime).getTime() - new Date(r.startTime).getTime()) / 3600000;
+        if (diff > 0) { repairHours += diff; repairCount++; }
+      }
+    } else if (r.type === 'maintenance' && isCurrentMonth) {
+      monthlyMaintenance++;
+    } else if (r.type === 'inspection' && isCurrentMonth) {
+      monthlyInspection++;
+    }
+    if (r.status === 'pending') pendingRecords++;
+    else if (r.status === 'completed' || r.status === 'approved') completedRecords++;
+  }
+  const mttr = repairCount > 0 ? Math.round((repairHours / repairCount) * 10) / 10 : 0;
   const availabilityRate = totalEquipments > 0 ? Math.round((inUseCount / totalEquipments) * 1000) / 10 : 0;
-  const pendingRecords = records.filter(r => r.status === 'pending').length;
-  const completedRecords = records.filter(r => r.status === 'completed' || r.status === 'approved').length;
 
   res.json(success({
     totalEquipments, inUseCount, stoppedCount, scrappedCount,
@@ -73,15 +82,14 @@ router.get('/monthly', authMiddleware, (req, res) => {
 
   const partsMap = {};
   for (const r of monthRecords) {
-    if (r.partsReplaced) {
-      try {
-        const parsed = typeof r.partsReplaced === 'string' ? JSON.parse(r.partsReplaced) : r.partsReplaced;
-        if (Array.isArray(parsed)) {
-          for (const p of parsed) partsMap[p] = (partsMap[p] || 0) + 1;
-        } else if (typeof parsed === 'string' && parsed) {
-          partsMap[parsed] = (partsMap[parsed] || 0) + 1;
+    if (r.partsReplaced === 'yes' && r.partsReplacedDetail) {
+      const detail = r.partsReplacedDetail.trim();
+      if (detail) {
+        const items = detail.split(/[,，、;；\n]+/).map(s => s.trim()).filter(Boolean);
+        for (const item of items) {
+          partsMap[item] = (partsMap[item] || 0) + 1;
         }
-      } catch (e) {}
+      }
     }
   }
   const vulnerableParts = Object.entries(partsMap).map(([partName, replaceCount]) => ({
@@ -205,6 +213,55 @@ router.get('/record-type-distribution', authMiddleware, (req, res) => {
     color: t.color
   }));
   res.json(success(result));
+});
+
+// 配件更换汇总统计
+router.get('/parts-replacement', authMiddleware, (req, res) => {
+  const records = db.getAll('records');
+  const replacedRecords = records.filter(r => r.partsReplaced === 'yes' && r.partsReplacedDetail);
+
+  // 配件更换记录列表
+  const partsList = replacedRecords.map(r => ({
+    equipmentName: r.equipmentName || '',
+    equipmentId: r.equipmentId,
+    detail: r.partsReplacedDetail,
+    date: (r.createdAt || '').slice(0, 10),
+    type: r.type
+  })).sort((a, b) => b.date.localeCompare(a.date));
+
+  // 配件关键词统计
+  const partsMap = {};
+  for (const r of replacedRecords) {
+    const detail = r.partsReplacedDetail.trim();
+    if (detail) {
+      const items = detail.split(/[,，、;；\n]+/).map(s => s.trim()).filter(Boolean);
+      for (const item of items) {
+        partsMap[item] = (partsMap[item] || 0) + 1;
+      }
+    }
+  }
+
+  const partsStats = Object.entries(partsMap)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+
+  const perEquipment = replacedRecords.reduce((acc, r) => {
+    const key = r.equipmentName || r.equipmentId;
+    if (!acc[key]) acc[key] = { name: key, count: 0, details: [] };
+    acc[key].count += 1;
+    acc[key].details.push(r.partsReplacedDetail);
+    return acc;
+  }, {});
+
+  const equipmentStats = Object.values(perEquipment)
+    .sort((a, b) => b.count - a.count);
+
+  res.json(success({
+    totalReplacements: replacedRecords.length,
+    partsList: partsList.slice(0, 50),
+    partsStats,
+    equipmentStats
+  }));
 });
 
 module.exports = router;

@@ -85,14 +85,16 @@ router.post('/batch', authMiddleware, (req, res) => {
   const items = req.body || [];
   if (!Array.isArray(items) || items.length === 0) return res.json(error('批量导入数据不能为空'));
 
-  let added = 0;
   let skipped = 0;
+  const toInsert = [];
+  const existingCodes = new Set(db.getAll('equipments').map(e => e.code));
   const now = db.now();
+
   for (const item of items) {
     if (!item.code || !item.name) { skipped++; continue; }
-    const existing = db.findBy('equipments', e => e.code === item.code);
-    if (existing) { skipped++; continue; }
-    db.insert('equipments', {
+    if (existingCodes.has(item.code)) { skipped++; continue; }
+    existingCodes.add(item.code);
+    toInsert.push({
       code: item.code,
       name: item.name,
       model: item.model || '',
@@ -105,7 +107,6 @@ router.post('/batch', authMiddleware, (req, res) => {
       updatedBy: req.user.id,
       createdAt: now,
       updatedAt: now,
-      // 新增字段
       keyEquipment: item.keyEquipment || '',
       productionLineCode: item.productionLineCode || '',
       factoryCode: item.factoryCode || '',
@@ -119,9 +120,14 @@ router.post('/batch', authMiddleware, (req, res) => {
       useLocation: item.useLocation || '',
       departmentName: item.departmentName || ''
     });
-    added++;
   }
-  res.json(success({ added, skipped }, `批量导入完成，成功 ${added} 条，跳过 ${skipped} 条`));
+
+  // 批量插入：一次写盘，避免逐条insert的多次磁盘I/O
+  if (toInsert.length > 0) {
+    db.batchInsert('equipments', toInsert);
+  }
+
+  res.json(success({ added: toInsert.length, skipped }, `批量导入完成，成功 ${toInsert.length} 条，跳过 ${skipped} 条`));
 });
 
 router.put('/:id', authMiddleware, (req, res) => {

@@ -50,6 +50,19 @@ function getResultLabel(result: string) {
 const showPhoto = ref(false)
 const currentPhotoIndex = ref(0)
 
+const pageTitle = computed(() => {
+  if (!record.value || !record.value.equipmentCode) return '记录详情'
+  return record.value.equipmentCode + ' - ' + record.value.equipmentName + ' - 记录详情'
+})
+
+const equipmentDisplay = computed(() => {
+  if (!record.value) return '-'
+  const code = record.value.equipmentCode || ''
+  const name = record.value.equipmentName || ''
+  if (code && name) return code + ' - ' + name
+  return name || '-'
+})
+
 function previewPhoto(index: number) {
   currentPhotoIndex.value = index
   showPhoto.value = true
@@ -84,7 +97,7 @@ onMounted(() => {
     <div class="page-header">
       <div style="display:flex;align-items:center;gap:8px;">
         <el-button text @click="router.back()"><el-icon><ArrowLeft /></el-icon></el-button>
-        <h2 class="page-title">记录详情</h2>
+        <h2 class="page-title">{{ pageTitle }}</h2>
       </div>
       <div style="display:flex;gap:8px;" v-if="isEdit">
         <el-button type="primary" @click="router.push(`/record/${route.params.id}/edit`)">编辑</el-button>
@@ -103,7 +116,7 @@ onMounted(() => {
               {{ recordTypeMap[record.type] || record.type }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="关联设备">{{ record.equipmentName || '-' }}</el-descriptions-item>
+          <el-descriptions-item label="关联设备">{{ equipmentDisplay }}</el-descriptions-item>
           <el-descriptions-item label="维修人员">{{ record.personnel || '-' }}</el-descriptions-item>
           <el-descriptions-item label="填报时间">{{ formatDate(record.createdAt) }}</el-descriptions-item>
           <el-descriptions-item label="更新时间">{{ formatDate(record.updatedAt) }}</el-descriptions-item>
@@ -120,6 +133,10 @@ onMounted(() => {
           <el-descriptions-item v-if="record.isStopped === 'yes'" label="停机时长">
             {{ (record.stopDuration || '0') + (record.stopDurationUnit === 'hours' ? '小时' : '分钟') }}
           </el-descriptions-item>
+          <el-descriptions-item label="是否更换配件">{{ record.partsReplaced === 'yes' ? '是' : '否' }}</el-descriptions-item>
+          <el-descriptions-item v-if="record.partsReplaced === 'yes'" label="更换配件详情">
+            <div class="content-text">{{ record.partsReplacedDetail || '-' }}</div>
+          </el-descriptions-item>
         </el-descriptions>
       </div>
 
@@ -127,8 +144,14 @@ onMounted(() => {
       <div class="section-card">
         <div class="section-title">作业内容</div>
         <el-descriptions :column="1" border size="default">
-          <el-descriptions-item label="具体内容">
-            <div class="content-text">{{ record.content || '-' }}</div>
+          <el-descriptions-item label="故障描述">
+            <div class="content-text">{{ record.faultDescription || record.content || '-' }}</div>
+          </el-descriptions-item>
+          <el-descriptions-item label="故障原因">
+            <div class="content-text">{{ record.faultCause || '-' }}</div>
+          </el-descriptions-item>
+          <el-descriptions-item label="解决办法">
+            <div class="content-text">{{ record.solution || '-' }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="处理结果">
             <el-tag :type="record.result === 'fixed' ? 'success' : record.result === 'observing' ? 'warning' : record.result === 'needs_parts' ? 'primary' : record.result === 'unrepairable' ? 'danger' : 'info'" size="default">
@@ -151,14 +174,7 @@ onMounted(() => {
             :key="index"
             @click="previewPhoto(index)"
           >
-            <el-image
-              :src="photo"
-              fit="cover"
-              class="photo-img"
-              :preview-src-list="record.photos"
-              :initial-index="index"
-              hide-on-click-modal
-            />
+            <img :src="photo" class="photo-img" />
           </div>
         </div>
       </div>
@@ -257,11 +273,6 @@ onMounted(() => {
 }
 
 .photo-img {
-  width: 100%;
-  height: 100%;
-}
-
-.photo-img :deep(img) {
   width: 100%;
   height: 100%;
   object-fit: cover;

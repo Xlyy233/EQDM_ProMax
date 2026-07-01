@@ -36,7 +36,11 @@ function writeLog(level, message, data = null) {
     logLine += ' ' + (typeof data === 'string' ? data : JSON.stringify(data, null, 2));
   }
   
-  console.log(logLine);
+  // 只在开发环境或非请求日志时输出到控制台（避免终端窗口自动弹出）
+  const isDev = process.env.NODE_ENV === 'development';
+  if (isDev || level === 'error') {
+    console.log(logLine);
+  }
   
   // 写入文件
   const logFile = path.join(LOG_DIR, `${new Date().toISOString().split('T')[0]}.log`);

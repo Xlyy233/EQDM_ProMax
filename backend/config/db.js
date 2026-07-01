@@ -12,7 +12,12 @@ const DEFAULT_DATA = {
   users: [],
   equipments: [],
   records: [],
-  maintenancePlans: []
+  maintenancePlans: [],
+  attachments: [],
+  knowledge: [],
+  knowledge_comments: [],
+  knowledge_likes: [],
+  notifications: []
 };
 
 let cache = null;
@@ -111,6 +116,21 @@ function insert(table, item) {
   return item;
 }
 
+// 批量插入：一次写盘完成多条记录，避免逐条insert导致的多次磁盘I/O
+function batchInsert(table, items) {
+  const list = getAll(table);
+  const ts = now();
+  const results = items.map(item => {
+    if (!item.id) item.id = genId(table.slice(0, 1));
+    if (!item.createdAt) item.createdAt = ts;
+    if (!item.updatedAt) item.updatedAt = ts;
+    list.push(item);
+    return item;
+  });
+  setAll(table, list);
+  return results;
+}
+
 function update(table, id, updates) {
   const list = getAll(table);
   const idx = list.findIndex(item => item.id === id);
@@ -161,6 +181,7 @@ module.exports = {
   findById,
   findBy,
   insert,
+  batchInsert,
   update,
   remove,
   count,

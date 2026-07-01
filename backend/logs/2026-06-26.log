@@ -1,0 +1,303 @@
+[2026-06-26 07:20:44] [INFO ] ========================================
+[2026-06-26 07:20:44] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-26 07:20:44] [INFO ] ========================================
+[2026-06-26 07:20:44] [INFO ]   服务地址: http://localhost:3000
+[2026-06-26 07:20:44] [INFO ]   API 前缀: /api
+[2026-06-26 07:20:44] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-26 07:20:44] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-26 07:20:44] [INFO ]   运行环境: production
+[2026-06-26 07:20:44] [INFO ] ========================================
+[2026-06-26 07:20:44] [INFO ]   默认账号:
+[2026-06-26 07:20:44] [INFO ]     管理员: admin / admin123
+[2026-06-26 07:20:44] [INFO ]     部门经理: manager / manager123
+[2026-06-26 07:20:44] [INFO ]     员工共享: sa / 123456
+[2026-06-26 07:20:44] [INFO ] ========================================
+[2026-06-26 07:23:27] [INFO ] ========================================
+[2026-06-26 07:23:27] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-26 07:23:27] [INFO ] ========================================
+[2026-06-26 07:23:27] [INFO ]   服务地址: http://localhost:3000
+[2026-06-26 07:23:27] [INFO ]   API 前缀: /api
+[2026-06-26 07:23:27] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-26 07:23:27] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-26 07:23:27] [INFO ]   运行环境: production
+[2026-06-26 07:23:27] [INFO ] ========================================
+[2026-06-26 07:23:27] [INFO ]   默认账号:
+[2026-06-26 07:23:27] [INFO ]     管理员: admin / admin123
+[2026-06-26 07:23:27] [INFO ]     部门经理: manager / manager123
+[2026-06-26 07:23:27] [INFO ]     员工共享: sa / 123456
+[2026-06-26 07:23:27] [INFO ] ========================================
+[2026-06-26 07:23:35] [INFO ] GET /api/health 200 4ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET / 200 7ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/index-Bq23dyAW.css 200 11ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/index-B6NomJ-h.js 200 20ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/index-Cmf9Axez.js 200 3ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/index-BXSV598w.js 200 5ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/record-B2nMG62C.js 200 5ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/maintenance-COrXiDY3.js 200 6ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /assets/statistics-Ny-BejdI.js 200 7ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /api/records?page=1&pageSize=10 200 4ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 3ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-26 07:23:40] [INFO ] GET /favicon.svg 200 2ms - ::1
+[2026-06-26 07:23:45] [INFO ] GET / 200 3ms - ::1
+[2026-06-26 07:24:30] [INFO ] GET /assets/index-B6NomJ-h.js 200 5ms - ::1
+[2026-06-26 07:25:08] [INFO ] GET /assets/index-2RDeEvqZ.js 200 2ms - ::1
+[2026-06-26 07:25:08] [INFO ] GET /favicon.svg 200 1ms - ::1
+[2026-06-26 07:25:16] [INFO ] POST /api/auth/login 200 121ms - ::1
+[2026-06-26 07:25:16] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 2ms - ::1
+[2026-06-26 07:25:16] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-26 07:25:16] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-06-26 07:25:23] [INFO ] GET /assets/list-BRDkmYMC.js 200 2ms - ::1
+[2026-06-26 07:25:23] [INFO ] GET /assets/list-Cx5UzeU1.css 200 4ms - ::1
+[2026-06-26 07:25:24] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 2ms - ::1
+[2026-06-26 07:25:26] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 4ms - ::1
+[2026-06-26 07:25:26] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-06-26 07:25:26] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-06-26 07:25:32] [INFO ] GET /assets/list-Cx5UzeU1.css 304 1ms - ::1
+[2026-06-26 07:25:32] [INFO ] GET /assets/index-Bq23dyAW.css 200 5ms - ::1
+[2026-06-26 07:25:32] [INFO ] GET /.well-known/appspecific/com.chrome.devtools.json 200 2ms - ::1
+[2026-06-26 07:25:42] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 1ms - ::1
+[2026-06-26 07:25:43] [INFO ] GET /assets/form-DbF0GrZ8.js 200 2ms - ::1
+[2026-06-26 07:25:43] [INFO ] GET /assets/equipment-CiSxq6Pj.js 200 3ms - ::1
+[2026-06-26 07:25:43] [INFO ] GET /assets/form-DcEw9sqr.css 200 4ms - ::1
+[2026-06-26 07:25:43] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 5ms - ::1
+[2026-06-26 07:25:43] [INFO ] GET /api/equipments?pageSize=999 200 22ms - ::1
+[2026-06-26 07:25:50] [INFO ] GET /api/records?equipmentId=emqf95rus0344&page=1&pageSize=1 200 3ms - ::1
+[2026-06-26 07:26:42] [INFO ] POST /api/records 200 7ms - ::1
+[2026-06-26 07:26:42] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 1ms - ::1
+[2026-06-26 07:26:45] [INFO ] GET /assets/detail-BWWB-3NZ.js 200 2ms - ::1
+[2026-06-26 07:26:45] [INFO ] GET /assets/detail-Ci0rIqkr.css 200 3ms - ::1
+[2026-06-26 07:26:45] [INFO ] GET /api/records/rmquly6lksrf0 200 2ms - ::1
+[2026-06-26 07:26:59] [INFO ] GET /api/records/rmquly6lksrf0 304 2ms - ::1
+[2026-06-26 07:26:59] [INFO ] GET /api/equipments/emqf95rus0344 200 1ms - ::1
+[2026-06-26 07:27:00] [INFO ] GET /api/equipments?pageSize=999 304 1ms - ::1
+[2026-06-26 07:27:17] [INFO ] PUT /api/records/rmquly6lksrf0 200 7ms - ::1
+[2026-06-26 07:27:17] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 1ms - ::1
+[2026-06-26 07:27:19] [INFO ] GET /api/records/rmquly6lksrf0 200 2ms - ::1
+[2026-06-26 07:27:22] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 2ms - ::1
+[2026-06-26 07:27:23] [INFO ] GET /api/records/rmquly6lksrf0 304 2ms - ::1
+[2026-06-26 07:27:23] [INFO ] GET /api/equipments/emqf95rus0344 304 1ms - ::1
+[2026-06-26 07:27:23] [INFO ] GET /api/equipments?pageSize=999 304 2ms - ::1
+[2026-06-26 07:27:51] [INFO ] PUT /api/records/rmquly6lksrf0 200 12ms - ::1
+[2026-06-26 07:27:51] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 1ms - ::1
+[2026-06-26 07:27:54] [INFO ] GET /api/records/rmquly6lksrf0 200 3ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /record/rmquly6lksrf0 200 2ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/index-Bq23dyAW.css 200 5ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/index-B6NomJ-h.js 200 12ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/detail-BWWB-3NZ.js 200 2ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/index-BXSV598w.js 200 4ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 200 5ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/detail-Ci0rIqkr.css 200 8ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /assets/record-B2nMG62C.js 200 8ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /api/records/rmquly6lksrf0 200 2ms - ::1
+[2026-06-26 07:28:26] [INFO ] GET /favicon.svg 200 1ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /assets/maintenance-COrXiDY3.js 200 2ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /assets/index-Cmf9Axez.js 200 3ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /assets/statistics-Ny-BejdI.js 200 4ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 4ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-26 07:31:19] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-26 07:31:29] [INFO ] GET /api/records/rmquly6lksrf0 304 3ms - ::1
+[2026-06-26 07:33:09] [INFO ] ========================================
+[2026-06-26 07:33:09] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-26 07:33:09] [INFO ] ========================================
+[2026-06-26 07:33:09] [INFO ]   服务地址: http://localhost:3000
+[2026-06-26 07:33:09] [INFO ]   API 前缀: /api
+[2026-06-26 07:33:09] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-26 07:33:09] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-26 07:33:09] [INFO ]   运行环境: production
+[2026-06-26 07:33:09] [INFO ] ========================================
+[2026-06-26 07:33:09] [INFO ]   默认账号:
+[2026-06-26 07:33:09] [INFO ]     管理员: admin / admin123
+[2026-06-26 07:33:09] [INFO ]     部门经理: manager / manager123
+[2026-06-26 07:33:09] [INFO ]     员工共享: sa / 123456
+[2026-06-26 07:33:09] [INFO ] ========================================
+[2026-06-26 07:34:47] [INFO ] GET /record/rmquly6lksrf0 304 10ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/index-Bq23dyAW.css 304 1ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/index-B6NomJ-h.js 304 2ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/detail-BWWB-3NZ.js 304 1ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/index-BXSV598w.js 304 3ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/recordTemplates-rnFIkSDC.js 304 4ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/detail-Ci0rIqkr.css 304 1ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /assets/record-B2nMG62C.js 304 2ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /api/records/rmquly6lksrf0 304 13ms - ::1
+[2026-06-26 07:34:47] [INFO ] GET /favicon.svg 304 0ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /assets/index-Cmf9Axez.js 304 1ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /assets/maintenance-COrXiDY3.js 304 2ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /assets/statistics-Ny-BejdI.js 304 1ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 2ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-06-26 07:34:48] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-06-26 07:34:52] [INFO ] GET /assets/list-BRDkmYMC.js 200 4ms - ::1
+[2026-06-26 07:34:52] [INFO ] GET /assets/list-Cx5UzeU1.css 200 6ms - ::1
+[2026-06-26 07:34:52] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 2ms - ::1
+[2026-06-26 07:34:53] [INFO ] GET /assets/form-DcEw9sqr.css 200 2ms - ::1
+[2026-06-26 07:34:53] [INFO ] GET /assets/form-DbF0GrZ8.js 200 3ms - ::1
+[2026-06-26 07:34:53] [INFO ] GET /assets/equipment-CiSxq6Pj.js 200 4ms - ::1
+[2026-06-26 07:34:54] [INFO ] GET /api/equipments?pageSize=999 200 22ms - ::1
+[2026-06-26 07:35:02] [INFO ] GET /api/records?equipmentId=emqf95rukqce2&page=1&pageSize=1 200 2ms - ::1
+[2026-06-26 07:35:34] [INFO ] POST /api/records 200 6ms - ::1
+[2026-06-26 07:35:34] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 2ms - ::1
+[2026-06-26 07:35:40] [INFO ] GET /api/records/rmqum9kplgd9j 200 3ms - ::1
+[2026-06-26 07:35:51] [INFO ] GET /assets/index-Bq23dyAW.css 304 1ms - ::1
+[2026-06-26 07:35:51] [INFO ] GET /assets/detail-Ci0rIqkr.css 304 2ms - ::1
+[2026-06-26 07:35:51] [INFO ] GET /assets/list-Cx5UzeU1.css 304 5ms - ::1
+[2026-06-26 07:35:51] [INFO ] GET /assets/form-DcEw9sqr.css 304 1ms - ::1
+[2026-06-26 07:35:51] [INFO ] GET /.well-known/appspecific/com.chrome.devtools.json 200 2ms - ::1
+[2026-06-26 07:35:54] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 304 3ms - ::1
+[2026-06-26 07:36:05] [INFO ] GET /assets/index-2RDeEvqZ.js 200 2ms - ::1
+[2026-06-26 07:36:07] [INFO ] POST /api/auth/login 200 110ms - ::1
+[2026-06-26 07:36:07] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-06-26 07:36:07] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-06-26 07:36:07] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-26 07:36:11] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-06-26 07:36:13] [INFO ] GET /assets/qrcode-Jko58mBk.js 200 3ms - ::1
+[2026-06-26 07:36:13] [INFO ] GET /assets/qrcode-BDzvbXqV.css 200 4ms - ::1
+[2026-06-26 07:36:13] [INFO ] GET /api/equipments?page=1&pageSize=20 200 2ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /assets/index-CMzxZtnx.css 200 2ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /assets/index-JI842att.js 200 7ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/parts-replacement 200 1ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/monthly?year=2026&month=6 200 2ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/trend?days=30 200 1ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/department 200 1ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/cost?months=6 200 1ms - ::1
+[2026-06-26 07:36:14] [INFO ] GET /api/statistics/record-type-distribution 200 2ms - ::1
+[2026-06-26 07:41:42] [INFO ] ========================================
+[2026-06-26 07:41:42] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-06-26 07:41:42] [INFO ] ========================================
+[2026-06-26 07:41:42] [INFO ]   服务地址: http://localhost:3000
+[2026-06-26 07:41:42] [INFO ]   API 前缀: /api
+[2026-06-26 07:41:42] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-06-26 07:41:42] [INFO ]   数据文件: ./data/eqdm.json
+[2026-06-26 07:41:42] [INFO ]   运行环境: production
+[2026-06-26 07:41:42] [INFO ] ========================================
+[2026-06-26 07:41:42] [INFO ]   默认账号:
+[2026-06-26 07:41:42] [INFO ]     管理员: admin / admin123
+[2026-06-26 07:41:42] [INFO ]     部门经理: manager / manager123
+[2026-06-26 07:41:42] [INFO ]     员工共享: sa / 123456
+[2026-06-26 07:41:42] [INFO ] ========================================
+[2026-06-26 07:42:48] [INFO ] GET /login 200 9ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/index-Bq23dyAW.css 200 7ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/index-BJFDEj-S.js 200 14ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/index-j6ppMKav.js 200 2ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/index-4dg0gAur.js 200 3ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/index-BXSV598w.js 200 4ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/record-CMixJfYY.js 200 6ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/maintenance-CSzNCevX.js 200 8ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /assets/statistics-B5Qq1C66.js 200 8ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /favicon.svg 200 2ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /api/records?page=1&pageSize=10 200 24ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-06-26 07:42:48] [INFO ] GET /favicon.svg 304 2ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /assets/index-BCrLU32r.css 200 2ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /assets/index-BnVvFtdM.js 200 7ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/monthly?year=2026&month=6 200 3ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/trend?days=30 200 2ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/cost?months=6 200 2ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/record-type-distribution 200 2ms - ::1
+[2026-06-26 07:42:52] [INFO ] GET /api/statistics/parts-replacement 200 1ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/dashboard 304 3ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 1ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/trend?days=7 200 1ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:11] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/dashboard 304 3ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/trend?days=365 200 4ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 1ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:13] [INFO ] GET /api/statistics/parts-replacement 304 0ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 1ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/trend?days=7 304 1ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:14] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 1ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/trend?days=365 304 1ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/record-type-distribution 304 0ms - ::1
+[2026-06-26 07:43:15] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/trend?days=90 200 1ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/monthly?year=2026&month=6 304 2ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:24] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/monthly?year=2026&month=2 200 1ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/trend?days=90 304 1ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:27] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/cost?months=6 304 0ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:29] [INFO ] GET /api/statistics/parts-replacement 304 0ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/trend?days=7 304 1ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/cost?months=6 304 0ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:30] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/record-type-distribution 304 0ms - ::1
+[2026-06-26 07:43:32] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/trend?days=90 304 2ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:34] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/trend?days=365 304 1ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:35] [INFO ] GET /api/statistics/parts-replacement 304 0ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/monthly?year=2026&month=7 200 1ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/trend?days=365 304 2ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/record-type-distribution 304 0ms - ::1
+[2026-06-26 07:43:37] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/monthly?year=2026&month=4 200 1ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/trend?days=365 304 1ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/cost?months=6 304 0ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:41] [INFO ] GET /api/statistics/parts-replacement 304 0ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/dashboard 304 3ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/trend?days=365 304 1ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:42] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/trend?days=7 304 1ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:46] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/monthly?year=2026&month=2 304 1ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:43:50] [INFO ] GET /api/statistics/parts-replacement 304 0ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/monthly?year=2026&month=1 200 0ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/trend?days=30 304 1ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/cost?months=6 304 1ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/record-type-distribution 304 1ms - ::1
+[2026-06-26 07:44:16] [INFO ] GET /api/statistics/parts-replacement 304 1ms - ::1

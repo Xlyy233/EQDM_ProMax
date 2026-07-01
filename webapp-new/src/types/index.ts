@@ -5,6 +5,17 @@ export type UserRole = 'employee' | 'manager' | 'admin'
 export type MaintenanceCycleType = 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'yearly'
 export type MaintenancePlanStatus = 'active' | 'paused' | 'completed'
 
+export interface EquipmentAttachment {
+  id: string
+  equipmentId: string
+  originalName: string
+  fileName: string
+  mimeType: string
+  size: number
+  createdBy: string
+  createdAt: string
+}
+
 export interface Equipment {
   id: string
   code: string
@@ -36,10 +47,14 @@ export interface Equipment {
 export interface WorkRecord {
   id: string
   equipmentId: string
+  equipmentCode: string
   equipmentName: string
   type: RecordType
   title: string
   content: string
+  faultDescription: string
+  faultCause: string
+  solution: string
   startTime: string
   endTime: string
   result: string
@@ -54,6 +69,8 @@ export interface WorkRecord {
   isStopped: 'yes' | 'no'
   stopDuration: string
   stopDurationUnit: 'minutes' | 'hours'
+  partsReplaced: 'yes' | 'no'
+  partsReplacedDetail: string
 }
 
 export interface User {
@@ -144,6 +161,13 @@ export interface PieChartData {
   name: string
   value: number
   color: string
+}
+
+export interface PartsReplacementData {
+  totalReplacements: number
+  partsList: Array<{ equipmentName: string; equipmentId: string; detail: string; date: string; type: string }>
+  partsStats: Array<{ name: string; count: number }>
+  equipmentStats: Array<{ name: string; count: number; details: string[] }>
 }
 
 export interface PaginatedResponse<T> {

@@ -2,20 +2,22 @@ const express = require('express');
 const db = require('../config/db');
 const { authMiddleware } = require('../middleware/auth');
 const { success, error } = require('../utils/helper');
+const { createNotification } = require('./notifications');
 
 const router = express.Router();
 
-// 解析记录中的 JSON 字符串字段
+// 解析记录中的 JSON 字符串字段，并关联设备编号
 function parseRecord(record) {
   if (!record) return record
   if (typeof record.photos === 'string' && record.photos) {
     try { record.photos = JSON.parse(record.photos) } catch { record.photos = [] }
   }
   if (!Array.isArray(record.photos)) record.photos = []
-  if (typeof record.partsReplaced === 'string' && record.partsReplaced) {
-    try { record.partsReplaced = JSON.parse(record.partsReplaced) } catch { record.partsReplaced = [] }
+  // 关联设备编号
+  if (record.equipmentId && !record.equipmentCode) {
+    const eq = db.findById('equipments', record.equipmentId)
+    if (eq) record.equipmentCode = eq.code
   }
-  if (!Array.isArray(record.partsReplaced)) record.partsReplaced = []
   return record
 }
 
@@ -67,7 +69,7 @@ router.get('/:id', authMiddleware, (req, res) => {
 });
 
 router.post('/', authMiddleware, (req, res) => {
-  const { equipmentId, equipmentName, type, title, content, startTime, endTime, result, remark, photos, status, personnel, cost, laborCost, partsCost, otherCost, partsReplaced } = req.body || {};
+  const { equipmentId, equipmentCode, equipmentName, type, title, content, faultDescription, faultCause, solution, startTime, endTime, result, remark, photos, status, personnel, cost, laborCost, partsCost, otherCost, partsReplaced, partsReplacedDetail, isStopped, stopDuration, stopDurationUnit } = req.body || {};
   if (!equipmentId || !type) return res.json(error('设备ID和类型为必填项'));
 
   const equip = db.findById('equipments', equipmentId);
@@ -75,10 +77,14 @@ router.post('/', authMiddleware, (req, res) => {
 
   const newRecord = {
     equipmentId,
+    equipmentCode: equipmentCode || equip.code,
     equipmentName: equipmentName || equip.name,
     type,
     title: title || '',
     content: content || '',
+    faultDescription: faultDescription || '',
+    faultCause: faultCause || '',
+    solution: solution || '',
     startTime: startTime || '',
     endTime: endTime || '',
     result: result || '',
@@ -90,12 +96,31 @@ router.post('/', authMiddleware, (req, res) => {
     laborCost: laborCost || 0,
     partsCost: partsCost || 0,
     otherCost: otherCost || 0,
-    partsReplaced: Array.isArray(partsReplaced) ? JSON.stringify(partsReplaced) : (partsReplaced || ''),
+    partsReplaced: partsReplaced || 'no',
+    partsReplacedDetail: partsReplacedDetail || '',
+    isStopped: isStopped || 'no',
+    stopDuration: stopDuration || '',
+    stopDurationUnit: stopDurationUnit || 'minutes',
     createdBy: req.user.id,
     updatedBy: req.user.id
   };
 
   const created = db.insert('records', newRecord);
+
+  // 创建通知：为每个用户生成独立副本（排除提交人自己）
+  const typeLabel = { repair: '维修', maintenance: '保养', inspection: '巡检', improvement: '改善' }[type] || type;
+  const users = db.getAll('users');
+  for (const u of users) {
+    if (u.id === req.user.id) continue;
+    createNotification({
+      type: 'new_record',
+      title: '新工作记录',
+      content: `${req.user.realName || req.user.username} 提交了「${equipmentName || equip.name}」的${typeLabel}记录`,
+      targetUrl: `/record/${created.id}`,
+      targetUserId: u.id
+    });
+  }
+
   res.json(success(created, '记录创建成功'));
 });
 
@@ -105,15 +130,12 @@ router.put('/:id', authMiddleware, (req, res) => {
   if (!existing) return res.json(error('记录不存在', 404));
 
   const updates = {};
-  const fields = ['equipmentId', 'equipmentName', 'type', 'title', 'content', 'startTime', 'endTime', 'result', 'remark', 'status', 'personnel', 'cost', 'laborCost', 'partsCost', 'otherCost'];
+  const fields = ['equipmentId', 'equipmentCode', 'equipmentName', 'type', 'title', 'content', 'faultDescription', 'faultCause', 'solution', 'startTime', 'endTime', 'result', 'remark', 'status', 'personnel', 'cost', 'laborCost', 'partsCost', 'otherCost', 'partsReplaced', 'partsReplacedDetail', 'isStopped', 'stopDuration', 'stopDurationUnit'];
   for (const f of fields) {
     if (req.body[f] !== undefined) updates[f] = req.body[f];
   }
   if (req.body.photos !== undefined) {
     updates.photos = Array.isArray(req.body.photos) ? JSON.stringify(req.body.photos) : (req.body.photos || '');
-  }
-  if (req.body.partsReplaced !== undefined) {
-    updates.partsReplaced = Array.isArray(req.body.partsReplaced) ? JSON.stringify(req.body.partsReplaced) : (req.body.partsReplaced || '');
   }
   updates.updatedBy = req.user.id;
 

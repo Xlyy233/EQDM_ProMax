@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { getCurrentUser, canManageEquipment, canManageUsers, canViewStatistics, canExportData, canViewLogs, canManageMaintenance, logout } from '@/stores/user'
 import { ElMessageBox } from 'element-plus'
+import NotificationBell from '@/components/NotificationBell.vue'
 
 const props = defineProps<{ refreshKey?: number }>()
 const slots = defineSlots<{ default: () => any }>()
@@ -65,6 +66,7 @@ function goTo(path: string) {
     <el-header class="mobile-header gradient-primary" style="height: 60px;">
       <div class="flex items-center justify-between h-full text-white">
         <div class="flex items-center gap-2">
+          <NotificationBell light />
           <el-icon :size="22"><Tools /></el-icon>
           <span class="font-semibold">设备管理系统</span>
         </div>
@@ -132,6 +134,7 @@ function goTo(path: string) {
         <div class="flex items-center justify-between h-full">
           <div class="flex items-center gap-3">
             <el-icon :size="20" class="cursor-pointer" @click="collapsed = !collapsed"><Fold v-if="!collapsed" /><Expand v-else /></el-icon>
+            <NotificationBell />
             <el-breadcrumb :separator-icon="ArrowRight">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item v-if="route.meta.title && route.path !== '/'">{{ route.meta.title }}</el-breadcrumb-item>

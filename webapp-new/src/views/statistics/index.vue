@@ -6,7 +6,7 @@ import { ElMessage } from 'element-plus'
 import * as statisticsApi from '@/api/statistics'
 import type {
   DashboardData, StatisticsData, TrendData,
-  DepartmentStats, CostAnalysis, PieChartData
+  CostAnalysis, PieChartData, PartsReplacementData
 } from '@/types'
 import * as echarts from 'echarts/core'
 import { LineChart, BarChart, PieChart } from 'echarts/charts'
@@ -23,9 +23,9 @@ const loading = ref(false)
 const dashboardData = ref<DashboardData | null>(null)
 const monthlyData = ref<StatisticsData | null>(null)
 const trendData = ref<TrendData[]>([])
-const departmentStats = ref<DepartmentStats[]>([])
 const costAnalysis = ref<CostAnalysis | null>(null)
 const typeDistribution = ref<PieChartData[]>([])
+const partsReplacement = ref<PartsReplacementData | null>(null)
 
 const currentYear = ref(new Date().getFullYear())
 const currentMonth = ref(new Date().getMonth() + 1)
@@ -40,23 +40,22 @@ const yearOptions = computed(() => {
 async function loadAllData() {
   loading.value = true
   try {
-    const [dashRes, monthRes, trendRes, deptRes, costRes, typeRes] = await Promise.all([
+    const [dashRes, monthRes, trendRes, costRes, typeRes, partsRes] = await Promise.all([
       statisticsApi.getDashboardOverview(),
       statisticsApi.getStatistics(currentYear.value, currentMonth.value),
       statisticsApi.getTrendData(timeRange.value === 'week' ? 7 : timeRange.value === 'month' ? 30 : timeRange.value === 'quarter' ? 90 : 365),
-      statisticsApi.getDepartmentStats(),
       statisticsApi.getCostAnalysis(6),
-      statisticsApi.getRecordTypeDistribution()
+      statisticsApi.getRecordTypeDistribution(),
+      statisticsApi.getPartsReplacement()
     ])
     dashboardData.value = dashRes.data
     monthlyData.value = monthRes.data
     trendData.value = trendRes.data || []
-    departmentStats.value = deptRes.data || []
     costAnalysis.value = costRes.data
     typeDistribution.value = typeRes.data || []
+    partsReplacement.value = partsRes.data
     renderTrendChart()
     renderTypePieChart()
-    renderDeptBarChart()
     renderCostChart()
   } catch (e) {
   } finally { loading.value = false }
@@ -67,7 +66,6 @@ function onYearMonthChange() { loadAllData() }
 
 let trendChartInstance: echarts.ECharts | null = null
 let pieChartInstance: echarts.ECharts | null = null
-let deptChartInstance: echarts.ECharts | null = null
 let costChartInstance: echarts.ECharts | null = null
 
 function renderTrendChart() {
@@ -106,29 +104,6 @@ function renderTypePieChart() {
       emphasis: { label: { show: true } },
       data: typeDistribution.value.map(d => ({ name: d.name, value: d.value, itemStyle: { color: d.color } }))
     }]
-  }, true)
-}
-
-function renderDeptBarChart() {
-  const dom = document.getElementById('dept-bar-chart')
-  if (!dom) return
-  if (!deptChartInstance) {
-    deptChartInstance = echarts.init(dom)
-  }
-  deptChartInstance.setOption({
-    tooltip: { trigger: 'axis' },
-    legend: { data: ['维修次数', '保养次数', '故障率%'], top: 0 },
-    grid: { top: 40, right: 20, bottom: 30, left: 40 },
-    xAxis: { type: 'category', data: departmentStats.value.map(d => d.department), axisLabel: { rotate: 30, fontSize: 10 } },
-    yAxis: [
-      { type: 'value', name: '次数', minInterval: 1 },
-      { type: 'value', name: '故障率%', min: 0, max: 100 }
-    ],
-    series: [
-      { name: '维修次数', type: 'bar', data: departmentStats.value.map(d => d.repairCount), color: '#ef4444' },
-      { name: '保养次数', type: 'bar', data: departmentStats.value.map(d => d.maintenanceCount), color: '#3b82f6' },
-      { name: '故障率%', type: 'line', yAxisIndex: 1, data: departmentStats.value.map(d => d.failureRate), color: '#f59e0b' }
-    ]
   }, true)
 }
 
@@ -226,12 +201,6 @@ onMounted(() => {
         </el-col>
       </el-row>
 
-      <!-- 部门对比 -->
-      <div class="chart-card" v-if="departmentStats.length > 0">
-        <h4>部门对比分析</h4>
-        <div id="dept-bar-chart" style="height:320px;"></div>
-      </div>
-
       <!-- 成本分析 + 设备故障率排行 -->
       <el-row :gutter="16" class="chart-row">
         <el-col :xs="24" :lg="12">
@@ -284,6 +253,65 @@ onMounted(() => {
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- 配件更换消耗 -->
+      <div class="chart-card" v-if="partsReplacement && partsReplacement.totalReplacements > 0">
+        <h4>配件更换消耗
+          <span class="cost-summary">共更换 {{ partsReplacement.totalReplacements }} 次</span>
+        </h4>
+        <el-row :gutter="16">
+          <!-- 配件更换排行 -->
+          <el-col :xs="24" :lg="12">
+            <p style="font-size:13px;color:#909399;margin:0 0 8px;">配件更换排行</p>
+            <table class="rank-table" v-if="partsReplacement.partsStats.length > 0">
+              <thead>
+                <tr><th>#</th><th>配件名称</th><th>更换次数</th></tr>
+              </thead>
+              <tbody>
+                <tr v-for="(p, i) in partsReplacement.partsStats.slice(0, 10)" :key="i" :class="{ 'top3': i < 3 }">
+                  <td class="rank-num">{{ i + 1 }}</td>
+                  <td class="rank-name">{{ p.name }}</td>
+                  <td>{{ p.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <el-empty v-else description="暂无数据" :image-size="60" />
+          </el-col>
+          <!-- 设备更换排行 -->
+          <el-col :xs="24" :lg="12">
+            <p style="font-size:13px;color:#909399;margin:0 0 8px;">设备更换排行</p>
+            <table class="rank-table" v-if="partsReplacement.equipmentStats.length > 0">
+              <thead>
+                <tr><th>#</th><th>设备名称</th><th>更换次数</th></tr>
+              </thead>
+              <tbody>
+                <tr v-for="(e, i) in partsReplacement.equipmentStats.slice(0, 10)" :key="i" :class="{ 'top3': i < 3 }">
+                  <td class="rank-num">{{ i + 1 }}</td>
+                  <td class="rank-name">{{ e.name }}</td>
+                  <td>{{ e.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <el-empty v-else description="暂无数据" :image-size="60" />
+          </el-col>
+        </el-row>
+        <!-- 最近更换记录 -->
+        <div style="margin-top:16px;" v-if="partsReplacement.partsList.length > 0">
+          <p style="font-size:13px;color:#909399;margin:0 0 8px;">最近更换记录</p>
+          <table class="rank-table">
+            <thead>
+              <tr><th>日期</th><th>设备名称</th><th>更换配件</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="(r, i) in partsReplacement.partsList.slice(0, 10)" :key="i">
+                <td>{{ r.date }}</td>
+                <td class="rank-name">{{ r.equipmentName }}</td>
+                <td style="text-align:left;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" :title="r.detail">{{ r.detail }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

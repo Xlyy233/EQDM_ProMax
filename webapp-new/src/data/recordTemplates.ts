@@ -98,8 +98,12 @@ export function getTemplatesByType(type: RecordType | 'all'): Template[] {
 }
 
 // 将模板格式化填充到记录表单内容
-export function formatTemplateContent(tpl: Template): string {
-  return `描述：${tpl.description}\n原因：${tpl.reason}\n方法：${tpl.method}`
+export function formatTemplateContent(tpl: Template): { faultDescription: string; faultCause: string; solution: string } {
+  return {
+    faultDescription: tpl.description || '',
+    faultCause: tpl.reason || '',
+    solution: tpl.method || ''
+  }
 }
 
 export const getProcessResultOptions = () => [
@@ -132,7 +136,7 @@ export function saveRecentEquipment(equipment: { id: string; code: string; name:
   localStorage.setItem('eqdm_recent_equipments', JSON.stringify(list))
 }
 
-export function generateAutoTitle(equipmentName: string, recordType: RecordType): string {
+export function generateAutoTitle(equipmentCode: string, equipmentName: string, recordType: RecordType): string {
   const typeMap: Record<RecordType, string> = {
     repair: '维修',
     maintenance: '保养',
@@ -141,5 +145,5 @@ export function generateAutoTitle(equipmentName: string, recordType: RecordType)
   }
   const now = new Date()
   const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
-  return `${equipmentName} ${typeMap[recordType]} ${dateStr}`
+  return `[${equipmentCode}] ${equipmentName} ${typeMap[recordType]} ${dateStr}`
 }

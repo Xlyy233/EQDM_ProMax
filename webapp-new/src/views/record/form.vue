@@ -32,10 +32,14 @@ const lastRecord = ref<WorkRecord | null>(null)
 
 const form = ref({
   equipmentId: '',
+  equipmentCode: '',
   equipmentName: '',
   type: 'repair' as RecordType,
   title: '',
   content: '',
+  faultDescription: '',
+  faultCause: '',
+  solution: '',
   startTime: '',
   endTime: '',
   result: 'fixed' as string,
@@ -44,6 +48,8 @@ const form = ref({
   isStopped: 'no' as 'yes' | 'no',
   stopDuration: '',
   stopDurationUnit: 'minutes' as 'minutes' | 'hours',
+  partsReplaced: 'no' as 'yes' | 'no',
+  partsReplacedDetail: '',
   photos: [] as string[]
 })
 
@@ -58,7 +64,10 @@ const filteredTemplates = computed(() => {
 })
 
 function applyTemplate(tpl: Template) {
-  form.value.content = formatTemplateContent(tpl)
+  const c = formatTemplateContent(tpl)
+  form.value.faultDescription = c.faultDescription
+  form.value.faultCause = c.faultCause
+  form.value.solution = c.solution
   form.value.result = tpl.method
   updateTemplateFrequency(tpl.id)
   ElMessage.success(`已应用模板「${tpl.name}」`)
@@ -66,8 +75,8 @@ function applyTemplate(tpl: Template) {
 
 // ========== 自动生成标题 ==========
 function autoGenerateTitle() {
-  if (!form.value.equipmentName) return
-  form.value.title = generateAutoTitle(form.value.equipmentName, form.value.type)
+  if (!form.value.equipmentCode || !form.value.equipmentName) return
+  form.value.title = generateAutoTitle(form.value.equipmentCode, form.value.equipmentName, form.value.type)
 }
 
 function onRecordTypeChange() {
@@ -78,6 +87,7 @@ function onEquipmentChange(val: string) {
   const eq = equipments.value.find(e => e.id === val)
   if (eq) {
     form.value.equipmentId = eq.id
+    form.value.equipmentCode = eq.code
     form.value.equipmentName = eq.name
     saveRecentEquipment({ id: eq.id, code: eq.code, name: eq.name })
     autoGenerateTitle()
@@ -102,6 +112,7 @@ async function loadEquipments() {
       const eq = equipments.value.find(e => e.id === equipmentId)
       if (eq) {
         form.value.equipmentId = equipmentId
+        form.value.equipmentCode = eq.code
         form.value.equipmentName = eq.name
         saveRecentEquipment({ id: eq.id, code: eq.code, name: eq.name })
         autoGenerateTitle()
@@ -111,6 +122,7 @@ async function loadEquipments() {
         if (scrappedEq) {
           equipments.value.unshift(scrappedEq)
           form.value.equipmentId = equipmentId
+          form.value.equipmentCode = scrappedEq.code
           form.value.equipmentName = scrappedEq.name
         }
       }
@@ -139,10 +151,14 @@ async function loadData() {
     if (res.data) {
       form.value = {
         equipmentId: res.data.equipmentId,
+        equipmentCode: res.data.equipmentCode || '',
         equipmentName: res.data.equipmentName,
         type: res.data.type,
         title: res.data.title,
         content: res.data.content,
+        faultDescription: res.data.faultDescription || '',
+        faultCause: res.data.faultCause || '',
+        solution: res.data.solution || '',
         startTime: res.data.startTime,
         endTime: res.data.endTime,
         result: res.data.result || 'fixed',
@@ -151,6 +167,8 @@ async function loadData() {
         isStopped: res.data.isStopped || 'no',
         stopDuration: res.data.stopDuration || '',
         stopDurationUnit: res.data.stopDurationUnit || 'minutes',
+        partsReplaced: res.data.partsReplaced || 'no',
+        partsReplacedDetail: res.data.partsReplacedDetail || '',
         photos: Array.isArray(res.data.photos) ? res.data.photos : (typeof res.data.photos === 'string' ? (() => { try { return JSON.parse(res.data.photos) } catch { return [] } })() : [])
       }
       try {
@@ -303,7 +321,7 @@ onMounted(async () => {
 
           <el-form-item label="标题" class="form-item-full">
             <div class="input-with-btn">
-              <el-input v-model="form.title" placeholder="自动生成，可手动编辑" />
+              <el-input v-model="form.title" placeholder="自动生成，可手动编辑" inputmode="text" />
               <el-button type="primary" plain @click="autoGenerateTitle" :disabled="!form.equipmentName">自动生成</el-button>
             </div>
           </el-form-item>
@@ -314,13 +332,13 @@ onMounted(async () => {
                 v-for="eq in equipments"
                 :key="eq.id"
                 :value="eq.id"
-                :label="`${eq.code} ${eq.name}`"
+                :label="eq.code + ' ' + eq.name"
               />
             </el-select>
           </el-form-item>
 
           <el-form-item label="维修人员">
-            <el-input v-model="form.personnel" placeholder="填写维修人员姓名" />
+            <el-input v-model="form.personnel" placeholder="填写维修人员姓名" inputmode="text" />
           </el-form-item>
         </div>
 
@@ -393,7 +411,7 @@ onMounted(async () => {
           <el-row :gutter="16" v-if="form.isStopped === 'yes'">
             <el-col :xs="14" :sm="14">
               <el-form-item label="停机时长">
-                <el-input v-model="form.stopDuration" placeholder="输入时长" />
+                <el-input v-model="form.stopDuration" placeholder="输入时长" inputmode="numeric" />
               </el-form-item>
             </el-col>
             <el-col :xs="10" :sm="10">
@@ -407,11 +425,45 @@ onMounted(async () => {
           </el-row>
         </div>
 
+        <!-- ====== 配件更换信息 ====== -->
+        <div class="section-card">
+          <div class="section-title">配件更换</div>
+          <el-form-item label="是否更换配件">
+            <el-radio-group v-model="form.partsReplaced">
+              <el-radio value="no">否</el-radio>
+              <el-radio value="yes">是</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="更换配件详情" v-if="form.partsReplaced === 'yes'">
+            <div class="voice-input-wrapper">
+              <el-input v-model="form.partsReplacedDetail" type="textarea" :rows="3" placeholder="输入更换的配件名称、配件编号...（可点击键盘麦克风语音输入）" inputmode="text" />
+              <span class="voice-hint">点击键盘 <i class="voice-mic-icon">🎤</i> 按钮即可语音输入</span>
+            </div>
+          </el-form-item>
+        </div>
+
         <!-- ====== 作业内容卡片 ====== -->
         <div class="section-card">
           <div class="section-title">作业内容</div>
-          <el-form-item label="具体内容" label-width="80px">
-            <el-input v-model="form.content" type="textarea" :rows="5" placeholder="详细描述作业内容..." />
+
+          <el-form-item label="故障描述" label-width="80px">
+            <div class="voice-input-wrapper">
+              <el-input v-model="form.faultDescription" type="textarea" :rows="4" placeholder="描述故障现象...（可点击键盘麦克风语音输入）" inputmode="text" />
+              <span class="voice-hint">点击键盘 <i class="voice-mic-icon">🎤</i> 按钮即可语音输入</span>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="故障原因" label-width="80px">
+            <div class="voice-input-wrapper">
+              <el-input v-model="form.faultCause" type="textarea" :rows="3" placeholder="分析故障原因..." inputmode="text" />
+            </div>
+          </el-form-item>
+
+          <el-form-item label="解决办法" label-width="80px">
+            <div class="voice-input-wrapper">
+              <el-input v-model="form.solution" type="textarea" :rows="3" placeholder="记录解决办法..." inputmode="text" />
+            </div>
           </el-form-item>
 
           <el-form-item label="处理结果" label-width="80px">
@@ -426,7 +478,7 @@ onMounted(async () => {
           </el-form-item>
 
           <el-form-item label="备注" label-width="80px">
-            <el-input v-model="form.remark" type="textarea" :rows="2" placeholder="备注（选填）..." />
+            <el-input v-model="form.remark" type="textarea" :rows="2" placeholder="备注（选填，可语音输入）..." inputmode="text" />
           </el-form-item>
         </div>
 
@@ -711,5 +763,24 @@ onMounted(async () => {
     white-space: nowrap;
     flex-shrink: 0;
   }
+}
+
+/* ====== 语音输入提示 ====== */
+.voice-input-wrapper {
+  width: 100%;
+}
+
+.voice-hint {
+  display: block;
+  font-size: 12px;
+  color: #909399;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.voice-mic-icon {
+  font-style: normal;
+  font-size: 13px;
+  vertical-align: -1px;
 }
 </style>

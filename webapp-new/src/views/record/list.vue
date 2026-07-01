@@ -96,7 +96,7 @@ onMounted(() => {
         <el-table-column label="填报时间" width="150">
           <template #default="{ row }">{{ formatDate(row.createdAt || row.updatedAt) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="160" fixed="right" @click.stop>
+        <el-table-column label="操作" width="160" fixed="right" class-name="op-col" @click.stop>
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click.stop="router.push(`/record/${row.id}`)">详情</el-button>
             <el-button v-if="canEdit(row)" link type="primary" size="small" @click.stop="router.push(`/record/${row.id}/edit`)">编辑</el-button>
@@ -129,6 +129,10 @@ onMounted(() => {
 
   .record-table :deep(.el-table__cell) {
     padding: 8px 6px;
+  }
+
+  .record-table :deep(.op-col) {
+    display: none;
   }
 }
 </style>
