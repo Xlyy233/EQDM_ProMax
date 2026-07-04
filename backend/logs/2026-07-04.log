@@ -1,0 +1,610 @@
+[2026-07-04 00:21:51] [INFO ] ========================================
+[2026-07-04 00:21:51] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-04 00:21:51] [INFO ] ========================================
+[2026-07-04 00:21:51] [INFO ]   服务地址: http://localhost:3000
+[2026-07-04 00:21:51] [INFO ]   API 前缀: /api
+[2026-07-04 00:21:51] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-04 00:21:51] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-04 00:21:51] [INFO ]   运行环境: production
+[2026-07-04 00:21:51] [INFO ] ========================================
+[2026-07-04 00:21:51] [INFO ]   默认账号:
+[2026-07-04 00:21:51] [INFO ]     管理员: admin / admin123
+[2026-07-04 00:21:51] [INFO ]     部门经理: manager / manager123
+[2026-07-04 00:21:51] [INFO ]     员工共享: sa / 123456
+[2026-07-04 00:21:51] [INFO ] ========================================
+[2026-07-04 00:22:11] [INFO ] POST /api/auth/login 200 153ms - ::1
+[2026-07-04 00:22:12] [INFO ] POST /api/inspections/templates 200 134ms - ::1
+[2026-07-04 00:22:12] [INFO ] GET /api/inspections/templates 200 1ms - ::1
+[2026-07-04 00:33:39] [WARN ] GET /api/notifications/unread 401 2ms - ::1
+[2026-07-04 00:34:05] [INFO ] GET /api/notifications/unread 200 9ms - ::1
+[2026-07-04 00:34:05] [INFO ] GET /api/records?page=1&pageSize=10 200 23ms - ::1
+[2026-07-04 00:34:05] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 3ms - ::1
+[2026-07-04 00:34:05] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-04 00:34:11] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 6ms - ::1
+[2026-07-04 00:34:12] [INFO ] GET /api/inspections/templates 200 6ms - ::1
+[2026-07-04 00:34:36] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 00:34:45] [INFO ] POST /api/inspections/templates 200 101ms - ::1
+[2026-07-04 00:34:45] [INFO ] GET /api/inspections/templates 200 1ms - ::1
+[2026-07-04 00:35:00] [INFO ] POST /api/auth/login 200 97ms - ::1
+[2026-07-04 00:35:00] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 2ms - ::1
+[2026-07-04 00:35:00] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 00:35:00] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-04 00:35:00] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 00:35:30] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 00:35:44] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 11ms - ::1
+[2026-07-04 00:35:46] [INFO ] GET /api/equipments?pageSize=999 200 7ms - ::1
+[2026-07-04 00:36:00] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 00:36:30] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-04 00:37:00] [INFO ] GET /api/notifications/unread 304 3ms - ::1
+[2026-07-04 00:37:30] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 00:37:37] [INFO ] GET /api/equipments?pageSize=999 304 6ms - ::1
+[2026-07-04 00:38:00] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-04 00:55:35] [INFO ] GET /api/notifications/unread 200 8ms - ::1
+[2026-07-04 00:55:35] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 3ms - ::1
+[2026-07-04 00:55:35] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-04 00:55:35] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-04 00:55:38] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 5ms - ::1
+[2026-07-04 00:55:39] [INFO ] GET /api/equipments?pageSize=999 200 15ms - ::1
+[2026-07-04 00:55:50] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 7ms - ::1
+[2026-07-04 00:55:53] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 6ms - ::1
+[2026-07-04 00:55:55] [INFO ] GET /api/equipments?pageSize=999 304 18ms - ::1
+[2026-07-04 00:55:58] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 8ms - ::1
+[2026-07-04 00:56:02] [INFO ] POST /api/auth/login 200 98ms - ::1
+[2026-07-04 00:56:02] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 00:56:02] [INFO ] GET /api/records?page=1&pageSize=10 200 8ms - ::1
+[2026-07-04 00:56:02] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 00:56:02] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 00:56:05] [INFO ] GET /api/inspections/templates 200 5ms - ::1
+[2026-07-04 00:56:07] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 7ms - ::1
+[2026-07-04 00:56:09] [INFO ] GET /api/inspections/templates 304 8ms - ::1
+[2026-07-04 00:56:28] [INFO ] DELETE /api/inspections/templates/imr5mr7k9sfpc 200 65ms - ::1
+[2026-07-04 00:56:29] [INFO ] GET /api/inspections/templates 200 2ms - ::1
+[2026-07-04 00:56:31] [INFO ] DELETE /api/inspections/templates/imr5mb2dd5qhk 200 67ms - ::1
+[2026-07-04 00:56:32] [INFO ] GET /api/inspections/templates 200 1ms - ::1
+[2026-07-04 00:56:32] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 00:57:02] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 00:57:32] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 00:58:02] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 00:58:32] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-04 00:59:02] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 00:59:32] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 01:00:02] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 01:00:32] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 01:01:02] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-04 01:01:32] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-04 01:02:02] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:02:32] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:03:33] [WARN ] GET /api/equipments/types 401 1ms - ::1
+[2026-07-04 01:06:16] [INFO ] GET /api/notifications/unread 200 6ms - ::1
+[2026-07-04 01:06:16] [INFO ] GET /api/records?page=1&pageSize=10 200 3ms - ::1
+[2026-07-04 01:06:16] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-04 01:06:16] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-04 01:06:20] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 200 7ms - ::1
+[2026-07-04 01:06:20] [INFO ] POST /api/attachments/equipment/batch 200 2ms - ::1
+[2026-07-04 01:06:38] [INFO ] POST /api/equipments/batch 200 5ms - ::1
+[2026-07-04 01:06:38] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-07-04 01:06:38] [INFO ] POST /api/attachments/equipment/batch 200 2ms - ::1
+[2026-07-04 01:06:45] [INFO ] GET /api/records?page=1&pageSize=10 304 6ms - ::1
+[2026-07-04 01:06:45] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:06:45] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:06:46] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:06:47] [INFO ] GET /api/equipments?page=1&pageSize=10&keyword= 304 1ms - ::1
+[2026-07-04 01:06:47] [INFO ] POST /api/attachments/equipment/batch 200 1ms - ::1
+[2026-07-04 01:06:48] [INFO ] GET /api/equipments?page=1&pageSize=20 200 6ms - ::1
+[2026-07-04 01:06:49] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-04 01:06:50] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 4ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/monthly?year=2026&month=7 200 7ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/trend?days=30 200 4ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/cost?months=6 200 3ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/record-type-distribution 200 4ms - ::1
+[2026-07-04 01:06:51] [INFO ] GET /api/statistics/parts-replacement 200 2ms - ::1
+[2026-07-04 01:06:53] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 5ms - ::1
+[2026-07-04 01:06:54] [INFO ] GET /api/statistics/dashboard 304 0ms - ::1
+[2026-07-04 01:06:54] [INFO ] GET /api/statistics/monthly?year=2026&month=7 304 3ms - ::1
+[2026-07-04 01:06:55] [INFO ] GET /api/statistics/trend?days=30 304 14ms - ::1
+[2026-07-04 01:06:55] [INFO ] GET /api/statistics/cost?months=6 304 2ms - ::1
+[2026-07-04 01:06:55] [INFO ] GET /api/statistics/record-type-distribution 304 2ms - ::1
+[2026-07-04 01:06:55] [INFO ] GET /api/statistics/parts-replacement 304 2ms - ::1
+[2026-07-04 01:06:58] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 17ms - ::1
+[2026-07-04 01:06:59] [INFO ] GET /api/inspections/templates 200 5ms - ::1
+[2026-07-04 01:06:59] [INFO ] GET /api/equipments/types 200 1ms - ::1
+[2026-07-04 01:07:03] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 10ms - ::1
+[2026-07-04 01:07:03] [INFO ] GET /api/inspections/templates 304 1ms - ::1
+[2026-07-04 01:07:04] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:07:04] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 10ms - ::1
+[2026-07-04 01:07:05] [INFO ] GET /api/inspections/templates 304 0ms - ::1
+[2026-07-04 01:07:05] [INFO ] GET /api/equipments/types 304 2ms - ::1
+[2026-07-04 01:07:07] [INFO ] GET /api/equipments?pageSize=999 200 14ms - ::1
+[2026-07-04 01:07:16] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 01:07:46] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 01:08:03] [INFO ] PUT /api/equipments/batch-types 200 6ms - ::1
+[2026-07-04 01:08:03] [INFO ] GET /api/equipments/types 304 2ms - ::1
+[2026-07-04 01:08:16] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 01:08:25] [INFO ] GET /api/equipments?pageSize=999 304 14ms - ::1
+[2026-07-04 01:08:46] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:08:53] [INFO ] PUT /api/equipments/batch-types 200 5ms - ::1
+[2026-07-04 01:08:54] [INFO ] GET /api/equipments/types 304 2ms - ::1
+[2026-07-04 01:08:56] [INFO ] GET /api/equipments?pageSize=999 304 5ms - ::1
+[2026-07-04 01:09:10] [INFO ] PUT /api/equipments/batch-types 200 7ms - ::1
+[2026-07-04 01:09:11] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:09:16] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 01:09:30] [INFO ] GET /api/equipments?pageSize=999 304 11ms - ::1
+[2026-07-04 01:09:42] [INFO ] PUT /api/equipments/batch-types 200 5ms - ::1
+[2026-07-04 01:09:42] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:09:46] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 01:09:57] [INFO ] GET /api/equipments?pageSize=999 304 8ms - ::1
+[2026-07-04 01:10:16] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-04 01:10:46] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:11:16] [INFO ] GET /api/notifications/unread 304 3ms - ::1
+[2026-07-04 01:12:35] [INFO ] POST /api/auth/login 200 68ms - ::1
+[2026-07-04 01:12:45] [INFO ] GET /api/equipments?pageSize=2 200 4ms - ::1
+[2026-07-04 01:13:02] [INFO ] PUT /api/equipments/batch-types 200 3ms - ::1
+[2026-07-04 01:13:28] [INFO ] ========================================
+[2026-07-04 01:13:28] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-04 01:13:28] [INFO ] ========================================
+[2026-07-04 01:13:28] [INFO ]   服务地址: http://localhost:3000
+[2026-07-04 01:13:28] [INFO ]   API 前缀: /api
+[2026-07-04 01:13:28] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-04 01:13:28] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-04 01:13:28] [INFO ]   运行环境: production
+[2026-07-04 01:13:28] [INFO ] ========================================
+[2026-07-04 01:13:28] [INFO ]   默认账号:
+[2026-07-04 01:13:28] [INFO ]     管理员: admin / admin123
+[2026-07-04 01:13:28] [INFO ]     部门经理: manager / manager123
+[2026-07-04 01:13:28] [INFO ]     员工共享: sa / 123456
+[2026-07-04 01:13:28] [INFO ] ========================================
+[2026-07-04 01:13:45] [INFO ] PUT /api/equipments/batch-types 200 90ms - ::1
+[2026-07-04 01:13:55] [INFO ] GET /api/equipments/types 200 4ms - ::1
+[2026-07-04 01:14:44] [INFO ] GET /api/notifications/unread 200 10ms - ::1
+[2026-07-04 01:14:44] [INFO ] GET /api/records?page=1&pageSize=10 200 15ms - ::1
+[2026-07-04 01:14:44] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-07-04 01:14:44] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-04 01:14:47] [INFO ] GET /api/inspections/templates 200 5ms - ::1
+[2026-07-04 01:14:47] [INFO ] GET /api/equipments/types 200 1ms - ::1
+[2026-07-04 01:14:55] [INFO ] GET /api/equipments?pageSize=999 200 6ms - ::1
+[2026-07-04 01:15:12] [INFO ] PUT /api/equipments/batch-types 200 462ms - ::1
+[2026-07-04 01:15:12] [INFO ] GET /api/equipments/types 200 1ms - ::1
+[2026-07-04 01:15:14] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:15:17] [INFO ] GET /api/equipments?pageSize=999 200 8ms - ::1
+[2026-07-04 01:15:44] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 01:15:54] [INFO ] PUT /api/equipments/batch-types 200 378ms - ::1
+[2026-07-04 01:15:54] [INFO ] GET /api/equipments/types 200 2ms - ::1
+[2026-07-04 01:16:14] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 01:16:15] [INFO ] POST /api/inspections/templates 200 88ms - ::1
+[2026-07-04 01:16:15] [INFO ] GET /api/inspections/templates 200 1ms - ::1
+[2026-07-04 01:16:16] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:16:29] [INFO ] POST /api/inspections/templates 200 97ms - ::1
+[2026-07-04 01:16:29] [INFO ] GET /api/inspections/templates 200 2ms - ::1
+[2026-07-04 01:16:29] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:16:44] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 01:16:52] [INFO ] POST /api/inspections/templates 200 70ms - ::1
+[2026-07-04 01:16:52] [INFO ] GET /api/inspections/templates 200 2ms - ::1
+[2026-07-04 01:16:53] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-04 01:16:55] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 10ms - ::1
+[2026-07-04 01:17:01] [INFO ] POST /api/auth/login 200 171ms - ::1
+[2026-07-04 01:17:01] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 01:17:02] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 4ms - ::1
+[2026-07-04 01:17:02] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-04 01:17:02] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:17:07] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 26ms - ::1
+[2026-07-04 01:17:09] [INFO ] GET /api/equipments?pageSize=999 200 14ms - ::1
+[2026-07-04 01:17:13] [INFO ] GET /api/inspections/templates/by-type/%E6%8C%A4%E5%8E%8B%E6%9C%BA 200 6ms - ::1
+[2026-07-04 01:17:22] [INFO ] GET /api/inspections/templates/by-type/%E5%86%B2%E5%BA%8A 200 6ms - ::1
+[2026-07-04 01:17:26] [INFO ] GET /api/inspections/templates/by-type/%E5%86%B2%E5%BA%8A 304 7ms - ::1
+[2026-07-04 01:17:31] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 01:17:36] [INFO ] GET /api/inspections/templates/by-type/%E5%8E%8B%E5%BC%AF%E6%9C%BA 200 6ms - ::1
+[2026-07-04 01:18:00] [INFO ] POST /api/inspections/records 200 68ms - ::1
+[2026-07-04 01:18:01] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 9ms - ::1
+[2026-07-04 01:18:01] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 01:18:03] [INFO ] GET /api/inspections/records/imr5oaufclvnt 200 11ms - ::1
+[2026-07-04 01:20:48] [INFO ] ========================================
+[2026-07-04 01:20:48] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-04 01:20:48] [INFO ] ========================================
+[2026-07-04 01:20:48] [INFO ]   服务地址: http://localhost:3000
+[2026-07-04 01:20:48] [INFO ]   API 前缀: /api
+[2026-07-04 01:20:48] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-04 01:20:48] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-04 01:20:48] [INFO ]   运行环境: production
+[2026-07-04 01:20:48] [INFO ] ========================================
+[2026-07-04 01:20:48] [INFO ]   默认账号:
+[2026-07-04 01:20:48] [INFO ]     管理员: admin / admin123
+[2026-07-04 01:20:48] [INFO ]     部门经理: manager / manager123
+[2026-07-04 01:20:48] [INFO ]     员工共享: sa / 123456
+[2026-07-04 01:20:48] [INFO ] ========================================
+[2026-07-04 01:21:03] [INFO ] GET /api/inspections/records?page=1&pageSize=5 200 19ms - ::1
+[2026-07-04 01:26:23] [WARN ] GET /api/notifications/unread 401 2ms - ::1
+[2026-07-04 01:29:34] [INFO ] GET /api/notifications/unread 200 19ms - ::1
+[2026-07-04 01:29:34] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 17ms - ::1
+[2026-07-04 01:29:34] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 3ms - ::1
+[2026-07-04 01:29:34] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-04 01:29:37] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 14ms - ::1
+[2026-07-04 01:29:38] [INFO ] GET /api/inspections/records/imr5oaufclvnt 200 18ms - ::1
+[2026-07-04 01:30:04] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 01:30:34] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 01:31:04] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 01:31:34] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 01:32:04] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:32:34] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:33:04] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 01:33:34] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:34:04] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 01:34:34] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:35:04] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 01:35:34] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:36:04] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 01:36:34] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 01:37:04] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 01:37:34] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 01:38:04] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:38:34] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 01:39:04] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:39:34] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 01:40:04] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 01:40:19] [INFO ] GET / 200 22ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /registerSW.js 200 5ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/index-JL29xHpQ.css 200 66ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/index-CYI0XWD4.js 200 281ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /api/notifications/unread 304 17ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /favicon.svg 304 20ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/maintenance-BFniBVWu.js 200 6ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/index-BXSV598w.js 200 9ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/record-B7Dv94qm.js 200 18ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/statistics-C607MNvh.js 200 17ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /assets/index-DnSlPThM.js 200 25ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /favicon.svg 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /api/records?page=1&pageSize=10 200 11ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:19] [INFO ] GET /api/statistics/dashboard 200 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:34] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 01:40:35] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:50] [INFO ] GET /api/notifications/unread 304 14ms - ::ffff:192.168.102.33
+[2026-07-04 01:40:59] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:04] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 01:41:04] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:18] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET / 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/index-JL29xHpQ.css 304 0ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/index-CYI0XWD4.js 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /registerSW.js 304 3ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /api/notifications/unread 304 20ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/index-DnSlPThM.js 304 5ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/index-BXSV598w.js 304 6ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/record-B7Dv94qm.js 304 6ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/maintenance-BFniBVWu.js 304 8ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /assets/statistics-C607MNvh.js 304 9ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /api/records?page=1&pageSize=10 304 7ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:30] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:34] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:41:39] [INFO ] GET /assets/list-CUkI-UXc.css 200 5ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:39] [INFO ] GET /assets/list-BW9u8kP8.js 200 12ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:39] [INFO ] GET /api/records?page=1&pageSize=10 304 13ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:39] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:39] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:40] [INFO ] GET /api/records?page=1&pageSize=10 304 6ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:40] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:40] [INFO ] GET /api/statistics/dashboard 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:40] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:48] [INFO ] GET /assets/index-YfLc8Sh8.js 200 12ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:48] [INFO ] GET /favicon.svg 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:48] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:48] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] POST /api/auth/login 200 142ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /favicon.svg 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /api/notifications/unread 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /api/statistics/dashboard 304 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 2ms - ::ffff:192.168.102.33
+[2026-07-04 01:41:50] [INFO ] GET /favicon.svg 304 0ms - ::ffff:192.168.102.33
+[2026-07-04 01:42:04] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 01:42:20] [INFO ] GET /api/notifications/unread 304 23ms - ::ffff:192.168.102.33
+[2026-07-04 01:42:29] [INFO ] GET /favicon.svg 304 1ms - ::ffff:192.168.102.33
+[2026-07-04 01:42:34] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 01:43:04] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:43:05] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 8ms - ::1
+[2026-07-04 01:43:13] [INFO ] POST /api/auth/login 200 106ms - ::1
+[2026-07-04 01:43:13] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 01:43:13] [INFO ] GET /api/records?page=1&pageSize=10 200 4ms - ::1
+[2026-07-04 01:43:13] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:43:13] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:43:43] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 01:44:13] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:44:43] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:45:13] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 01:45:43] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 01:46:13] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:46:43] [INFO ] ========================================
+[2026-07-04 01:46:43] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-04 01:46:43] [INFO ] ========================================
+[2026-07-04 01:46:43] [INFO ]   服务地址: http://localhost:3000
+[2026-07-04 01:46:43] [INFO ]   API 前缀: /api
+[2026-07-04 01:46:43] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-04 01:46:43] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-04 01:46:43] [INFO ]   运行环境: production
+[2026-07-04 01:46:43] [INFO ] ========================================
+[2026-07-04 01:46:43] [INFO ]   默认账号:
+[2026-07-04 01:46:43] [INFO ]     管理员: admin / admin123
+[2026-07-04 01:46:43] [INFO ]     部门经理: manager / manager123
+[2026-07-04 01:46:43] [INFO ]     员工共享: sa / 123456
+[2026-07-04 01:46:43] [INFO ] ========================================
+[2026-07-04 01:46:59] [INFO ] GET /api/statistics/dashboard 200 26ms - ::1
+[2026-07-04 01:47:08] [WARN ] GET /api/notifications/unread 401 2ms - ::1
+[2026-07-04 01:47:13] [INFO ] GET /api/notifications/unread 200 19ms - ::1
+[2026-07-04 01:47:43] [INFO ] GET /api/notifications/unread 304 20ms - ::1
+[2026-07-04 01:48:13] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 01:48:43] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 01:48:52] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 01:48:52] [INFO ] GET /api/records?page=1&pageSize=10 304 20ms - ::1
+[2026-07-04 01:48:52] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:48:52] [INFO ] GET /api/statistics/dashboard 200 3ms - ::1
+[2026-07-04 01:48:53] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 01:48:53] [INFO ] GET /api/records?page=1&pageSize=10 304 2ms - ::1
+[2026-07-04 01:48:53] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-04 01:48:53] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/records?page=1&pageSize=10 304 11ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:48:54] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:48:55] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-04 01:48:55] [INFO ] GET /api/records?page=1&pageSize=10 304 4ms - ::1
+[2026-07-04 01:48:55] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-04 01:48:55] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-04 01:49:25] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:49:55] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:50:25] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 01:50:55] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 01:51:25] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 02:29:04] [INFO ] ========================================
+[2026-07-04 02:29:04] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-04 02:29:04] [INFO ] ========================================
+[2026-07-04 02:29:04] [INFO ]   服务地址: http://localhost:3000
+[2026-07-04 02:29:04] [INFO ]   API 前缀: /api
+[2026-07-04 02:29:04] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-04 02:29:04] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-04 02:29:04] [INFO ]   运行环境: production
+[2026-07-04 02:29:04] [INFO ] ========================================
+[2026-07-04 02:29:04] [INFO ]   默认账号:
+[2026-07-04 02:29:04] [INFO ]     管理员: admin / admin123
+[2026-07-04 02:29:04] [INFO ]     部门经理: manager / manager123
+[2026-07-04 02:29:04] [INFO ]     员工共享: sa / 123456
+[2026-07-04 02:29:04] [INFO ] ========================================
+[2026-07-04 02:29:20] [INFO ] GET /api/notifications/unread 200 21ms - ::1
+[2026-07-04 02:29:21] [INFO ] GET /api/records?page=1&pageSize=10 200 24ms - ::1
+[2026-07-04 02:29:21] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-04 02:29:21] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-07-04 02:29:51] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:30:20] [INFO ] GET /api/notifications/unread 304 21ms - ::1
+[2026-07-04 02:30:51] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:31:20] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:31:51] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:32:20] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 02:32:51] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:33:20] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:33:51] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:34:20] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:34:51] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:35:20] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 02:35:51] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:36:20] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:36:51] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 02:37:20] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:37:51] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 02:38:20] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 02:38:51] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:39:03] [INFO ] GET /api/inspections/templates 200 13ms - ::1
+[2026-07-04 02:39:04] [INFO ] GET /api/equipments/types 200 1ms - ::1
+[2026-07-04 02:39:20] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 02:39:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:40:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 02:40:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:41:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:41:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:42:21] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 02:42:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:43:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 02:43:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:44:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 02:44:50] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 02:45:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:45:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:46:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:46:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:47:21] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 02:47:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:48:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:48:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:49:21] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 02:49:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:50:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:50:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:51:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:51:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:52:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:52:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 02:53:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 02:53:50] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 02:54:21] [INFO ] GET /api/notifications/unread 304 -1ms - ::1
+[2026-07-04 02:54:50] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 02:55:21] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 02:55:50] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 02:56:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 02:56:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 02:57:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:57:50] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 02:58:21] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 02:58:50] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 02:59:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 02:59:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:00:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:00:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:01:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:01:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:02:21] [INFO ] GET /api/notifications/unread 304 -2ms - ::1
+[2026-07-04 03:02:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:03:21] [INFO ] GET /api/notifications/unread 304 26ms - ::1
+[2026-07-04 03:03:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:04:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:04:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:05:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:05:50] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:06:21] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 03:06:50] [INFO ] GET /api/notifications/unread 304 24ms - ::1
+[2026-07-04 03:07:21] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 03:07:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:08:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:08:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:09:21] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 03:09:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:10:21] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-04 03:10:50] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:11:21] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:11:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:12:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:12:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:13:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:13:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:14:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:14:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:15:21] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:15:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:16:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:16:50] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:17:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:17:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:18:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:18:50] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 03:19:21] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:19:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:20:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:20:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:21:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:21:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:22:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:22:50] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 03:23:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:23:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:24:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:24:50] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:25:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:25:50] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:26:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:26:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:27:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:27:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:28:21] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:28:50] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 03:29:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:29:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:30:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:30:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:31:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:31:50] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:32:21] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 03:32:50] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:33:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:33:50] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:34:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:34:50] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 03:35:21] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 03:35:50] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:36:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:36:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:37:21] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 03:37:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:38:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:38:50] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:39:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:39:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:40:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:40:50] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 03:41:21] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 03:41:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:42:21] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 03:42:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:43:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:43:50] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:44:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:44:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:45:21] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 03:45:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:46:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:46:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:47:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:47:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:48:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:48:50] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 03:49:21] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:49:50] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:50:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:50:50] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:51:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:51:50] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:52:21] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 03:52:50] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 03:53:21] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 03:53:50] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 03:54:21] [INFO ] GET /api/notifications/unread 304 18ms - ::1
+[2026-07-04 03:54:50] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 03:55:21] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 03:55:51] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 03:56:21] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 03:57:09] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-04 03:58:09] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-04 03:59:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:00:09] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-04 04:01:09] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 04:02:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:03:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:04:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:05:09] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:06:09] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:07:09] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:08:09] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:09:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:10:09] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 04:11:09] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-04 04:12:09] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 04:13:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:14:09] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:15:09] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:16:09] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 04:17:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:18:09] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 04:19:09] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 04:20:09] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:21:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:22:09] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 04:23:09] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 04:24:09] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:25:09] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-04 04:26:09] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:27:09] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:28:09] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:29:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:30:09] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:31:09] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:32:09] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-04 04:33:09] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:34:09] [INFO ] GET /api/notifications/unread 304 8ms - ::1
+[2026-07-04 04:34:42] [INFO ] GET /api/notifications/unread 304 23ms - ::1
+[2026-07-04 04:34:51] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-04 04:35:20] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-04 04:35:51] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:36:20] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 04:36:51] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:37:20] [INFO ] GET /api/notifications/unread 304 12ms - ::1
+[2026-07-04 04:37:51] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-04 04:38:20] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-04 04:38:51] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:39:20] [INFO ] GET /api/notifications/unread 304 13ms - ::1
+[2026-07-04 04:39:51] [INFO ] GET /api/notifications/unread 304 10ms - ::1
+[2026-07-04 04:40:20] [INFO ] GET /api/notifications/unread 304 8ms - ::1

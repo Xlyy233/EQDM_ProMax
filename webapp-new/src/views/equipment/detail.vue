@@ -51,12 +51,12 @@ onMounted(loadData)
     <div class="stat-card" style="padding:24px;max-width:800px;" v-loading="loading">
       <el-form :model="form" label-width="100px" v-if="equipment">
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="设备编号">
               <el-input v-model="equipment.code" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="设备名称">
               <el-input v-model="equipment.name" disabled />
             </el-form-item>
@@ -64,12 +64,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="规格型号">
               <el-input :model-value="equipment.model || ''" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="品牌">
               <el-input :model-value="equipment.brand || ''" disabled />
             </el-form-item>
@@ -77,12 +77,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="所属部门">
               <el-input v-model="equipment.department" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="安装位置">
               <el-input :model-value="equipment.location || ''" disabled />
             </el-form-item>
@@ -90,7 +90,7 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="设备状态">
               <el-select v-model="form.status" style="width:100%;">
                 <el-option label="在用" value="in_use" />
@@ -99,7 +99,7 @@ onMounted(loadData)
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="关键设备">
               <el-input :model-value="equipment.keyEquipment || ''" disabled />
             </el-form-item>
@@ -107,12 +107,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="产线编码">
               <el-input :model-value="equipment.productionLineCode || ''" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="出厂编号">
               <el-input :model-value="equipment.factoryCode || ''" disabled />
             </el-form-item>
@@ -120,12 +120,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="资产类型">
               <el-input :model-value="equipment.assetType || ''" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="数量">
               <el-input :model-value="equipment.quantity || ''" disabled />
             </el-form-item>
@@ -133,12 +133,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="额定功率">
               <el-input :model-value="equipment.ratedPower || ''" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="使用位置">
               <el-input :model-value="equipment.useLocation || ''" disabled />
             </el-form-item>
@@ -146,12 +146,12 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="启用日期">
               <el-input :model-value="equipment.enableDate || ''" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="出厂日期">
               <el-input :model-value="equipment.factoryDate || ''" disabled />
             </el-form-item>
@@ -159,7 +159,7 @@ onMounted(loadData)
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <el-form-item label="采购日期">
               <el-input :model-value="equipment.purchaseDate || ''" disabled />
             </el-form-item>

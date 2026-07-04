@@ -60,6 +60,7 @@ export interface WorkRecord {
   result: string
   remark: string
   photos: string[]
+  afterPhotos: string[]
   status: RecordStatus
   personnel: string
   createdAt: string
@@ -189,3 +190,45 @@ export const recordStatusMap: Record<RecordStatus, string> = { completed: '已�
 export const roleMap: Record<UserRole, string> = { employee: '普通员工', manager: '部门经理', admin: '系统管理员' }
 export const cycleTypeMap: Record<MaintenanceCycleType, string> = { daily: '每天', weekly: '每周', monthly: '每月', quarterly: '每季度', yearly: '每年' }
 export const maintenanceStatusMap: Record<MaintenancePlanStatus, string> = { active: '进行中', paused: '已暂停', completed: '已完成' }
+
+// ========== 巡检类型 ==========
+
+export interface InspectionItem {
+  id: string
+  content: string
+  order: number
+}
+
+export interface InspectionTemplate {
+  id: string
+  name: string
+  equipmentType: string
+  items: InspectionItem[]
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface InspectionResultItem {
+  id: string
+  content: string
+  checked: boolean
+  remark: string
+}
+
+export interface InspectionRecord {
+  id: string
+  templateId: string
+  templateName: string
+  equipmentId: string
+  equipmentCode: string
+  equipmentName: string
+  inspector: string
+  inspectionDate: string
+  items: InspectionResultItem[]
+  photos: string
+  afterPhotos: string
+  status: string
+  remark: string
+  createdAt: string
+}

@@ -80,6 +80,13 @@ if ($includeFiles.Count -eq 0) {
     exit 1
 }
 
+# Include backend/node_modules (needed for production)
+$backendNM = Join-Path $projectRoot 'backend\node_modules'
+if (Test-Path $backendNM) {
+    Write-Host "  [+]  backend/node_modules/ (included for production)" -ForegroundColor Green
+    Add-FolderContents $backendNM $projectRoot
+}
+
 Write-Host ""
 Write-Host "  Packaging $($includeFiles.Count) files..." -ForegroundColor Cyan
 

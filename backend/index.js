@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
@@ -19,6 +20,7 @@ const logRoutes = require('./routes/logs');
 const attachmentRoutes = require('./routes/attachments');
 const knowledgeRoutes = require('./routes/knowledge');
 const notificationRoutes = require('./routes/notifications');
+const inspectionRoutes = require('./routes/inspections');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,9 +52,15 @@ app.use(cors({
     if (isLocalNetworkOrigin(origin)) return callback(null, true);
     // 白名单中的外部地址
     if (EXTERNAL_ORIGINS.includes(origin)) return callback(null, true);
-    callback(null, true); // 生产环境宽松策略：允许所有来源
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true
+}));
+
+// 安全 HTTP 响应头
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  contentSecurityPolicy: false
 }));
 
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -89,6 +97,7 @@ app.use('/api/logs', logRoutes);
 app.use('/api/attachments', attachmentRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/inspections', inspectionRoutes);
 
 // 静态文件：上传的附件
 const uploadsPath = path.join(__dirname, 'uploads');

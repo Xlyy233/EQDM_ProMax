@@ -64,15 +64,16 @@ $env:PATH = "$NodeDir;$env:PATH"
 $null = & $NodeExe --version 2>&1
 Write-Host "   [OK] Node.js verified" -ForegroundColor Green
 
-# --- Install dependencies if needed ---
+# --- Install dependencies ---
 Write-Host ""
 Write-Host ">> Checking dependencies..." -ForegroundColor Cyan
 $NodeModules = Join-Path $BackendDir 'node_modules'
 
+$npm = Join-Path $NodeDir 'npm.cmd'
+if (-not (Test-Path $npm)) { $npm = Join-Path $NodeDir 'npm' }
+
 if (-not (Test-Path $NodeModules)) {
     Write-Host "   Installing dependencies, please wait..." -ForegroundColor Yellow
-    $npm = Join-Path $NodeDir 'npm'
-    if (-not (Test-Path "$npm.cmd")) { $npm = "$npm.cmd" }
     $installLog = & $NodeExe $npm install --production 2>&1
     if (Test-Path $NodeModules) {
         Write-Host "   [OK] Dependencies installed" -ForegroundColor Green
@@ -84,6 +85,8 @@ if (-not (Test-Path $NodeModules)) {
     }
 } else {
     Write-Host "   [OK] Dependencies ready" -ForegroundColor Green
+    Write-Host "   [note] If you get 'module not found' error, manually run:" -ForegroundColor Gray
+    Write-Host "   cd backend && npm install" -ForegroundColor Gray
 }
 
 # --- Get LAN IP ---

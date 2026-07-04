@@ -30,6 +30,32 @@ router.get('/departments', authMiddleware, (req, res) => {
   res.json(success(depts));
 });
 
+// 获取所有设备类型（去重）
+router.get('/types', authMiddleware, (req, res) => {
+  const types = [...new Set(db.getAll('equipments').map(e => e.type).filter(Boolean))].sort();
+  res.json(success(types));
+});
+
+// 批量更新设备类型
+router.put('/batch-types', authMiddleware, (req, res) => {
+  try {
+    const { updates } = req.body || {};
+    if (!updates || !Array.isArray(updates) || updates.length === 0) {
+      return res.status(400).json({ code: 400, data: null, message: '更新数据不能为空' });
+    }
+    const results = [];
+    for (const item of updates) {
+      const { id, type } = item;
+      if (!id || type === undefined) continue;
+      const updated = db.update('equipments', id, { type: type.trim() });
+      if (updated) results.push(updated);
+    }
+    res.json(success({ count: results.length }));
+  } catch (e) {
+    res.status(500).json({ code: 500, data: null, message: '批量更新设备类型失败' });
+  }
+});
+
 router.get('/qrcode', authMiddleware, (req, res) => {
   const { qrcode } = req.query;
   if (!qrcode) return res.json(error('qrcode 参数不能为空'));

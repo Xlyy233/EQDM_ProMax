@@ -11,6 +11,8 @@ html, body, #app {
   color: #303133;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 * {
@@ -26,6 +28,24 @@ a { text-decoration: none; color: inherit; }
   }
   .el-pagination {
     justify-content: center !important;
+  }
+  .el-pagination__total,
+  .el-pagination__sizes {
+    display: none;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .page-container {
+    padding: 12px;
+  }
+  .stat-card {
+    padding: 14px !important;
+    border-radius: 8px;
+  }
+  .el-form-item {
+    --el-form-label-width: 80px;
   }
 }
 

@@ -48,7 +48,12 @@ function getResultLabel(result: string) {
 
 // ========== 照片预览 ==========
 const showPhoto = ref(false)
-const currentPhotoIndex = ref(0)
+const currentPhotoUrl = ref('')
+
+function previewPhoto(url: string) {
+  currentPhotoUrl.value = url
+  showPhoto.value = true
+}
 
 const pageTitle = computed(() => {
   if (!record.value || !record.value.equipmentCode) return '记录详情'
@@ -63,27 +68,9 @@ const equipmentDisplay = computed(() => {
   return name || '-'
 })
 
-function previewPhoto(index: number) {
-  currentPhotoIndex.value = index
-  showPhoto.value = true
-}
-
-function prevPhoto() {
-  if (currentPhotoIndex.value > 0) currentPhotoIndex.value--
-}
-
-function nextPhoto() {
-  if (record.value && currentPhotoIndex.value < record.value.photos.length - 1) {
-    currentPhotoIndex.value++
-  }
-}
-
-// 键盘导航
 function onKeydown(e: KeyboardEvent) {
   if (!showPhoto.value) return
-  if (e.key === 'ArrowLeft') prevPhoto()
-  else if (e.key === 'ArrowRight') nextPhoto()
-  else if (e.key === 'Escape') showPhoto.value = false
+  if (e.key === 'Escape') showPhoto.value = false
 }
 
 onMounted(() => {
@@ -96,7 +83,7 @@ onMounted(() => {
   <div class="page-container">
     <div class="page-header">
       <div style="display:flex;align-items:center;gap:8px;">
-        <el-button text @click="router.back()"><el-icon><ArrowLeft /></el-icon></el-button>
+        <el-button text @click="router.back()" aria-label="返回"><el-icon><ArrowLeft /></el-icon></el-button>
         <h2 class="page-title">{{ pageTitle }}</h2>
       </div>
       <div style="display:flex;gap:8px;" v-if="isEdit">
@@ -164,17 +151,32 @@ onMounted(() => {
         </el-descriptions>
       </div>
 
-      <!-- ====== 照片展示卡片 ====== -->
+      <!-- ====== 处理前现场照片 ====== -->
       <div class="section-card" v-if="record.photos && record.photos.length > 0">
-        <div class="section-title">现场照片 ({{ record.photos.length }}张)</div>
+        <div class="section-title">操作处理前现场照片 ({{ record.photos.length }}张)</div>
         <div class="photos-grid">
           <div
             class="photo-item"
             v-for="(photo, index) in record.photos"
-            :key="index"
-            @click="previewPhoto(index)"
+            :key="'before-'+index"
+            @click="previewPhoto(photo)"
           >
-            <img :src="photo" class="photo-img" />
+            <img :src="photo" class="photo-img" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== 处理后现场照片 ====== -->
+      <div class="section-card" v-if="record.afterPhotos && record.afterPhotos.length > 0">
+        <div class="section-title">操作处理后现场照片 ({{ record.afterPhotos.length }}张)</div>
+        <div class="photos-grid">
+          <div
+            class="photo-item"
+            v-for="(photo, index) in record.afterPhotos"
+            :key="'after-'+index"
+            @click="previewPhoto(photo)"
+          >
+            <img :src="photo" class="photo-img" loading="lazy" />
           </div>
         </div>
       </div>
@@ -192,15 +194,10 @@ onMounted(() => {
           <el-icon :size="28" color="#fff"><Close /></el-icon>
         </div>
         <img
-          :src="record?.photos[currentPhotoIndex]"
+          :src="currentPhotoUrl"
           class="modal-photo"
           @click.stop
         />
-        <div class="photo-nav" @click.stop>
-          <button class="nav-btn" :disabled="currentPhotoIndex <= 0" @click="prevPhoto">上一张</button>
-          <span class="nav-text">{{ currentPhotoIndex + 1 }} / {{ record?.photos.length }}</span>
-          <button class="nav-btn" :disabled="!record || currentPhotoIndex >= record.photos.length - 1" @click="nextPhoto">下一张</button>
-        </div>
       </div>
     </teleport>
   </div>
@@ -291,6 +288,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 3000;
+  overscroll-behavior: contain;
 }
 
 .modal-close {

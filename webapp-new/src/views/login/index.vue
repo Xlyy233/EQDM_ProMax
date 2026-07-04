@@ -54,18 +54,18 @@ async function handleLogin() {
 
       <el-form @submit.prevent="handleLogin">
         <el-form-item>
-          <el-input v-model="username" placeholder="用户名" :disabled="loading" size="large" clearable>
+          <el-input v-model="username" placeholder="用户名" :disabled="loading" size="large" clearable autocomplete="username">
             <template #prefix><el-icon><User /></el-icon></template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="password" type="password" placeholder="密码" :disabled="loading" size="large" show-password @keyup.enter="handleLogin">
+          <el-input v-model="password" type="password" placeholder="密码" :disabled="loading" size="large" show-password autocomplete="current-password" @keyup.enter="handleLogin">
             <template #prefix><el-icon><Lock /></el-icon></template>
           </el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" size="large" :loading="loading" @click="handleLogin" style="width:100%;background:linear-gradient(135deg,#409EFF,#67C23A);border:none;font-size:16px;font-weight:600;">
-            {{ loading ? '登录中...' : '登 录' }}
+            {{ loading ? '登录中…' : '登 录' }}
           </el-button>
         </el-form-item>
       </el-form>

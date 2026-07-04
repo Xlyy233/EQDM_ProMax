@@ -59,12 +59,21 @@ router.get('/records', authMiddleware, (req, res) => {
     { key: 'createdAt', label: '创建时间' }
   ];
 
+  // 单次遍历统计汇总
+  let total = 0, cntRepair = 0, cntMaintenance = 0, cntInspection = 0, cntImprovement = 0;
+  for (const r of list) {
+    total++;
+    if (r.type === 'repair') cntRepair++;
+    else if (r.type === 'maintenance') cntMaintenance++;
+    else if (r.type === 'inspection') cntInspection++;
+    else if (r.type === 'improvement') cntImprovement++;
+  }
   const summary = {
-    total: list.length,
-    repair: list.filter(r => r.type === 'repair').length,
-    maintenance: list.filter(r => r.type === 'maintenance').length,
-    inspection: list.filter(r => r.type === 'inspection').length,
-    improvement: list.filter(r => r.type === 'improvement').length
+    total,
+    repair: cntRepair,
+    maintenance: cntMaintenance,
+    inspection: cntInspection,
+    improvement: cntImprovement
   };
 
   if (req.query.format === 'json') {

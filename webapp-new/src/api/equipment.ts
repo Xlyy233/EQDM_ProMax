@@ -53,3 +53,13 @@ export async function batchAddEquipment(dataList: Equipment[]): Promise<ApiRespo
   const res = await request.post('/equipments/batch', dataList)
   return res.data
 }
+
+export async function getEquipmentTypes(): Promise<ApiResponse<string[]>> {
+  const res = await request.get('/equipments/types')
+  return res.data
+}
+
+export async function batchUpdateTypes(updates: { id: string; type: string }[]): Promise<ApiResponse<{ count: number }>> {
+  const res = await request.put('/equipments/batch-types', { updates })
+  return res.data
+}

@@ -35,8 +35,17 @@ request.interceptors.response.use(
     return response
   },
   (error) => {
-    // 避免在登录页显示错误提示
-    if (error.response?.status === 401 && router.currentRoute.value.path === '/login') {
+    // 401 未登录/token过期，跳转到登录页
+    if (error.response?.status === 401) {
+      if (router.currentRoute.value.path !== '/login') {
+        if (!isRedirectingToLogin) {
+          isRedirectingToLogin = true
+          ElMessage.error('登录已过期，请重新登录')
+          logout()
+          router.push('/login')
+          setTimeout(() => { isRedirectingToLogin = false }, 3000)
+        }
+      }
       return Promise.reject(error)
     }
     console.error('Request error:', error)

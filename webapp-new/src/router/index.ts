@@ -28,6 +28,10 @@ const routes: RouteRecordRaw[] = [
   { path: '/user', name: 'UserManage', component: () => import('@/views/user/list.vue'), meta: { title: '用户管理', icon: 'User' } },
   { path: '/template', name: 'Template', component: () => import('@/views/template/list.vue'), meta: { title: '常用模板', icon: 'Collection' } },
   { path: '/logs', name: 'Logs', component: () => import('@/views/logs/index.vue'), meta: { title: '日志管理', icon: 'Tickets' } },
+  { path: '/inspections/templates', name: 'InspectionTemplates', component: () => import('@/views/inspections/templates.vue'), meta: { title: '巡检模板', icon: 'Checked' } },
+  { path: '/inspections/list', name: 'InspectionList', component: () => import('@/views/inspections/list.vue'), meta: { title: '巡检记录', icon: 'DocumentChecked' } },
+  { path: '/inspections/form', name: 'InspectionForm', component: () => import('@/views/inspections/form.vue'), meta: { title: '开始巡检' } },
+  { path: '/inspections/detail/:id', name: 'InspectionDetail', component: () => import('@/views/inspections/detail.vue'), meta: { title: '巡检详情' } },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 

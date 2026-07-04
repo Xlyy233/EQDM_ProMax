@@ -17,12 +17,14 @@ const DEFAULT_DATA = {
   knowledge: [],
   knowledge_comments: [],
   knowledge_likes: [],
-  notifications: []
+  notifications: [],
+  inspectionTemplates: [],
+  inspectionRecords: []
 };
 
 let cache = null;
 let lastRead = 0;
-const CACHE_TTL = 100;
+const CACHE_TTL = 1000;
 
 function readDB() {
   const now = Date.now();

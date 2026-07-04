@@ -13,6 +13,10 @@ function parseRecord(record) {
     try { record.photos = JSON.parse(record.photos) } catch { record.photos = [] }
   }
   if (!Array.isArray(record.photos)) record.photos = []
+  if (typeof record.afterPhotos === 'string' && record.afterPhotos) {
+    try { record.afterPhotos = JSON.parse(record.afterPhotos) } catch { record.afterPhotos = [] }
+  }
+  if (!Array.isArray(record.afterPhotos)) record.afterPhotos = []
   // 关联设备编号
   if (record.equipmentId && !record.equipmentCode) {
     const eq = db.findById('equipments', record.equipmentId)
@@ -69,7 +73,7 @@ router.get('/:id', authMiddleware, (req, res) => {
 });
 
 router.post('/', authMiddleware, (req, res) => {
-  const { equipmentId, equipmentCode, equipmentName, type, title, content, faultDescription, faultCause, solution, startTime, endTime, result, remark, photos, status, personnel, cost, laborCost, partsCost, otherCost, partsReplaced, partsReplacedDetail, isStopped, stopDuration, stopDurationUnit } = req.body || {};
+  const { equipmentId, equipmentCode, equipmentName, type, title, content, faultDescription, faultCause, solution, startTime, endTime, result, remark, photos, afterPhotos, status, personnel, cost, laborCost, partsCost, otherCost, partsReplaced, partsReplacedDetail, isStopped, stopDuration, stopDurationUnit } = req.body || {};
   if (!equipmentId || !type) return res.json(error('设备ID和类型为必填项'));
 
   const equip = db.findById('equipments', equipmentId);
@@ -90,6 +94,7 @@ router.post('/', authMiddleware, (req, res) => {
     result: result || '',
     remark: remark || '',
     photos: Array.isArray(photos) ? JSON.stringify(photos) : (photos || ''),
+    afterPhotos: Array.isArray(afterPhotos) ? JSON.stringify(afterPhotos) : (afterPhotos || ''),
     status: status || 'completed',
     personnel: personnel || '',
     cost: cost || 0,
@@ -136,6 +141,9 @@ router.put('/:id', authMiddleware, (req, res) => {
   }
   if (req.body.photos !== undefined) {
     updates.photos = Array.isArray(req.body.photos) ? JSON.stringify(req.body.photos) : (req.body.photos || '');
+  }
+  if (req.body.afterPhotos !== undefined) {
+    updates.afterPhotos = Array.isArray(req.body.afterPhotos) ? JSON.stringify(req.body.afterPhotos) : (req.body.afterPhotos || '');
   }
   updates.updatedBy = req.user.id;
 

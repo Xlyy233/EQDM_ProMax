@@ -42,8 +42,13 @@ const upload = multer({
 });
 
 // 获取设备的所有附件
+// 路径安全过滤：仅允许字母数字、连字符和下划线
+function sanitizeId(id) {
+  return (id || '').replace(/[^a-zA-Z0-9_-]/g, '');
+}
+
 router.get('/equipment/:equipmentId', authMiddleware, (req, res) => {
-  const { equipmentId } = req.params;
+  const equipmentId = sanitizeId(req.params.equipmentId);
   const attachments = db.filter('attachments', a => a.equipmentId === equipmentId);
   attachments.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
   res.json(success(attachments));

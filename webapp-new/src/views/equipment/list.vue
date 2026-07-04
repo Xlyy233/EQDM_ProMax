@@ -314,6 +314,7 @@ function closeImportDialog() {
       <el-button type="success" plain @click="downloadTemplate" v-if="canManageEquipment()">下载导入模板</el-button>
     </div>
 
+    <div class="table-responsive">
     <el-table :data="list" v-loading="loading" border stripe style="width:100%;" empty-text="暂无设备数据" @row-click="(row:any) => router.push(`/equipment/${row.id}`)">
       <el-table-column prop="code" label="设备编号" min-width="120" />
       <el-table-column prop="name" label="设备名称" min-width="140" />
@@ -380,13 +381,14 @@ function closeImportDialog() {
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150" fixed="right" v-if="canManageEquipment()">
+      <el-table-column label="操作" width="150" fixed="right" v-if="canManageEquipment()" class-name="op-col">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click.stop="router.push(`/equipment/${row.id}/edit`)">编辑</el-button>
           <el-button link type="danger" size="small" @click.stop="handleDelete(row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
+    </div>
 
     <div style="margin-top:16px;display:flex;justify-content:flex-end;">
       <el-pagination
@@ -459,3 +461,11 @@ function closeImportDialog() {
     </el-dialog>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  :deep(.op-col) {
+    display: none;
+  }
+}
+</style>

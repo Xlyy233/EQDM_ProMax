@@ -116,8 +116,10 @@ async function fetchNotifications() {
 
     // 桌面通知 + 振动：有新增未读通知
     if (res.data.list.length > 0 && hasNewItems) {
-      // 手机振动
-      try { navigator.vibrate(200) } catch {}
+      // 手机振动（需用户已交互）
+      if (navigator.vibrate && navigator.userActivation?.hasBeenActive) {
+        try { navigator.vibrate(200) } catch {}
+      }
 
       if ('Notification' in window && Notification.permission === 'granted') {
         for (const n of res.data.list) {

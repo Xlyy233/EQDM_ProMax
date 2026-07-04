@@ -1,17 +1,27 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const rateLimit = require('express-rate-limit');
 const db = require('../config/db');
 const { success, error } = require('../utils/helper');
 const { generateToken, authMiddleware, requireRole } = require('../middleware/auth');
 
 const router = express.Router();
 
+// 登录频率限制：15分钟内最多10次
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { code: 429, data: null, message: '登录尝试过多，请15分钟后再试' }
+});
+
 function withoutPassword(user) {
   const { password, ...rest } = user;
   return rest;
 }
 
-router.post('/login', (req, res) => {
+router.post('/login', loginLimiter, (req, res) => {
   const { username, password } = req.body || {};
   if (!username || !password) {
     return res.json(error('用户名和密码不能为空'));

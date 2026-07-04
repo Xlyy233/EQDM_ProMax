@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getCurrentUser, canManageEquipment, canManageUsers, canViewStatistics, canExportData, canViewLogs, canManageMaintenance, logout } from '@/stores/user'
+import { getCurrentUser, canManageEquipment, canManageUsers, canViewStatistics, canExportData, canViewLogs, canManageMaintenance, hasRole, logout } from '@/stores/user'
 import { ElMessageBox } from 'element-plus'
 import NotificationBell from '@/components/NotificationBell.vue'
 
@@ -39,7 +39,9 @@ const menuItems = computed(() => {
     { path: '/export', label: '数据导出', icon: 'Download', show: canExportData() },
     { path: '/user', label: '用户管理', icon: 'User', show: canManageUsers() },
     { path: '/template', label: '常用模板', icon: 'Collection' },
-    { path: '/logs', label: '日志管理', icon: 'Tickets', show: canViewLogs() }
+    { path: '/logs', label: '日志管理', icon: 'Tickets', show: canViewLogs() },
+    { path: '/inspections/templates', label: '巡检模板', icon: 'Checked', show: hasRole(['manager', 'admin']) },
+    { path: '/inspections/list', label: '巡检记录', icon: 'DocumentChecked', show: true }
   ]
   return items.filter(item => item.show !== false)
 })
@@ -63,18 +65,18 @@ function goTo(path: string) {
 <template>
   <el-container class="app-container" v-if="isMobile">
     <!-- Mobile: header + content -->
-    <el-header class="mobile-header gradient-primary" style="height: 60px;">
-      <div class="flex items-center justify-between h-full text-white">
+    <el-header class="mobile-header gradient-primary" style="height: 60px; padding-top: env(safe-area-inset-top);">
+      <div class="flex items-center justify-between h-full text-white" style="padding: 0 12px;">
         <div class="flex items-center gap-2">
           <NotificationBell light />
-          <el-icon :size="22"><Tools /></el-icon>
+          <el-icon :size="22" aria-hidden="true"><Tools /></el-icon>
           <span class="font-semibold">设备管理系统</span>
         </div>
         <el-dropdown>
           <div class="flex items-center gap-2 cursor-pointer">
-            <div class="w-8 h-8 rounded-full bg-white bg-opacity-25 flex items-center justify-center font-semibold">{{ userInitial }}</div>
+            <div class="w-8 h-8 rounded-full bg-white bg-opacity-25 flex items-center justify-center font-semibold" aria-hidden="true">{{ userInitial }}</div>
             <span class="text-sm">{{ userName }}</span>
-            <el-icon><ArrowDown /></el-icon>
+            <el-icon aria-hidden="true"><ArrowDown /></el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -91,16 +93,17 @@ function goTo(path: string) {
     </el-main>
 
     <!-- Bottom navigation -->
-    <el-footer class="mobile-footer" style="height: 60px; padding: 0;">
+    <el-footer class="mobile-footer" style="height: 60px; padding: 0; padding-bottom: env(safe-area-inset-bottom);">
       <div class="mobile-nav">
-        <div v-for="item in [{ path:'/',label:'首页',icon:'HomeFilled' },{ path:'/equipment',label:'设备',icon:'Box',show:canManageEquipment() },{ path:'/record',label:'记录',icon:'Document' }].filter(i => i.show !== false)"
+        <button v-for="item in [{ path:'/',label:'首页',icon:'HomeFilled' },{ path:'/equipment',label:'设备',icon:'Box',show:canManageEquipment() },{ path:'/record',label:'记录',icon:'Document' },{ path:'/inspections/list',label:'巡检',icon:'DocumentChecked' }].filter(i => i.show !== false)"
              :key="item.path"
              class="nav-item"
              :class="{ active: activeMenu === item.path.split('/')[1] }"
+             :aria-label="item.label"
              @click="goTo(item.path)">
-          <el-icon :size="20"><component :is="item.icon" /></el-icon>
+          <el-icon :size="20" aria-hidden="true"><component :is="item.icon" /></el-icon>
           <span class="text-xs mt-1">{{ item.label }}</span>
-        </div>
+        </button>
       </div>
     </el-footer>
   </el-container>
@@ -212,6 +215,11 @@ function goTo(path: string) {
   color: #606266;
   cursor: pointer;
   transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
 }
 
 .nav-item.active {

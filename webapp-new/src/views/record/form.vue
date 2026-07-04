@@ -50,7 +50,8 @@ const form = ref({
   stopDurationUnit: 'minutes' as 'minutes' | 'hours',
   partsReplaced: 'no' as 'yes' | 'no',
   partsReplacedDetail: '',
-  photos: [] as string[]
+  photos: [] as string[],
+  afterPhotos: [] as string[]
 })
 
 const rules = {
@@ -169,7 +170,8 @@ async function loadData() {
         stopDurationUnit: res.data.stopDurationUnit || 'minutes',
         partsReplaced: res.data.partsReplaced || 'no',
         partsReplacedDetail: res.data.partsReplacedDetail || '',
-        photos: Array.isArray(res.data.photos) ? res.data.photos : (typeof res.data.photos === 'string' ? (() => { try { return JSON.parse(res.data.photos) } catch { return [] } })() : [])
+        photos: Array.isArray(res.data.photos) ? res.data.photos : (typeof res.data.photos === 'string' ? (() => { try { return JSON.parse(res.data.photos) } catch { return [] } })() : []),
+        afterPhotos: Array.isArray(res.data.afterPhotos) ? res.data.afterPhotos : (typeof res.data.afterPhotos === 'string' ? (() => { try { return JSON.parse(res.data.afterPhotos) } catch { return [] } })() : [])
       }
       try {
         const eqRes = await equipmentApi.getEquipmentById(res.data.equipmentId)
@@ -214,9 +216,11 @@ function initDefaultTime() {
 }
 
 // ========== 照片上传 ==========
-const MAX_PHOTOS = 9
+const MAX_PHOTOS = 5
 const uploadInput = ref<HTMLInputElement | null>(null)
 const cameraInput = ref<HTMLInputElement | null>(null)
+const afterUploadInput = ref<HTMLInputElement | null>(null)
+const afterCameraInput = ref<HTMLInputElement | null>(null)
 
 function compressImage(file: File): Promise<string> {
   return new Promise((resolve) => {
@@ -237,6 +241,43 @@ function compressImage(file: File): Promise<string> {
         canvas.height = h
         const ctx = canvas.getContext('2d')!
         ctx.drawImage(img, 0, 0, w, h)
+
+        // 水印：拍摄日期时间
+        const now = new Date()
+        const pad = (n: number) => String(n).padStart(2, '0')
+        const text = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes())
+        const fontSize = Math.max(12, Math.round(w * 0.035))
+        const padding = Math.round(w * 0.02)
+        ctx.font = 'bold ' + fontSize + 'px sans-serif'
+        const metrics = ctx.measureText(text)
+        const textW = metrics.width
+        const textH = fontSize * 1.2
+        const x = w - textW - padding * 2
+        const y = h - textH - padding * 2
+        // 半透明背景条
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'
+        const bgX = x - padding
+        const bgY = y - padding
+        const bgW = textW + padding * 2
+        const bgH = textH + padding * 2
+        const radius = Math.round(fontSize * 0.3)
+        ctx.beginPath()
+        ctx.moveTo(bgX + radius, bgY)
+        ctx.lineTo(bgX + bgW - radius, bgY)
+        ctx.quadraticCurveTo(bgX + bgW, bgY, bgX + bgW, bgY + radius)
+        ctx.lineTo(bgX + bgW, bgY + bgH - radius)
+        ctx.quadraticCurveTo(bgX + bgW, bgY + bgH, bgX + bgW - radius, bgY + bgH)
+        ctx.lineTo(bgX + radius, bgY + bgH)
+        ctx.quadraticCurveTo(bgX, bgY + bgH, bgX, bgY + bgH - radius)
+        ctx.lineTo(bgX, bgY + radius)
+        ctx.quadraticCurveTo(bgX, bgY, bgX + radius, bgY)
+        ctx.closePath()
+        ctx.fill()
+        // 白色文字
+        ctx.fillStyle = '#ffffff'
+        ctx.textBaseline = 'top'
+        ctx.fillText(text, x, y)
+
         resolve(canvas.toDataURL('image/jpeg', 0.6))
       }
       img.src = e.target?.result as string
@@ -253,12 +294,21 @@ function triggerCamera() {
   cameraInput.value?.click()
 }
 
-async function onFileChange(e: Event) {
+function triggerAfterUpload() {
+  afterUploadInput.value?.click()
+}
+
+function triggerAfterCamera() {
+  afterCameraInput.value?.click()
+}
+
+async function onFileChange(e: Event, target: 'photos' | 'afterPhotos') {
   const input = e.target as HTMLInputElement
   const files = input.files
   if (!files || files.length === 0) return
 
-  const remaining = MAX_PHOTOS - form.value.photos.length
+  const arr = form.value[target]
+  const remaining = MAX_PHOTOS - arr.length
   const toProcess = Array.from(files).slice(0, remaining)
 
   for (const file of toProcess) {
@@ -268,7 +318,7 @@ async function onFileChange(e: Event) {
     }
     try {
       const base64 = await compressImage(file)
-      form.value.photos.push(base64)
+      arr.push(base64)
     } catch {
       ElMessage.error('图片处理失败')
     }
@@ -277,12 +327,15 @@ async function onFileChange(e: Event) {
   if (toProcess.length > 0) {
     ElMessage.success(`已添加 ${toProcess.length} 张图片`)
   }
-  // reset input so same file can be re-selected
   input.value = ''
 }
 
 function removePhoto(index: number) {
   form.value.photos.splice(index, 1)
+}
+
+function removeAfterPhoto(index: number) {
+  form.value.afterPhotos.splice(index, 1)
 }
 
 // ========== 处理结果 ==========
@@ -299,7 +352,7 @@ onMounted(async () => {
   <div class="page-container">
     <div class="page-header">
       <div style="display:flex;align-items:center;gap:8px;">
-        <el-button text @click="router.back()"><el-icon><ArrowLeft /></el-icon></el-button>
+        <el-button text @click="router.back()" aria-label="返回"><el-icon><ArrowLeft /></el-icon></el-button>
         <h2 class="page-title">{{ isEdit ? '编辑记录' : '填报记录' }}</h2>
       </div>
     </div>
@@ -482,16 +535,16 @@ onMounted(async () => {
           </el-form-item>
         </div>
 
-        <!-- ====== 照片记录卡片 ====== -->
+        <!-- ====== 处理前现场照片 ====== -->
         <div class="section-card">
-          <div class="section-title">照片记录 ({{ form.photos.length }}/{{ MAX_PHOTOS }})</div>
+          <div class="section-title">操作处理前现场照片 ({{ form.photos.length }}/{{ MAX_PHOTOS }})</div>
           <div class="photos-grid">
             <div
               class="photo-item"
               v-for="(photo, index) in form.photos"
               :key="index"
             >
-              <img :src="photo" class="photo-img" />
+              <img :src="photo" class="photo-img" loading="lazy" />
               <div class="photo-delete" @click="removePhoto(index)">
                 <el-icon><Close /></el-icon>
               </div>
@@ -513,22 +566,43 @@ onMounted(async () => {
               <span class="upload-text">相册</span>
             </div>
           </div>
-          <input
-            ref="uploadInput"
-            type="file"
-            accept="image/*"
-            multiple
-            style="display:none;"
-            @change="onFileChange"
-          />
-          <input
-            ref="cameraInput"
-            type="file"
-            accept="image/*"
-            capture="environment"
-            style="display:none;"
-            @change="onFileChange"
-          />
+          <input ref="uploadInput" type="file" accept="image/*" multiple style="display:none;" @change="onFileChange($event, 'photos')" />
+          <input ref="cameraInput" type="file" accept="image/*" capture="environment" style="display:none;" @change="onFileChange($event, 'photos')" />
+        </div>
+
+        <!-- ====== 处理后现场照片 ====== -->
+        <div class="section-card">
+          <div class="section-title">操作处理后现场照片 ({{ form.afterPhotos.length }}/{{ MAX_PHOTOS }})</div>
+          <div class="photos-grid">
+            <div
+              class="photo-item"
+              v-for="(photo, index) in form.afterPhotos"
+              :key="index"
+            >
+              <img :src="photo" class="photo-img" loading="lazy" />
+              <div class="photo-delete" @click="removeAfterPhoto(index)">
+                <el-icon><Close /></el-icon>
+              </div>
+            </div>
+            <div
+              class="photo-item upload-btn"
+              v-if="form.afterPhotos.length < MAX_PHOTOS"
+              @click="triggerAfterCamera"
+            >
+              <el-icon :size="28" color="#909399"><Camera /></el-icon>
+              <span class="upload-text">拍照</span>
+            </div>
+            <div
+              class="photo-item upload-btn"
+              v-if="form.afterPhotos.length < MAX_PHOTOS"
+              @click="triggerAfterUpload"
+            >
+              <el-icon :size="28" color="#909399"><PictureFilled /></el-icon>
+              <span class="upload-text">相册</span>
+            </div>
+          </div>
+          <input ref="afterUploadInput" type="file" accept="image/*" multiple style="display:none;" @change="onFileChange($event, 'afterPhotos')" />
+          <input ref="afterCameraInput" type="file" accept="image/*" capture="environment" style="display:none;" @change="onFileChange($event, 'afterPhotos')" />
         </div>
 
         <!-- ====== 提交按钮 ====== -->

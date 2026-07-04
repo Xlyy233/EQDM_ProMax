@@ -1,0 +1,1 @@
+{"name":"设备管理系统","short_name":"设备管理","description":"设备台账与运维管理系统","start_url":"/","display":"standalone","background_color":"#f5f7fa","theme_color":"#409EFF","lang":"en","scope":"/","orientation":"portrait-primary","icons":[{"src":"favicon.svg","sizes":"64x64","type":"image/svg+xml","purpose":"any"}]}

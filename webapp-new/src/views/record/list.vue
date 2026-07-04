@@ -81,6 +81,7 @@ onMounted(() => {
     </div>
 
     <div class="stat-card" v-loading="loading">
+      <div class="table-responsive">
       <el-table :data="list" border stripe empty-text="暂无工作记录" class="record-table" @row-click="(row:any) => router.push(`/record/${row.id}`)">
         <el-table-column prop="title" label="标题" min-width="180" show-overflow-tooltip />
         <el-table-column prop="type" label="类型" width="90">
@@ -104,6 +105,7 @@ onMounted(() => {
           </template>
         </el-table-column>
       </el-table>
+      </div>
 
       <div style="margin-top:16px;display:flex;justify-content:flex-end;">
         <el-pagination v-model:current-page="page" v-model:page-size="pageSize" :total="total" :page-sizes="[10,20,50]" layout="total,sizes,prev,pager,next" @current-change="handlePageChange" @size-change="handleSizeChange" />
