@@ -13,6 +13,7 @@ const categories = [
   { id: 'tech', label: '技术分享', icon: 'Monitor' },
   { id: 'tools', label: '工具技巧', icon: 'Setting' },
   { id: 'bestpractice', label: '最佳实践', icon: 'Medal' },
+  { id: 'case', label: '故障案例', icon: 'Warning' },
 ]
 
 const searchTerm = ref('')

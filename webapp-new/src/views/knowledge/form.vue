@@ -26,6 +26,7 @@ const categories = [
   { id: 'workflow', label: '工作流程' },
   { id: 'tools', label: '工具技巧' },
   { id: 'bestpractice', label: '最佳实践' },
+  { id: 'case', label: '故障案例' },
 ]
 
 const form = ref({

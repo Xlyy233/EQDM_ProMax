@@ -16,6 +16,7 @@ const templates = ref<any[]>([])
 const selectedTemplate = ref<any>(null)
 const selectedEquipmentId = ref('')
 const selectedTemplateId = ref('')
+const templateLoaded = ref(false)
 
 const form = ref({
   inspectionDate: new Date().toISOString().slice(0, 10),
@@ -51,10 +52,12 @@ function onEquipmentChange(val: string) {
 }
 
 async function loadTemplates(equipmentType: string) {
+  templateLoaded.value = false
   try {
     const res = await api.getTemplatesByType(equipmentType)
     templates.value = res.data.data || []
   } catch { /* ignore */ }
+  finally { templateLoaded.value = true }
 }
 
 function onTemplateChange(val: string) {
@@ -188,8 +191,8 @@ onMounted(() => {
           <el-select v-model="selectedTemplateId" placeholder="请选择巡检模板" style="width:100%" @change="onTemplateChange">
             <el-option v-for="t in templates" :key="t.id" :label="t.name" :value="t.id" />
           </el-select>
-          <div v-if="templates.length === 0" style="color:#909399;font-size:13px;margin-top:4px;">
-            该设备类型暂无巡检模板，请联系经理创建
+          <div v-if="templateLoaded && templates.length === 0" style="color:#909399;font-size:13px;margin-top:4px;">
+            <el-icon style="vertical-align:middle;"><Warning /></el-icon> 该设备类型暂无巡检模板，请联系部门经理在「巡检模板」页面配置
           </div>
         </el-form-item>
         <el-form-item label="巡检日期">

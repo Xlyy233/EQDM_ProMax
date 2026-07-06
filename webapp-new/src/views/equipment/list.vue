@@ -105,8 +105,8 @@ function handlePreview(eq: Equipment, att: EquipmentAttachment) {
     previewName.value = att.originalName
     previewVisible.value = true
   } else {
-    // 非图片文件直接打开
-    window.open(attachmentApi.getAttachmentUrl(eq.id, att.fileName), '_blank')
+    // 非图片文件通过API打开，确保正确的Content-Type
+    window.open(attachmentApi.getAttachmentPreviewUrl(eq.id, att.fileName), '_blank')
   }
 }
 

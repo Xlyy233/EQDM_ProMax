@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { canViewStatistics, loadFromStorage, isLoggedIn } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 import * as statisticsApi from '@/api/statistics'
 import type {
   DashboardData, StatisticsData, TrendData,
-  CostAnalysis, PieChartData, PartsReplacementData
+  CostAnalysis, PieChartData, PartsReplacementData, PredictiveData
 } from '@/types'
 import * as echarts from 'echarts/core'
 import { LineChart, BarChart, PieChart } from 'echarts/charts'
@@ -26,6 +26,7 @@ const trendData = ref<TrendData[]>([])
 const costAnalysis = ref<CostAnalysis | null>(null)
 const typeDistribution = ref<PieChartData[]>([])
 const partsReplacement = ref<PartsReplacementData | null>(null)
+const predictiveData = ref<PredictiveData | null>(null)
 
 const currentYear = ref(new Date().getFullYear())
 const currentMonth = ref(new Date().getMonth() + 1)
@@ -58,7 +59,17 @@ async function loadAllData() {
     renderTypePieChart()
     renderCostChart()
   } catch (e) {
+    ElMessage.error('加载统计数据失败')
+    console.error(e)
   } finally { loading.value = false }
+
+  // 预测分析独立加载，失败不影响统计数据展示
+  try {
+    const predRes = await statisticsApi.getPredictiveAnalysis()
+    predictiveData.value = predRes.data
+  } catch (e) {
+    console.warn('预测分析加载失败:', e)
+  }
 }
 
 function onTimeRangeChange() { loadAllData() }
@@ -131,7 +142,31 @@ onMounted(() => {
   if (!isLoggedIn()) { router.replace('/login'); return }
   if (!canViewStatistics()) { ElMessage.error('您没有权限访问此页面'); router.replace('/'); return }
   loadAllData()
+  window.addEventListener('resize', handleResize)
 })
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  if (trendChartInstance) { trendChartInstance.dispose(); trendChartInstance = null }
+  if (pieChartInstance) { pieChartInstance.dispose(); pieChartInstance = null }
+  if (costChartInstance) { costChartInstance.dispose(); costChartInstance = null }
+})
+
+function handleResize() {
+  trendChartInstance?.resize()
+  pieChartInstance?.resize()
+  costChartInstance?.resize()
+}
+
+function riskClass(level: string) {
+  return { high: 'risk-high', medium: 'risk-medium', low: 'risk-low' }[level] || ''
+}
+function riskLabel(level: string) {
+  return { high: '高风险', medium: '中风险', low: '低风险' }[level] || ''
+}
+function suggestionClass(type: string) {
+  return { urgent: 'sg-urgent', danger: 'sg-danger', warning: 'sg-warning', info: 'sg-info' }[type] || ''
+}
 </script>
 
 <template>
@@ -313,6 +348,173 @@ onMounted(() => {
           </table>
         </div>
       </div>
+
+      <!-- ========== 预测分析 ========== -->
+      <template v-if="predictiveData">
+        <div class="section-divider">
+          <h3 class="section-title">预测分析与预防建议</h3>
+        </div>
+
+        <!-- 健康评分 KPI -->
+        <div class="kpi-row">
+          <div class="kpi-card kpi-red">
+            <div class="kpi-value">{{ predictiveData.highRiskEquipments.filter(e => e.riskLevel === 'high').length }}</div>
+            <div class="kpi-label">高风险设备</div>
+          </div>
+          <div class="kpi-card kpi-orange">
+            <div class="kpi-value">{{ predictiveData.highRiskEquipments.filter(e => e.riskLevel === 'medium').length }}</div>
+            <div class="kpi-label">中风险设备</div>
+          </div>
+          <div class="kpi-card kpi-green">
+            <div class="kpi-value">{{ predictiveData.healthScores.filter(e => e.riskLevel === 'low').length }}</div>
+            <div class="kpi-label">低风险设备</div>
+          </div>
+          <div class="kpi-card kpi-blue">
+            <div class="kpi-value">{{ predictiveData.healthScores.length > 0 ? Math.round(predictiveData.healthScores.reduce((s, e) => s + e.score, 0) / predictiveData.healthScores.length) : 0 }}</div>
+            <div class="kpi-label">平均健康分</div>
+          </div>
+        </div>
+
+        <!-- 保养逾期预警 + 高风险设备 -->
+        <el-row :gutter="16" class="chart-row">
+          <el-col :xs="24" :lg="12">
+            <div class="chart-card">
+              <h4>保养逾期预警
+                <span class="cost-summary">逾期 {{ predictiveData.maintenanceAnalysis.overduePlans.length }} 项</span>
+              </h4>
+              <div style="max-height:300px;overflow:auto;">
+                <table class="rank-table" v-if="predictiveData.maintenanceAnalysis.overduePlans.length > 0">
+                  <thead>
+                    <tr><th>设备名称</th><th>保养计划</th><th>逾期天数</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(p, i) in predictiveData.maintenanceAnalysis.overduePlans" :key="i" :class="{ 'row-danger': p.overdueDays > 7 }">
+                      <td class="rank-name">{{ p.equipmentName }}</td>
+                      <td>{{ p.planName }}</td>
+                      <td><span class="tag-red">{{ p.overdueDays }}天</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <el-empty v-else description="暂无逾期保养计划" :image-size="60" />
+              </div>
+            </div>
+          </el-col>
+          <el-col :xs="24" :lg="12">
+            <div class="chart-card">
+              <h4>高风险设备
+                <span class="cost-summary">共 {{ predictiveData.highRiskEquipments.length }} 台</span>
+              </h4>
+              <div style="max-height:300px;overflow:auto;">
+                <table class="rank-table" v-if="predictiveData.highRiskEquipments.length > 0">
+                  <thead>
+                    <tr><th>设备名称</th><th>健康分</th><th>风险</th><th>巡检异常</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(e, i) in predictiveData.highRiskEquipments" :key="i" :class="[riskClass(e.riskLevel)]">
+                      <td class="rank-name">{{ e.equipmentName }}</td>
+                      <td>{{ e.score }}</td>
+                      <td><span :class="'tag-' + (e.riskLevel === 'high' ? 'red' : e.riskLevel === 'medium' ? 'orange' : 'green')">{{ riskLabel(e.riskLevel) }}</span></td>
+                      <td style="text-align:left;font-size:12px;">{{ e.topFailItems.join('、') || '-' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <el-empty v-else description="暂无高风险设备" :image-size="60" />
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+
+        <!-- 保养效果分析 + 周期建议 -->
+        <el-row :gutter="16" class="chart-row" v-if="predictiveData.maintenanceAnalysis.ineffectiveMaintenances.length > 0 || predictiveData.maintenanceAnalysis.cycleSuggestions.length > 0">
+          <el-col :xs="24" :lg="12" v-if="predictiveData.maintenanceAnalysis.ineffectiveMaintenances.length > 0">
+            <div class="chart-card">
+              <h4>保养效果评估
+                <span class="cost-summary">保养后仍有故障</span>
+              </h4>
+              <div style="max-height:250px;overflow:auto;">
+                <table class="rank-table">
+                  <thead>
+                    <tr><th>设备名称</th><th>保养日期</th><th>保养后故障次数</th><th>最短故障间隔</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(m, i) in predictiveData.maintenanceAnalysis.ineffectiveMaintenances" :key="i">
+                      <td class="rank-name">{{ m.equipmentName }}</td>
+                      <td>{{ m.maintenanceDate }}</td>
+                      <td>{{ m.repairAfterCount }}</td>
+                      <td>{{ m.minDaysToRepair }}天</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </el-col>
+          <el-col :xs="24" :lg="predictiveData.maintenanceAnalysis.ineffectiveMaintenances.length > 0 ? 12 : 24" v-if="predictiveData.maintenanceAnalysis.cycleSuggestions.length > 0">
+            <div class="chart-card">
+              <h4>保养周期建议
+                <span class="cost-summary">建议调整周期</span>
+              </h4>
+              <div style="max-height:250px;overflow:auto;">
+                <table class="rank-table">
+                  <thead>
+                    <tr><th>设备名称</th><th>当前周期</th><th>建议周期</th><th>原因</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(c, i) in predictiveData.maintenanceAnalysis.cycleSuggestions" :key="i">
+                      <td class="rank-name">{{ c.equipmentName }}</td>
+                      <td>{{ c.currentCycleDays }}天</td>
+                      <td><span class="tag-orange">{{ c.suggestedCycleDays }}天</span></td>
+                      <td style="font-size:12px;">故障间隔{{ c.avgRepairGapDays }}天</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+
+        <!-- 预防性维护建议 -->
+        <div class="chart-card" v-if="predictiveData.suggestions.length > 0">
+          <h4>预防性维护建议
+            <span class="cost-summary">共 {{ predictiveData.suggestions.length }} 条</span>
+          </h4>
+          <div class="suggestion-list">
+            <div v-for="(s, i) in predictiveData.suggestions" :key="i" :class="'suggestion-item ' + suggestionClass(s.type)">
+              <div class="sg-header">
+                <span :class="'sg-badge ' + suggestionClass(s.type)">{{ s.title }}</span>
+                <span class="sg-equip" v-if="s.equipmentName">{{ s.equipmentName }}</span>
+              </div>
+              <div class="sg-content">{{ s.content }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 配件更换预测 -->
+        <div class="chart-card" v-if="predictiveData.partsPredictions.length > 0">
+          <h4>配件更换预测
+            <span class="cost-summary">共 {{ predictiveData.partsPredictions.length }} 项</span>
+          </h4>
+          <div style="max-height:300px;overflow:auto;">
+            <table class="rank-table">
+              <thead>
+                <tr><th>配件名称</th><th>平均更换周期</th><th>上次更换</th><th>预计下次更换</th><th>剩余天数</th></tr>
+              </thead>
+              <tbody>
+                <tr v-for="(p, i) in predictiveData.partsPredictions" :key="i" :class="{ 'row-danger': p.daysUntil <= 7, 'row-warning': p.daysUntil > 7 && p.daysUntil <= 30 }">
+                  <td class="rank-name">{{ p.partName }}</td>
+                  <td>{{ p.avgCycleDays }}天</td>
+                  <td>{{ p.lastReplaceDate }}</td>
+                  <td>{{ p.predictedNext }}</td>
+                  <td>
+                    <span :class="p.daysUntil <= 7 ? 'tag-red' : p.daysUntil <= 30 ? 'tag-orange' : 'tag-green'">
+                      {{ p.daysUntil > 0 ? p.daysUntil + '天' : '已到期' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -436,4 +638,47 @@ onMounted(() => {
   .month-picker { margin-top: 8px; }
   .chart-card h4 { font-size: 14px; }
 }
+
+/* 预测分析样式 */
+.section-divider {
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #303133;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #409eff;
+  margin: 0;
+}
+.kpi-orange { border-left-color: #f59e0b; background: linear-gradient(to right, #fffbeb, #fff); }
+.kpi-orange .kpi-value { color: #d97706; }
+
+.risk-high { background: #fef2f2 !important; }
+.risk-medium { background: #fffbeb !important; }
+.risk-low { background: #f0fdf4 !important; }
+
+.row-danger { background: #fef2f2 !important; }
+.row-warning { background: #fffbeb !important; }
+
+.tag-red { color: #dc2626; background: #fef2f2; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.tag-orange { color: #d97706; background: #fffbeb; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.tag-green { color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+
+/* 建议卡片 */
+.suggestion-list { display: flex; flex-direction: column; gap: 10px; }
+.suggestion-item { padding: 14px 16px; border-radius: 10px; border-left: 4px solid #dcdfe6; background: #fafafa; }
+.suggestion-item.sg-urgent { border-left-color: #dc2626; background: #fef2f2; }
+.suggestion-item.sg-danger { border-left-color: #ef4444; background: #fef2f2; }
+.suggestion-item.sg-warning { border-left-color: #f59e0b; background: #fffbeb; }
+.suggestion-item.sg-info { border-left-color: #3b82f6; background: #eff6ff; }
+.sg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.sg-badge { padding: 2px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; }
+.sg-badge.sg-urgent { background: #dc2626; }
+.sg-badge.sg-danger { background: #ef4444; }
+.sg-badge.sg-warning { background: #f59e0b; color: #fff; }
+.sg-badge.sg-info { background: #3b82f6; }
+.sg-equip { font-size: 13px; color: #303133; font-weight: 500; }
+.sg-content { font-size: 13px; color: #606266; line-height: 1.5; }
 </style>

@@ -361,4 +361,374 @@ router.get('/parts-replacement', authMiddleware, (req, res) => {
   }));
 });
 
+// ========== 预测性分析 ==========
+
+router.get('/predictive', authMiddleware, (req, res) => {
+  const equipments = db.getAll('equipments');
+  const records = db.getAll('records');
+  const inspectionRecords = db.getAll('inspectionRecords');
+  const plans = db.getAll('maintenancePlans');
+
+  const now = new Date();
+  const currentDate = now.toISOString().slice(0, 10);
+  const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1).toISOString().slice(0, 7);
+  const currentMonth = now.toISOString().slice(0, 7);
+  const eqNameMap = {};
+  for (const e of equipments) eqNameMap[e.id] = e.name;
+
+  // 设备创建日期索引（用于计算设备年龄）
+  const eqCreatedMap = {};
+  for (const e of equipments) eqCreatedMap[e.id] = e.createdAt || '';
+
+  // ====== 构建月度列表（近6个月）======
+  const monthList = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    monthList.push(d.toISOString().slice(0, 7));
+  }
+
+  // ====== 按设备分组统计 ======
+  const eqStats = {}; // { equipmentId: { repairCounts: {month: count}, totalRepair: N, inspectionItems: {failCount, totalCount}, partsCount: N } }
+  const initEqStats = () => {
+    const monthly = {};
+    for (const m of monthList) monthly[m] = 0;
+    return { repairCounts: monthly, totalRepair: 0, inspectionFailCount: 0, inspectionTotalCount: 0, partsCount: 0 };
+  };
+
+  // 维修记录统计
+  for (const r of records) {
+    if (r.type !== 'repair') continue;
+    const eid = r.equipmentId;
+    if (!eid) continue;
+    if (!eqStats[eid]) eqStats[eid] = initEqStats();
+    eqStats[eid].totalRepair++;
+    const m = (r.createdAt || '').slice(0, 7);
+    if (eqStats[eid].repairCounts[m] !== undefined) eqStats[eid].repairCounts[m]++;
+    if (r.partsReplaced === 'yes') eqStats[eid].partsCount++;
+  }
+
+  // 巡检记录统计
+  for (const ir of inspectionRecords) {
+    const eid = ir.equipmentId;
+    if (!eid) continue;
+    if (!eqStats[eid]) eqStats[eid] = initEqStats();
+    const items = ir.items || [];
+    for (const it of items) {
+      eqStats[eid].inspectionTotalCount++;
+      if (!it.checked) eqStats[eid].inspectionFailCount++;
+    }
+  }
+
+  // 巡检异常项目统计（按设备+项目内容）
+  const failItemMap = {};
+  for (const ir of inspectionRecords) {
+    const eid = ir.equipmentId;
+    if (!eid) continue;
+    const items = ir.items || [];
+    for (const it of items) {
+      if (!it.checked) {
+        if (!failItemMap[eid]) failItemMap[eid] = {};
+        const key = it.content;
+        failItemMap[eid][key] = (failItemMap[eid][key] || 0) + 1;
+      }
+    }
+  }
+
+  // ====== 保养分析 ======
+  const activePlans = plans.filter(p => p.status === 'active');
+  const eqPlanMap = {};
+  for (const p of activePlans) {
+    if (!eqPlanMap[p.equipmentId]) eqPlanMap[p.equipmentId] = [];
+    eqPlanMap[p.equipmentId].push(p);
+  }
+
+  // 保养逾期和即将到期
+  const overduePlans = [];
+  const upcomingPlans = [];
+  for (const p of activePlans) {
+    const diffDays = Math.floor((new Date(p.nextMaintenanceDate).getTime() - now.getTime()) / 86400000);
+    if (diffDays < 0) {
+      overduePlans.push({ ...p, overdueDays: Math.abs(diffDays) });
+    } else if (diffDays <= 7) {
+      upcomingPlans.push({ ...p, daysUntil: diffDays });
+    }
+  }
+
+  // 保养执行率：按设备统计保养记录（从 records 中 type === 'maintenance' 的记录）
+  const eqMaintenanceCount = {};
+  for (const r of records) {
+    if (r.type !== 'maintenance') continue;
+    const eid = r.equipmentId;
+    if (!eid) continue;
+    eqMaintenanceCount[eid] = (eqMaintenanceCount[eid] || 0) + 1;
+    const m = (r.createdAt || '').slice(0, 7);
+    if (eqStats[eid] && eqStats[eid].repairCounts[m] === undefined) {
+      // ensure stats exist
+    }
+  }
+
+  // 保养后故障分析：某设备保养后 N 天内发生维修
+  const ineffectiveMaintenances = [];
+  const maintenanceRecords = records.filter(r => r.type === 'maintenance' && r.equipmentId);
+  for (const mr of maintenanceRecords) {
+    const mDate = new Date(mr.createdAt);
+    let repairAfterCount = 0;
+    let minDaysToRepair = Infinity;
+    for (const r of records) {
+      if (r.type !== 'repair' || r.equipmentId !== mr.equipmentId) continue;
+      const rDate = new Date(r.createdAt);
+      const diff = (rDate.getTime() - mDate.getTime()) / 86400000;
+      if (diff > 0 && diff <= 30) {
+        repairAfterCount++;
+        if (diff < minDaysToRepair) minDaysToRepair = diff;
+      }
+    }
+    if (repairAfterCount > 0) {
+      ineffectiveMaintenances.push({
+        equipmentId: mr.equipmentId,
+        equipmentName: eqNameMap[mr.equipmentId] || '',
+        maintenanceDate: mr.createdAt?.slice(0, 10) || '',
+        repairAfterCount,
+        minDaysToRepair: Math.round(minDaysToRepair)
+      });
+    }
+  }
+
+  // ====== 设备健康评分 ======
+  const healthScores = [];
+  const highRiskEquipments = [];
+  const repairTrends = [];
+
+  for (const e of equipments) {
+    const st = eqStats[e.id] || initEqStats();
+    const ageDays = e.createdAt ? Math.floor((now.getTime() - new Date(e.createdAt).getTime()) / 86400000) : 0;
+
+    // 维修频率评分 (0-25)
+    const repairScore = Math.max(0, 25 - st.totalRepair * 5);
+
+    // 巡检通过率评分 (0-20)
+    const failRate = st.inspectionTotalCount > 0 ? st.inspectionFailCount / st.inspectionTotalCount : 0;
+    const inspectionScore = Math.round((1 - failRate) * 20);
+
+    // 设备年龄评分 (0-10)
+    const ageScore = Math.max(0, 10 - Math.floor(ageDays / 365) * 2);
+
+    // 配件更换评分 (0-15)
+    const partsScore = Math.max(0, 15 - st.partsCount * 3);
+
+    // 保养执行率评分 (0-15)
+    const plannedCount = (eqPlanMap[e.id] || []).length;
+    const actualCount = eqMaintenanceCount[e.id] || 0;
+    const complianceRate = plannedCount > 0 ? actualCount / plannedCount : 1;
+    const maintenanceScore = Math.round(complianceRate * 15);
+
+    // 保养逾期评分 (0-15)
+    const eqOverdue = overduePlans.filter(p => p.equipmentId === e.id);
+    const maxOverdue = eqOverdue.length > 0 ? Math.max(...eqOverdue.map(p => p.overdueDays)) : 0;
+    const overdueScore = Math.max(0, 15 - Math.floor(maxOverdue / 3));
+
+    const score = repairScore + inspectionScore + ageScore + partsScore + maintenanceScore + overdueScore;
+    let riskLevel = 'low';
+    if (score < 40) riskLevel = 'high';
+    else if (score < 70) riskLevel = 'medium';
+
+    // 维修趋势
+    const monthlyCounts = monthList.map(m => st.repairCounts[m] || 0);
+    let trend = 'stable';
+    if (monthlyCounts.length >= 3) {
+      const recent = monthlyCounts.slice(-3);
+      if (recent[2] > recent[1] && recent[1] > recent[0]) trend = 'up';
+      else if (recent[2] < recent[1] && recent[1] < recent[0]) trend = 'down';
+    }
+
+    const item = {
+      equipmentId: e.id,
+      equipmentName: e.name,
+      equipmentCode: e.code,
+      score,
+      riskLevel,
+      repairCount: st.totalRepair,
+      inspectionFailRate: Math.round(failRate * 100),
+      ageDays,
+      partsCount: st.partsCount,
+      maintenanceCompliance: Math.round(complianceRate * 100),
+      maintenanceOverdue: maxOverdue
+    };
+    healthScores.push(item);
+
+    if (riskLevel === 'high' || riskLevel === 'medium') {
+      const topFailItems = Object.entries(failItemMap[e.id] || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([k, v]) => `${k}(${v}次)`);
+      highRiskEquipments.push({ ...item, repairTrend: trend, topFailItems });
+    }
+
+    if (st.totalRepair > 0) {
+      repairTrends.push({ equipmentId: e.id, equipmentName: e.name, monthly: monthlyCounts, trend });
+    }
+  }
+
+  // 排序
+  healthScores.sort((a, b) => a.score - b.score);
+  highRiskEquipments.sort((a, b) => a.score - b.score);
+  repairTrends.sort((a, b) => {
+    const aSum = a.monthly.reduce((s, v) => s + v, 0);
+    const bSum = b.monthly.reduce((s, v) => s + v, 0);
+    return bSum - aSum;
+  });
+
+  // 保养逾期排序
+  overduePlans.sort((a, b) => b.overdueDays - a.overdueDays);
+
+  // 保养周期建议
+  const cycleSuggestions = [];
+  for (const e of equipments) {
+    const st = eqStats[e.id];
+    if (!st || st.totalRepair === 0) continue;
+    const plans = eqPlanMap[e.id] || [];
+    if (plans.length === 0) continue;
+    // 计算平均故障间隔（天）
+    const repairDates = records
+      .filter(r => r.type === 'repair' && r.equipmentId === e.id)
+      .map(r => new Date(r.createdAt).getTime())
+      .sort((a, b) => a - b);
+    if (repairDates.length >= 2) {
+      let totalGap = 0;
+      for (let i = 1; i < repairDates.length; i++) totalGap += (repairDates[i] - repairDates[i - 1]) / 86400000;
+      const avgGap = Math.round(totalGap / (repairDates.length - 1));
+      for (const p of plans) {
+        let cycleDays = 30;
+        if (p.cycleType === 'daily') cycleDays = p.cycleValue;
+        else if (p.cycleType === 'weekly') cycleDays = p.cycleValue * 7;
+        else if (p.cycleType === 'monthly') cycleDays = p.cycleValue * 30;
+        else if (p.cycleType === 'yearly') cycleDays = p.cycleValue * 365;
+        if (avgGap < cycleDays * 0.6) {
+          cycleSuggestions.push({
+            equipmentId: e.id,
+            equipmentName: e.name,
+            planName: p.planName,
+            currentCycleDays: cycleDays,
+            suggestedCycleDays: Math.max(7, Math.round(avgGap)),
+            avgRepairGapDays: avgGap
+          });
+        }
+      }
+    }
+  }
+
+  // ====== 配件更换预测 ======
+  const partsHistory = {};
+  const replacedRecords = records.filter(r => r.partsReplaced === 'yes' && r.partsReplacedDetail);
+  for (const r of replacedRecords) {
+    const detail = r.partsReplacedDetail.trim();
+    if (!detail) continue;
+    const items = detail.split(/[,，、;；\n]+/).map(s => s.trim()).filter(Boolean);
+    const date = (r.createdAt || '').slice(0, 10);
+    for (const item of items) {
+      if (!partsHistory[item]) partsHistory[item] = [];
+      partsHistory[item].push(date);
+    }
+  }
+  const partsPredictions = [];
+  for (const [name, dates] of Object.entries(partsHistory)) {
+    if (dates.length < 2) continue;
+    dates.sort();
+    let totalGap = 0;
+    for (let i = 1; i < dates.length; i++) {
+      totalGap += (new Date(dates[i]).getTime() - new Date(dates[i - 1]).getTime()) / 86400000;
+    }
+    const avgCycle = Math.round(totalGap / (dates.length - 1));
+    const lastDate = dates[dates.length - 1];
+    const predicted = new Date(new Date(lastDate).getTime() + avgCycle * 86400000).toISOString().slice(0, 10);
+    const daysUntil = Math.floor((new Date(predicted).getTime() - now.getTime()) / 86400000);
+    let priority = 'low';
+    if (daysUntil <= 14) priority = 'high';
+    else if (daysUntil <= 30) priority = 'medium';
+    partsPredictions.push({ partName: name, avgCycleDays: avgCycle, lastReplaceDate: lastDate, predictedNext: predicted, daysUntil, priority });
+  }
+  partsPredictions.sort((a, b) => a.daysUntil - b.daysUntil);
+
+  // ====== 生成建议 ======
+  const suggestions = [];
+  // 逾期保养建议
+  for (const p of overduePlans.slice(0, 10)) {
+    const eq = equipments.find(e => e.id === p.equipmentId);
+    const eqSt = eqStats[p.equipmentId];
+    const repairInfo = eqSt && eqSt.totalRepair > 0 ? `，该设备本月已发生 ${eqSt.totalRepair} 次维修` : '';
+    suggestions.push({
+      type: 'urgent',
+      title: '保养逾期',
+      content: `设备 ${eqNameMap[p.equipmentId] || ''} 的保养计划「${p.planName}」已逾期 ${p.overdueDays} 天${repairInfo}，建议立即安排保养`,
+      equipmentId: p.equipmentId,
+      equipmentName: eqNameMap[p.equipmentId] || ''
+    });
+  }
+  // 即将到期保养建议
+  for (const p of upcomingPlans.slice(0, 5)) {
+    suggestions.push({
+      type: 'warning',
+      title: '保养即将到期',
+      content: `设备 ${eqNameMap[p.equipmentId] || ''} 的保养计划「${p.planName}」将于 ${p.daysUntil} 天后到期`,
+      equipmentId: p.equipmentId,
+      equipmentName: eqNameMap[p.equipmentId] || ''
+    });
+  }
+  // 高风险设备建议
+  for (const eq of highRiskEquipments.slice(0, 5)) {
+    const parts = [];
+    if (eq.repairCount > 0) parts.push(`近 6 月维修 ${eq.repairCount} 次`);
+    if (eq.inspectionFailRate > 0) parts.push(`巡检不通过率 ${eq.inspectionFailRate}%`);
+    if (eq.maintenanceOverdue > 0) parts.push(`保养逾期 ${eq.maintenanceOverdue} 天`);
+    suggestions.push({
+      type: 'danger',
+      title: '高风险设备',
+      content: `设备 ${eq.equipmentName} 健康评分 ${eq.score} 分（${eq.riskLevel === 'high' ? '高风险' : '中风险'}），${parts.join('，')}，建议安排全面检查`,
+      equipmentId: eq.equipmentId,
+      equipmentName: eq.equipmentName
+    });
+  }
+  // 周期调整建议
+  for (const cs of cycleSuggestions.slice(0, 5)) {
+    suggestions.push({
+      type: 'info',
+      title: '保养周期建议',
+      content: `设备 ${cs.equipmentName} 的「${cs.planName}」当前周期 ${cs.currentCycleDays} 天，但平均故障间隔仅 ${cs.avgRepairGapDays} 天，建议调整为 ${cs.suggestedCycleDays} 天`,
+      equipmentId: cs.equipmentId,
+      equipmentName: cs.equipmentName
+    });
+  }
+  // 配件更换建议
+  for (const pp of partsPredictions.filter(p => p.priority === 'high').slice(0, 5)) {
+    suggestions.push({
+      type: 'warning',
+      title: '配件更换预警',
+      content: `配件「${pp.partName}」预计 ${pp.daysUntil} 天后需要更换（${pp.predictedNext}），建议提前备货`,
+      equipmentId: '',
+      equipmentName: ''
+    });
+  }
+  suggestions.sort((a, b) => {
+    const order = { urgent: 0, danger: 1, warning: 2, info: 3 };
+    return (order[a.type] || 4) - (order[b.type] || 4);
+  });
+
+  res.json(success({
+    healthScores: healthScores.slice(0, 50),
+    highRiskEquipments: highRiskEquipments.slice(0, 20),
+    repairTrends: repairTrends.slice(0, 10),
+    maintenanceAnalysis: {
+      complianceRate: activePlans.length > 0
+        ? Math.round((Object.values(eqMaintenanceCount).reduce((a, b) => a + b, 0) / activePlans.length) * 100)
+        : 0,
+      overduePlans: overduePlans.slice(0, 20),
+      upcomingPlans: upcomingPlans.slice(0, 10),
+      ineffectiveMaintenances: ineffectiveMaintenances.slice(0, 10),
+      cycleSuggestions: cycleSuggestions.slice(0, 10)
+    },
+    partsPredictions: partsPredictions.slice(0, 20),
+    suggestions
+  }));
+});
+
 module.exports = router;

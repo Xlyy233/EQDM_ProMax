@@ -21,6 +21,7 @@ const hasPermission = canManageMaintenance()
 const statusTabs = [
   { label: '全部', value: '' },
   { label: '进行中', value: 'active' },
+  { label: '已逾期', value: 'overdue' },
   { label: '已暂停', value: 'paused' },
   { label: '已完成', value: 'completed' }
 ]
@@ -43,10 +44,14 @@ function loadData() {
   loading.value = true
   const params: any = { page: page.value, pageSize: pageSize.value }
   if (keyword.value) params.keyword = keyword.value
-  if (activeStatus.value) params.status = activeStatus.value
+  if (activeStatus.value && activeStatus.value !== 'overdue') params.status = activeStatus.value
   maintenanceApi.getPlans(params).then(res => {
-    list.value = res.data?.list || []
-    total.value = res.data?.total || 0
+    let resultList = res.data?.list || []
+    if (activeStatus.value === 'overdue') {
+      resultList = resultList.filter(p => isOverdue(p))
+    }
+    list.value = resultList
+    total.value = activeStatus.value === 'overdue' ? resultList.length : (res.data?.total || 0)
   }).catch(() => {}).finally(() => { loading.value = false })
 }
 
@@ -73,6 +78,13 @@ function isUrgent(dateStr: string): boolean {
   const now = new Date()
   const diff = (next.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
   return diff <= 3 && diff >= 0
+}
+
+function isOverdue(plan: MaintenancePlan): boolean {
+  if (!plan.nextMaintenanceDate || plan.status !== 'active') return false
+  const next = new Date(plan.nextMaintenanceDate)
+  if (isNaN(next.getTime())) return false
+  return next.getTime() < Date.now()
 }
 </script>
 
@@ -125,6 +137,7 @@ function isUrgent(dateStr: string): boolean {
     <div v-loading="loading" class="plan-list">
       <div
         class="plan-card"
+        :class="{ 'plan-overdue': isOverdue(plan) }"
         v-for="plan in list"
         :key="plan.id"
         @click="router.push(`/maintenance/${plan.id}`)"
@@ -133,9 +146,9 @@ function isUrgent(dateStr: string): boolean {
           <div class="card-title-row">
             <span class="card-title">{{ plan.planName }}</span>
             <el-tag
-              :type="plan.status==='active'?'success':plan.status==='paused'?'warning':'info'"
+              :type="plan.status==='active'?(isOverdue(plan)?'danger':'success'):plan.status==='paused'?'warning':'info'"
               size="small"
-            >{{ maintenanceStatusMap[plan.status] }}</el-tag>
+            >{{ isOverdue(plan) ? '已逾期' : maintenanceStatusMap[plan.status] }}</el-tag>
           </div>
           <span class="card-equipment">{{ plan.equipmentName }} ({{ plan.equipmentCode }})</span>
         </div>
@@ -326,6 +339,11 @@ function isUrgent(dateStr: string): boolean {
 .card-actions {
   display: flex;
   gap: 8px;
+}
+
+.plan-card.plan-overdue {
+  border-left: 3px solid #F56C6C;
+  background: #FFF5F5;
 }
 
 /* ====== 空状态 ====== */

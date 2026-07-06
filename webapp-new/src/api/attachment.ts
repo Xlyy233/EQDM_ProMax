@@ -23,7 +23,13 @@ export function deleteAttachment(id: string): Promise<ApiResponse<null>> {
 
 export function getAttachmentUrl(equipmentId: string, fileName: string): string {
   const base = import.meta.env.VITE_API_BASE_URL || ''
-  return `${base}/uploads/equipment/${equipmentId}/${fileName}`
+  return base + '/uploads/equipment/' + equipmentId + '/' + fileName
+}
+
+// 获取附件预览/下载链接（通过后端API，带正确的Content-Type）
+export function getAttachmentPreviewUrl(equipmentId: string, fileName: string): string {
+  const base = import.meta.env.VITE_API_BASE_URL || ''
+  return base + '/api/attachments/file/' + equipmentId + '/' + fileName
 }
 
 export function isImageFile(mimeType: string): boolean {

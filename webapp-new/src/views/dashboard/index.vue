@@ -7,8 +7,10 @@ import type { WorkRecord, MaintenancePlan } from '@/types'
 import * as recordApi from '@/api/record'
 import * as maintenanceApi from '@/api/maintenance'
 import * as statisticsApi from '@/api/statistics'
+import * as announcementApi from '@/api/announcement'
+import type { Announcement } from '@/types'
 import dayjs from 'dayjs'
-import { Camera, Edit, Document, Collection, Box, Download, User, Tickets, Calendar, DataAnalysis, Tools, SetUp, CircleCheck, Grid, Sunny, Moon } from '@element-plus/icons-vue'
+import { Camera, Edit, Document, Collection, Box, Download, User, Tickets, Calendar, DataAnalysis, Tools, SetUp, CircleCheck, Grid, Sunny, Moon, Bell, ArrowRight } from '@element-plus/icons-vue'
 
 const iconMap: Record<string, any> = {
   Camera, Edit, Document, Collection, Box, Download, User, Tickets, Calendar, DataAnalysis, Tools, SetUp, CircleCheck, Grid,
@@ -47,10 +49,13 @@ const stats = ref([
 const recentRecords = ref<WorkRecord[]>([])
 const upcomingPlans = ref<MaintenancePlan[]>([])
 const upcomingCount = ref(0)
+const activeAnnouncement = ref<Announcement | null>(null)
+const showAnnounceDetail = ref(false)
 
 const actions = [
   { label: '扫码识别', icon: 'Camera', route: '/equipment/scan', show: true },
   { label: '填报记录', icon: 'Edit', route: '/record/new', show: true },
+  { label: '开始巡检', icon: 'CircleCheck', route: '/inspections/form', show: true },
   { label: '工作记录', icon: 'Document', route: '/record', show: true },
   { label: '常用模板', icon: 'Collection', route: '/template', show: true },
   { label: '设备台账', icon: 'Box', route: '/equipment', show: () => canManageEquipment() },
@@ -92,6 +97,10 @@ function loadAllData() {
       stats.value[3].value = res.data.monthlyInspectionCount || 0
     }
   }).catch(() => {})
+
+  announcementApi.getActiveAnnouncement().then(res => {
+    activeAnnouncement.value = res.data.data || null
+  }).catch(() => {})
 }
 
 function isUrgent(dateStr: string) {
@@ -126,6 +135,13 @@ onMounted(() => {
         style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;"
         @click="toggleDarkMode"
       />
+    </div>
+
+    <!-- 公告条幅 -->
+    <div v-if="activeAnnouncement" class="announcement-banner" @click="showAnnounceDetail = true">
+      <el-icon :size="18"><Bell /></el-icon>
+      <span class="announcement-title">{{ activeAnnouncement.title }}</span>
+      <el-icon :size="14" style="margin-left:auto;"><ArrowRight /></el-icon>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px;">
@@ -198,4 +214,38 @@ onMounted(() => {
       </div>
     </div>
   </div>
+
+  <!-- 公告详情弹窗 -->
+  <el-dialog v-model="showAnnounceDetail" title="系统公告" width="500px">
+    <div style="white-space:pre-wrap;line-height:1.8;font-size:14px;color:#303133;">{{ activeAnnouncement?.content }}</div>
+  </el-dialog>
 </template>
+
+<style scoped>
+.announcement-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ecf5ff;
+  border: 1px solid #b3d8ff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.announcement-banner:hover {
+  background: #d9ecff;
+}
+
+.announcement-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #409EFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+</style>

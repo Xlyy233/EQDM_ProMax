@@ -7688,7 +7688,7 @@
       "content": "sa 提交了「780T长棒热剪炉」的维修记录",
       "targetUrl": "/record/rmr48ybl4bdum",
       "targetUserId": "u001",
-      "read": false,
+      "read": true,
       "id": "nmr48ybn4eyv8",
       "createdAt": "2026-07-03 09:20:36",
       "updatedAt": "2026-07-03 09:20:36"
@@ -7798,7 +7798,7 @@
       "content": "sa 提交了「780T牵引机」的维修记录",
       "targetUrl": "/record/rmr497qr6heqj",
       "targetUserId": "u001",
-      "read": false,
+      "read": true,
       "id": "nmr497qt0gx42",
       "createdAt": "2026-07-03 09:27:55",
       "updatedAt": "2026-07-03 09:27:55"
@@ -7952,5 +7952,6 @@
       "createdAt": "2026-07-04 09:18:00",
       "updatedAt": "2026-07-04 09:18:00"
     }
-  ]
+  ],
+  "announcements": []
 }

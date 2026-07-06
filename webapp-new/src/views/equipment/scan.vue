@@ -12,6 +12,9 @@ const videoRef = ref<HTMLVideoElement | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const manualCode = ref('')
 const errorMsg = ref('')
+const showActionDialog = ref(false)
+const scannedEquipmentId = ref('')
+const scannedEquipmentName = ref('')
 
 let scanTimer: number | null = null
 
@@ -31,7 +34,9 @@ function handleScanResult(result: string) {
   stopScanning()
   const params = parseUrlParams(result)
   if (params) {
-    router.push(`/record/new?equipmentId=${encodeURIComponent(params.equipmentId)}&equipmentName=${encodeURIComponent(params.equipmentName)}`)
+    scannedEquipmentId.value = params.equipmentId
+    scannedEquipmentName.value = params.equipmentName || ''
+    showActionDialog.value = true
   } else {
     ElMessage.warning('无法识别的二维码内容，请扫描设备二维码')
     scanning.value = false
@@ -122,6 +127,16 @@ function handleManualSubmit() {
 }
 
 onUnmounted(stopScanning)
+
+function goToRecord() {
+  showActionDialog.value = false
+  router.push('/record/new?equipmentId=' + encodeURIComponent(scannedEquipmentId.value) + '&equipmentName=' + encodeURIComponent(scannedEquipmentName.value))
+}
+
+function goToDetail() {
+  showActionDialog.value = false
+  router.push('/equipment/' + scannedEquipmentId.value)
+}
 </script>
 
 <template>
@@ -165,7 +180,19 @@ onUnmounted(stopScanning)
         <el-button v-if="scanning" type="danger" @click="stopScanning" style="margin-top:12px;">停止扫码</el-button>
       </div>
 
-      <!-- 手动输入区域 -->
+      <!-- 操作选择弹窗 -->
+    <el-dialog v-model="showActionDialog" title="请选择操作" width="300px" :close-on-click-modal="false">
+      <div style="display:flex;flex-direction:column;gap:12px;padding:8px 0;">
+        <el-button type="primary" size="large" @click="goToRecord">
+          <el-icon><Edit /></el-icon> 填报记录
+        </el-button>
+        <el-button size="large" @click="goToDetail">
+          <el-icon><View /></el-icon> 查看设备详情
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 手动输入区域 -->
       <el-divider style="margin:24px 0;">手动输入</el-divider>
       <div style="display:flex;gap:8px;">
         <el-input

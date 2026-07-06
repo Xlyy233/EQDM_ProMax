@@ -1,6 +1,6 @@
 # EQDM_ProMax 设备台账与运维管理系统 API 文档
 
-> 版本：1.0.0 | 基础地址：`http://localhost:3000`
+> 版本：1.1.0 | 基础地址：`http://localhost:3000`
 
 ---
 
@@ -316,6 +316,43 @@ Authorization: Bearer <token>
 | 认证 | 是 |
 
 注意：同时删除关联的记录和维保计划。
+
+### 3.10 获取设备类型列表
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/equipments/types` |
+| 认证 | 是 |
+
+**响应**：`string[]` 去重后的设备类型名称数组，按字母排序。
+
+### 3.11 批量更新设备类型
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `PUT /api/equipments/batch-types` |
+| 认证 | 是 |
+
+**请求体**：
+
+```json
+{
+  "updates": [
+    { "id": "e_xxx", "type": "挤压机" },
+    { "id": "e_yyy", "type": "切割机" }
+  ]
+}
+```
+
+**响应**：
+
+```json
+{
+  "code": 200,
+  "data": { "count": 2 },
+  "message": "操作成功"
+}
+```
 
 ---
 
@@ -747,9 +784,162 @@ Authorization: Bearer <token>
     "equipmentStats": [
       { "name": "PEF1-真空上料机", "count": 5, "details": ["密封圈", "轴承"] }
     ]
+}
+```
+
+### 6.9 预测分析
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/statistics/predictive` |
+| 认证 | 是 |
+
+**说明**：基于设备台账、维修记录、巡检记录、保养计划四类数据，进行综合预测分析，包括设备健康评分、保养逾期预警、保养效果评估、保养周期建议、配件更换预测和预防性维护建议。
+
+**响应**：
+
+```json
+{
+  "code": 200,
+  "data": {
+    "healthScores": [
+      {
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机",
+        "equipmentCode": "XJ-PEF1-001",
+        "score": 72,
+        "riskLevel": "low",
+        "repairCount": 5,
+        "inspectionFailRate": 15,
+        "ageDays": 365,
+        "partsCount": 2,
+        "maintenanceCompliance": 80,
+        "maintenanceOverdue": 0
+      }
+    ],
+    "highRiskEquipments": [
+      {
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机",
+        "equipmentCode": "XJ-PEF1-001",
+        "score": 35,
+        "riskLevel": "high",
+        "repairCount": 8,
+        "inspectionFailRate": 40,
+        "ageDays": 730,
+        "partsCount": 5,
+        "maintenanceCompliance": 50,
+        "maintenanceOverdue": 15,
+        "repairTrend": "up",
+        "topFailItems": ["温度异常(3次)", "压力不足(2次)"]
+      }
+    ],
+    "repairTrends": [
+      {
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机",
+        "monthly": [1, 0, 2, 3, 2, 4],
+        "trend": "up"
+      }
+    ],
+    "maintenanceAnalysis": {
+      "complianceRate": 60,
+      "overduePlans": [
+        {
+          "equipmentId": "e_xxx",
+          "planName": "季度润滑",
+          "nextMaintenanceDate": "2026-06-20",
+          "overdueDays": 14
+        }
+      ],
+      "upcomingPlans": [
+        {
+          "equipmentId": "e_yyy",
+          "planName": "月度检查",
+          "nextMaintenanceDate": "2026-07-10",
+          "daysUntil": 6
+        }
+      ],
+      "ineffectiveMaintenances": [
+        {
+          "equipmentId": "e_xxx",
+          "equipmentName": "780T铝型材挤压机",
+          "maintenanceDate": "2026-06-01",
+          "repairAfterCount": 3,
+          "minDaysToRepair": 5
+        }
+      ],
+      "cycleSuggestions": [
+        {
+          "equipmentId": "e_xxx",
+          "equipmentName": "780T铝型材挤压机",
+          "planName": "季度润滑",
+          "currentCycleDays": 90,
+          "suggestedCycleDays": 30,
+          "avgRepairGapDays": 30
+        }
+      ]
+    },
+    "partsPredictions": [
+      {
+        "partName": "密封圈",
+        "avgCycleDays": 60,
+        "lastReplaceDate": "2026-06-01",
+        "predictedNext": "2026-08-01",
+        "daysUntil": 28,
+        "priority": "medium"
+      }
+    ],
+    "suggestions": [
+      {
+        "type": "urgent",
+        "title": "保养逾期",
+        "content": "设备 780T铝型材挤压机 的保养计划「季度润滑」已逾期 14 天，该设备本月已发生 2 次维修，建议立即安排保养",
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机"
+      },
+      {
+        "type": "danger",
+        "title": "高风险设备",
+        "content": "设备 780T铝型材挤压机 健康评分 35 分（高风险），近 6 月维修 8 次，巡检不通过率 40%，保养逾期 15 天，建议安排全面检查",
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机"
+      },
+      {
+        "type": "warning",
+        "title": "配件更换预警",
+        "content": "配件「密封圈」预计 28 天后需要更换（2026-08-01），建议提前备货",
+        "equipmentId": "",
+        "equipmentName": ""
+      },
+      {
+        "type": "info",
+        "title": "保养周期建议",
+        "content": "设备 780T铝型材挤压机 的「季度润滑」当前周期 90 天，但平均故障间隔仅 30 天，建议调整为 30 天",
+        "equipmentId": "e_xxx",
+        "equipmentName": "780T铝型材挤压机"
+      }
+    ]
   }
 }
 ```
+
+**评分维度说明**：
+
+| 维度 | 满分 | 说明 |
+|------|------|------|
+| 维修频率 | 25 | 近 6 个月维修次数，每次扣 5 分 |
+| 巡检通过率 | 20 | 巡检不通过率每 10% 扣 2 分 |
+| 设备年龄 | 10 | 每使用 1 年扣 2 分 |
+| 配件更换 | 15 | 每次配件更换扣 3 分 |
+| 保养执行率 | 15 | 执行率每降低 10% 扣 1.5 分 |
+| 保养逾期 | 15 | 每逾期 3 天扣 1 分 |
+
+**风险等级**：`high`（< 40 分，高风险）、`medium`（40-70 分，中风险）、`low`（> 70 分，低风险）
+
+**建议类型**：`urgent`（紧急，红色）、`danger`（危险，红色）、`warning`（警告，橙色）、`info`（提示，蓝色）
+
+**配件优先级**：`high`（14 天内）、`medium`（30 天内）、`low`（30 天以上）
 
 ---
 
@@ -1040,9 +1230,181 @@ Authorization: Bearer <token>
 
 ---
 
-## 十一、其他接口
+## 十一、巡检模块 `/api/inspections`
 
-### 11.1 健康检查
+### 11.1 获取巡检模板列表
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/templates` |
+| 认证 | 是 |
+
+**Query 参数**：`page`, `pageSize`, `keyword`（搜索模板名称）
+
+### 11.2 获取模板详情
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/templates/:id` |
+| 认证 | 是 |
+
+### 11.3 按设备类型获取模板
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/templates/by-type/:equipmentType` |
+| 认证 | 是 |
+
+**说明**：员工巡检时，根据所选设备的类型自动加载对应模板。
+
+### 11.4 创建模板
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `POST /api/inspections/templates` |
+| 认证 | 是（经理/管理员） |
+
+**请求体**：
+
+```json
+{
+  "name": "挤压机日常巡检",
+  "equipmentType": "挤压机",
+  "items": [
+    { "content": "检查液压系统压力是否正常", "order": 0 },
+    { "content": "检查温度传感器是否正常", "order": 1 },
+    { "content": "检查润滑系统是否正常", "order": 2 }
+  ]
+}
+```
+
+### 11.5 更新模板
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `PUT /api/inspections/templates/:id` |
+| 认证 | 是（经理/管理员） |
+
+### 11.6 删除模板
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `DELETE /api/inspections/templates/:id` |
+| 认证 | 是（经理/管理员） |
+
+### 11.7 获取巡检记录列表
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/records?page=1&pageSize=20` |
+| 认证 | 是 |
+
+**Query 参数**：`page`, `pageSize`, `keyword`（搜索设备名称/编号/模板名称）、`startDate`、`endDate`
+
+### 11.8 获取巡检记录详情
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/records/:id` |
+| 认证 | 是 |
+
+**响应**：
+
+```json
+{
+  "code": 200,
+  "data": {
+    "id": "imr_xxx",
+    "templateId": "imt_xxx",
+    "templateName": "挤压机日常巡检",
+    "equipmentId": "e_xxx",
+    "equipmentCode": "XJ-PEF1-001",
+    "equipmentName": "780T铝型材挤压机",
+    "equipmentType": "挤压机",
+    "inspectionDate": "2026-07-04",
+    "status": "completed",
+    "items": [
+      {
+        "content": "检查液压系统压力是否正常",
+        "order": 0,
+        "checked": true,
+        "remark": ""
+      },
+      {
+        "content": "检查温度传感器是否正常",
+        "order": 1,
+        "checked": false,
+        "remark": "温度偏高，需要关注"
+      }
+    ],
+    "photos": ["data:image/jpeg;base64,..."],
+    "afterPhotos": ["data:image/jpeg;base64,..."],
+    "remark": "整体运行正常",
+    "createdBy": "u_xxx",
+    "createdByName": "张三",
+    "createdAt": "2026-07-04 09:00:00",
+    "updatedAt": "2026-07-04 09:00:00"
+  }
+}
+```
+
+### 11.9 创建巡检记录
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `POST /api/inspections/records` |
+| 认证 | 是 |
+
+**请求体**：
+
+```json
+{
+  "templateId": "imt_xxx",
+  "templateName": "挤压机日常巡检",
+  "equipmentId": "e_xxx",
+  "equipmentCode": "XJ-PEF1-001",
+  "equipmentName": "780T铝型材挤压机",
+  "equipmentType": "挤压机",
+  "inspectionDate": "2026-07-04",
+  "items": [
+    { "content": "检查液压系统压力是否正常", "order": 0, "checked": true, "remark": "" },
+    { "content": "检查温度传感器是否正常", "order": 1, "checked": false, "remark": "温度偏高" }
+  ],
+  "photos": ["data:image/jpeg;base64,..."],
+  "afterPhotos": ["data:image/jpeg;base64,..."],
+  "remark": "整体运行正常"
+}
+```
+
+### 11.10 更新巡检记录
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `PUT /api/inspections/records/:id` |
+| 认证 | 是 |
+
+### 11.11 删除巡检记录
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `DELETE /api/inspections/records/:id` |
+| 认证 | 是 |
+
+### 11.12 导出巡检记录 CSV
+
+| 项目 | 说明 |
+|------|------|
+| 路径 | `GET /api/inspections/export?startDate=xxx&endDate=xxx` |
+| 认证 | 是 |
+| 响应 | CSV 文件（UTF-8 BOM） |
+
+**导出字段**：记录ID、模板名称、设备编号、设备名称、设备类型、巡检日期、检查结果（通过数/总数）、状态、创建人、创建时间、备注。
+
+---
+
+## 十二、其他接口
+
+### 12.1 健康检查
 
 | 项目 | 说明 |
 |------|------|
@@ -1064,7 +1426,7 @@ Authorization: Bearer <token>
 }
 ```
 
-### 11.2 扫码查看设备
+### 12.2 扫码查看设备
 
 | 项目 | 说明 |
 |------|------|
@@ -1072,7 +1434,7 @@ Authorization: Bearer <token>
 | 认证 | 否 |
 | 响应 | HTML 页面，显示设备信息和操作入口 |
 
-### 11.3 日志管理
+### 12.3 日志管理
 
 | 项目 | 说明 |
 |------|------|

@@ -3,7 +3,9 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { isLoggedIn } from '@/stores/user'
+import type { Equipment } from '@/types'
 import * as api from '@/api/inspection'
+import * as equipmentApi from '@/api/equipment'
 
 const router = useRouter()
 const loading = ref(false)
@@ -14,6 +16,8 @@ const pageSize = ref(20)
 const keyword = ref('')
 const startDate = ref('')
 const endDate = ref('')
+const equipmentList = ref<Equipment[]>([])
+const filterEquipmentId = ref('')
 
 async function loadData() {
   loading.value = true
@@ -22,6 +26,7 @@ async function loadData() {
     if (keyword.value.trim()) params.keyword = keyword.value.trim()
     if (startDate.value) params.startDate = startDate.value
     if (endDate.value) params.endDate = endDate.value
+    if (filterEquipmentId.value) params.equipmentId = filterEquipmentId.value
     const res = await api.getRecords(params)
     list.value = res.data.data?.list || []
     total.value = res.data.data?.total || 0
@@ -70,7 +75,15 @@ async function handleExport() {
 onMounted(() => {
   if (!isLoggedIn()) { router.replace('/login'); return }
   loadData()
+  loadEquipmentList()
 })
+
+async function loadEquipmentList() {
+  try {
+    const res = await equipmentApi.getEquipments({ pageSize: 999 })
+    equipmentList.value = res.data?.list || []
+  } catch { /* ignore */ }
+}
 </script>
 
 <template>
@@ -79,6 +92,9 @@ onMounted(() => {
       <h2 class="page-title">巡检记录</h2>
       <div class="header-actions">
         <el-input v-model="keyword" placeholder="搜索设备/模板" size="small" style="width:150px;" clearable @clear="loadData" @change="loadData" />
+        <el-select v-model="filterEquipmentId" placeholder="筛选设备" size="small" style="width:180px;" clearable @change="loadData" filterable>
+          <el-option v-for="eq in equipmentList" :key="eq.id" :value="eq.id" :label="eq.code + ' ' + eq.name" />
+        </el-select>
         <el-date-picker v-model="startDate" type="date" placeholder="开始日期" size="small" style="width:140px;" value-format="YYYY-MM-DD" @change="loadData" />
         <el-date-picker v-model="endDate" type="date" placeholder="结束日期" size="small" style="width:140px;" value-format="YYYY-MM-DD" @change="loadData" />
         <el-button size="small" @click="handleExport">导出</el-button>

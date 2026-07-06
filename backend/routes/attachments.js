@@ -126,4 +126,40 @@ router.delete('/:id', authMiddleware, (req, res) => {
   res.json(success(null, '删除成功'));
 });
 
+// 下载/预览附件文件（设置 Content-Type 和 inline 头，确保浏览器内联显示）
+router.get('/file/:equipmentId/:fileName', authMiddleware, (req, res) => {
+  const equipmentId = sanitizeId(req.params.equipmentId);
+  const fileName = req.params.fileName;
+  // 安全检查：文件名不能包含路径分隔符
+  if (fileName.includes('/') || fileName.includes('\\')) {
+    return res.status(403).json(error('非法的文件路径'));
+  }
+  const filePath = path.join(uploadsDir, equipmentId, fileName);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json(error('文件不存在'));
+  }
+  const ext = path.extname(fileName).toLowerCase();
+  const mimeMap = {
+    '.pdf': 'application/pdf',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.webp': 'image/webp',
+    '.txt': 'text/plain; charset=utf-8',
+    '.doc': 'application/msword',
+    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.xls': 'application/vnd.ms-excel',
+    '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    '.zip': 'application/zip',
+    '.rar': 'application/x-rar-compressed'
+  };
+  const contentType = mimeMap[ext] || 'application/octet-stream';
+  // 图片和PDF内联显示，其他文件触发下载
+  const isInline = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf', '.txt'].includes(ext);
+  res.setHeader('Content-Type', contentType);
+  res.setHeader('Content-Disposition', isInline ? 'inline' : 'attachment; filename="' + encodeURIComponent(fileName) + '"');
+  res.sendFile(filePath);
+});
+
 module.exports = router;

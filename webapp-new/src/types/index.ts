@@ -164,6 +164,100 @@ export interface PieChartData {
   color: string
 }
 
+// 预测性分析类型
+export interface HealthScore {
+  equipmentId: string
+  equipmentName: string
+  equipmentCode: string
+  score: number
+  riskLevel: 'high' | 'medium' | 'low'
+  repairCount: number
+  inspectionFailRate: number
+  ageDays: number
+  partsCount: number
+  maintenanceCompliance: number
+  maintenanceOverdue: number
+}
+
+export interface HighRiskEquipment extends HealthScore {
+  repairTrend: string
+  topFailItems: string[]
+}
+
+export interface RepairTrend {
+  equipmentId: string
+  equipmentName: string
+  monthly: number[]
+  trend: string
+}
+
+export interface OverduePlan {
+  equipmentId: string
+  equipmentName: string
+  planName: string
+  nextMaintenanceDate: string
+  overdueDays: number
+}
+
+export interface UpcomingPlan {
+  equipmentId: string
+  equipmentName: string
+  planName: string
+  nextMaintenanceDate: string
+  daysUntil: number
+}
+
+export interface IneffectiveMaintenance {
+  equipmentId: string
+  equipmentName: string
+  maintenanceDate: string
+  repairAfterCount: number
+  minDaysToRepair: number
+}
+
+export interface CycleSuggestion {
+  equipmentId: string
+  equipmentName: string
+  planName: string
+  currentCycleDays: number
+  suggestedCycleDays: number
+  avgRepairGapDays: number
+}
+
+export interface MaintenanceAnalysis {
+  complianceRate: number
+  overduePlans: OverduePlan[]
+  upcomingPlans: UpcomingPlan[]
+  ineffectiveMaintenances: IneffectiveMaintenance[]
+  cycleSuggestions: CycleSuggestion[]
+}
+
+export interface PartsPrediction {
+  partName: string
+  avgCycleDays: number
+  lastReplaceDate: string
+  predictedNext: string
+  daysUntil: number
+  priority: string
+}
+
+export interface Suggestion {
+  type: string
+  title: string
+  content: string
+  equipmentId: string
+  equipmentName: string
+}
+
+export interface PredictiveData {
+  healthScores: HealthScore[]
+  highRiskEquipments: HighRiskEquipment[]
+  repairTrends: RepairTrend[]
+  maintenanceAnalysis: MaintenanceAnalysis
+  partsPredictions: PartsPrediction[]
+  suggestions: Suggestion[]
+}
+
 export interface PartsReplacementData {
   totalReplacements: number
   partsList: Array<{ equipmentName: string; equipmentId: string; detail: string; date: string; type: string }>
@@ -231,4 +325,17 @@ export interface InspectionRecord {
   status: string
   remark: string
   createdAt: string
+}
+
+// ========== 公告类型 ==========
+
+export interface Announcement {
+  id: string
+  title: string
+  content: string
+  isActive: boolean
+  createdBy: string
+  createdByName: string
+  createdAt: string
+  updatedAt: string
 }

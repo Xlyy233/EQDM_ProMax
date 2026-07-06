@@ -7,7 +7,7 @@ const { createNotification } = require('./notifications');
 const router = express.Router();
 
 // 解析记录中的 JSON 字符串字段，并关联设备编号
-function parseRecord(record) {
+function parseRecord(record, eqMap) {
   if (!record) return record
   if (typeof record.photos === 'string' && record.photos) {
     try { record.photos = JSON.parse(record.photos) } catch { record.photos = [] }
@@ -17,18 +17,26 @@ function parseRecord(record) {
     try { record.afterPhotos = JSON.parse(record.afterPhotos) } catch { record.afterPhotos = [] }
   }
   if (!Array.isArray(record.afterPhotos)) record.afterPhotos = []
-  // 关联设备编号
+  // 关联设备编号（从映射表查，避免每次查数据库）
   if (record.equipmentId && !record.equipmentCode) {
-    const eq = db.findById('equipments', record.equipmentId)
-    if (eq) record.equipmentCode = eq.code
+    record.equipmentCode = eqMap ? eqMap[record.equipmentId] || '' : ''
   }
   return record
+}
+
+// 构建设备 ID → 编号映射表
+function buildEqCodeMap() {
+  const eqs = db.getAll('equipments')
+  const map = {}
+  for (const e of eqs) map[e.id] = e.code || ''
+  return map
 }
 
 router.get('/', authMiddleware, (req, res) => {
   const { page, pageSize, keyword, type, status, equipmentId, createdBy, startTime, endTime } = req.query;
   let list = db.getAll('records');
-  list.forEach(r => parseRecord(r));
+  const eqMap = buildEqCodeMap();
+  list.forEach(r => parseRecord(r, eqMap));
 
   if (keyword) {
     const kw = String(keyword).toLowerCase();
@@ -53,7 +61,8 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/stats', authMiddleware, (req, res) => {
   const { startTime, endTime } = req.query;
   let list = db.getAll('records');
-  list.forEach(r => parseRecord(r));
+  const eqMap = buildEqCodeMap();
+  list.forEach(r => parseRecord(r, eqMap));
   if (startTime) list = list.filter(r => r.createdAt >= startTime);
   if (endTime) list = list.filter(r => r.createdAt <= endTime);
 
@@ -69,7 +78,7 @@ router.get('/stats', authMiddleware, (req, res) => {
 router.get('/:id', authMiddleware, (req, res) => {
   const record = db.findById('records', req.params.id);
   if (!record) return res.json(error('记录不存在', 404));
-  res.json(success(parseRecord(record)));
+  res.json(success(parseRecord(record, buildEqCodeMap())));
 });
 
 router.post('/', authMiddleware, (req, res) => {

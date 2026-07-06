@@ -52,6 +52,11 @@ function handleResume() {
   }).catch(() => {})
 }
 
+function goToRecord() {
+  if (!plan.value) return
+  router.push('/record/new?equipmentId=' + encodeURIComponent(plan.value.equipmentId) + '&equipmentName=' + encodeURIComponent(plan.value.equipmentName))
+}
+
 onMounted(loadData)
 </script>
 
@@ -63,6 +68,9 @@ onMounted(loadData)
         <h2 class="page-title">计划详情</h2>
       </div>
       <div style="display:flex;gap:8px;" v-if="plan">
+        <el-button type="primary" @click="goToRecord">
+          <el-icon><Edit /></el-icon> 填写保养记录
+        </el-button>
         <el-button v-if="plan.status==='active'" type="success" @click="handleComplete">
           <el-icon><Check /></el-icon> 完成保养
         </el-button>

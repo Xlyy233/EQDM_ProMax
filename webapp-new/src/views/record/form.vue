@@ -82,6 +82,9 @@ function autoGenerateTitle() {
 
 function onRecordTypeChange() {
   autoGenerateTitle()
+  if (form.value.equipmentId) {
+    loadLastRecord(form.value.equipmentId, form.value.type)
+  }
 }
 
 function onEquipmentChange(val: string) {
@@ -92,7 +95,7 @@ function onEquipmentChange(val: string) {
     form.value.equipmentName = eq.name
     saveRecentEquipment({ id: eq.id, code: eq.code, name: eq.name })
     autoGenerateTitle()
-    loadLastRecord(eq.id)
+    loadLastRecord(eq.id, form.value.type)
   }
 }
 
@@ -131,9 +134,11 @@ async function loadEquipments() {
   } catch (e) {}
 }
 
-async function loadLastRecord(equipmentId: string) {
+async function loadLastRecord(equipmentId: string, recordType?: string) {
   try {
-    const res = await recordApi.getRecords({ equipmentId, page: 1, pageSize: 1 })
+    const params: any = { equipmentId, page: 1, pageSize: 1 }
+    if (recordType) params.type = recordType
+    const res = await recordApi.getRecords(params)
     if (res.data?.list && res.data.list.length > 0) {
       lastRecord.value = res.data.list[0]
     } else {
@@ -213,6 +218,10 @@ function initDefaultTime() {
   const now = dayjs()
   form.value.startTime = now.format('YYYY-MM-DD HH:mm')
   form.value.endTime = now.format('YYYY-MM-DD HH:mm')
+}
+
+function fillCurrentTime(field: 'startTime' | 'endTime') {
+  form.value[field] = dayjs().format('YYYY-MM-DD HH:mm')
 }
 
 // ========== 照片上传 ==========
@@ -416,7 +425,7 @@ onMounted(async () => {
 
         <!-- ====== 上次维修参考 ====== -->
         <div class="section-card" v-if="!isEdit && lastRecord">
-          <div class="section-title">上次维修参考</div>
+          <div class="section-title">上次{{ getRecordTypeOptions().find(o => o.value === form.type)?.label || '' }}参考</div>
           <div class="last-record-card">
             <div class="last-record-title">{{ lastRecord.title }}</div>
             <div class="last-record-content">{{ lastRecord.content }}</div>
@@ -430,26 +439,32 @@ onMounted(async () => {
           <el-row :gutter="16">
             <el-col :xs="24" :sm="12">
               <el-form-item label="开始时间" prop="startTime">
-                <el-date-picker
-                  v-model="form.startTime"
-                  type="datetime"
-                  format="YYYY-MM-DD HH:mm"
-                  value-format="YYYY-MM-DD HH:mm"
-                  placeholder="选择开始时间"
-                  style="width:100%;"
-                />
+                <div style="display:flex;gap:8px;width:100%;">
+                  <el-date-picker
+                    v-model="form.startTime"
+                    type="datetime"
+                    format="YYYY-MM-DD HH:mm"
+                    value-format="YYYY-MM-DD HH:mm"
+                    placeholder="选择开始时间"
+                    style="flex:1;"
+                  />
+                  <el-button @click="fillCurrentTime('startTime')" size="small">当前</el-button>
+                </div>
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="12">
               <el-form-item label="结束时间">
-                <el-date-picker
-                  v-model="form.endTime"
-                  type="datetime"
-                  format="YYYY-MM-DD HH:mm"
-                  value-format="YYYY-MM-DD HH:mm"
-                  placeholder="选择结束时间"
-                  style="width:100%;"
-                />
+                <div style="display:flex;gap:8px;width:100%;">
+                  <el-date-picker
+                    v-model="form.endTime"
+                    type="datetime"
+                    format="YYYY-MM-DD HH:mm"
+                    value-format="YYYY-MM-DD HH:mm"
+                    placeholder="选择结束时间"
+                    style="flex:1;"
+                  />
+                  <el-button @click="fillCurrentTime('endTime')" size="small">当前</el-button>
+                </div>
               </el-form-item>
             </el-col>
           </el-row>

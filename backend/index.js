@@ -21,6 +21,7 @@ const attachmentRoutes = require('./routes/attachments');
 const knowledgeRoutes = require('./routes/knowledge');
 const notificationRoutes = require('./routes/notifications');
 const inspectionRoutes = require('./routes/inspections');
+const announcementRoutes = require('./routes/announcements');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -98,6 +99,7 @@ app.use('/api/attachments', attachmentRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/inspections', inspectionRoutes);
+app.use('/api/announcements', announcementRoutes);
 
 // 静态文件：上传的附件
 const uploadsPath = path.join(__dirname, 'uploads');
@@ -124,12 +126,15 @@ app.use((err, req, res, next) => {
 // SPA 路由支持：所有非 API 路径返回前端 index.html
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) {
-    logger.warn(`接口不存在: ${req.method} ${req.url}`);
+    logger.warn('接口不存在: ' + req.method + ' ' + req.url);
     res.status(404).json({
       code: 404,
       data: null,
       message: '接口不存在: ' + req.method + ' ' + req.url
     });
+  } else if (req.path.startsWith('/uploads/')) {
+    // express.static 未找到文件，返回 404 而非首页
+    res.status(404).json({ code: 404, data: null, message: '文件不存在' });
   } else {
     // 返回前端首页
     const indexPath = path.join(distPath, 'index.html');

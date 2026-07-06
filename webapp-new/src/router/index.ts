@@ -32,6 +32,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/inspections/list', name: 'InspectionList', component: () => import('@/views/inspections/list.vue'), meta: { title: '巡检记录', icon: 'DocumentChecked' } },
   { path: '/inspections/form', name: 'InspectionForm', component: () => import('@/views/inspections/form.vue'), meta: { title: '开始巡检' } },
   { path: '/inspections/detail/:id', name: 'InspectionDetail', component: () => import('@/views/inspections/detail.vue'), meta: { title: '巡检详情' } },
+  { path: '/announcements', name: 'Announcements', component: () => import('@/views/announcements/index.vue'), meta: { title: '系统公告', icon: 'Bell' } },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
