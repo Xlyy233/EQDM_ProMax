@@ -1,0 +1,1 @@
+import{Z as t}from"./index-TO-RADZL.js";async function n(s){return(await t.get("/users",{params:s})).data}async function u(s){return(await t.post("/users",s)).data}async function c(s,e){return(await t.put(`/users/${s}`,e)).data}async function o(s){return(await t.delete(`/users/${s}`)).data}export{u as a,o as d,n as g,c as u};

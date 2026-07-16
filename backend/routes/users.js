@@ -112,8 +112,15 @@ router.put('/:id', authMiddleware, requireRole('admin'), (req, res) => {
   const existing = db.findById('users', id);
   if (!existing) return res.json(error('用户不存在', 404));
 
-  const { password, realName, role, department } = req.body || {};
+  const { username, password, realName, role, department } = req.body || {};
   const updates = {};
+
+  // 用户名唯一性检查
+  if (username !== undefined) {
+    const duplicate = db.findBy('users', u => u.username === username && u.id !== id);
+    if (duplicate) return res.json(error('用户名已存在'));
+    updates.username = username;
+  }
   if (password) updates.password = bcrypt.hashSync(password, 10);
   if (realName !== undefined) updates.realName = realName;
   if (role !== undefined) updates.role = role;

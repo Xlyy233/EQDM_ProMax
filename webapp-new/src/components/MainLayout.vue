@@ -23,7 +23,7 @@ const userName = computed(() => user.value?.realName || user.value?.username || 
 const userInitial = computed(() => (userName.value.charAt(0) || '?').toUpperCase())
 const userRole = computed(() => {
   const role = user.value?.role
-  const map: Record<string, string> = { employee: '普通员工', manager: '部门经理', admin: '系统管理员' }
+  const map: Record<string, string> = { employee: '普通员工', manager: '部门经理', admin: '系统管理员', maintenance_leader: '维修负责人', inspection_leader: '保养巡检负责人', coordinator: '总协调主管' }
   return map[role || ''] || ''
 })
 
@@ -33,16 +33,18 @@ const menuItems = computed(() => {
     { path: '/equipment', label: '设备台账', icon: 'Box', show: canManageEquipment() },
     { path: '/equipment-qrcode', label: '二维码管理', icon: 'PictureFilled', show: canManageEquipment() },
     { path: '/record', label: '工作记录', icon: 'Document' },
-    { path: '/maintenance', label: '保养计划', icon: 'Calendar', show: canManageMaintenance() },
+    { path: '/maintenance', label: '保养计划', icon: 'Calendar', show: true },
     { path: '/statistics', label: '统计分析', icon: 'DataAnalysis', show: canViewStatistics() },
     { path: '/knowledge', label: '部门知识库', icon: 'Reading', show: true },
     { path: '/export', label: '数据导出', icon: 'Download', show: canExportData() },
     { path: '/user', label: '用户管理', icon: 'User', show: canManageUsers() },
     { path: '/template', label: '常用模板', icon: 'Collection' },
     { path: '/logs', label: '日志管理', icon: 'Tickets', show: canViewLogs() },
-    { path: '/inspections/templates', label: '巡检模板', icon: 'Checked', show: hasRole(['manager', 'admin']) },
+    { path: '/inspections/templates', label: '巡检模板', icon: 'Checked', show: hasRole(['manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator']) },
     { path: '/inspections/list', label: '巡检记录', icon: 'DocumentChecked', show: true },
-    { path: '/announcements', label: '系统公告', icon: 'Bell', show: true }
+    { path: '/announcements', label: '系统公告', icon: 'Bell', show: true },
+    { path: '/spare-parts/list', label: '备件库存', icon: 'Box', show: true },
+    { path: '/files', label: '文件共享', icon: 'Folder', show: true }
   ]
   return items.filter(item => item.show !== false)
 })
@@ -96,7 +98,7 @@ function goTo(path: string) {
     <!-- Bottom navigation -->
     <el-footer class="mobile-footer" style="height: 60px; padding: 0; padding-bottom: env(safe-area-inset-bottom);">
       <div class="mobile-nav">
-        <button v-for="item in [{ path:'/',label:'首页',icon:'HomeFilled' },{ path:'/equipment',label:'设备',icon:'Box',show:canManageEquipment() },{ path:'/record',label:'记录',icon:'Document' },{ path:'/inspections/list',label:'巡检',icon:'DocumentChecked' },{ path:'/maintenance',label:'保养',icon:'Calendar',show:canManageMaintenance() }].filter(i => i.show !== false)"
+        <button v-for="item in [{ path:'/',label:'首页',icon:'HomeFilled' },{ path:'/equipment',label:'设备',icon:'Box',show:canManageEquipment() },{ path:'/record',label:'记录',icon:'Document' },{ path:'/inspections/list',label:'巡检',icon:'DocumentChecked' },{ path:'/maintenance',label:'保养',icon:'Calendar',show:true }].filter(i => i.show !== false)"
              :key="item.path"
              class="nav-item"
              :class="{ active: activeMenu === item.path.split('/')[1] }"

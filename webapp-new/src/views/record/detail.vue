@@ -121,8 +121,13 @@ onMounted(() => {
             {{ (record.stopDuration || '0') + (record.stopDurationUnit === 'hours' ? '小时' : '分钟') }}
           </el-descriptions-item>
           <el-descriptions-item label="是否更换配件">{{ record.partsReplaced === 'yes' ? '是' : '否' }}</el-descriptions-item>
-          <el-descriptions-item v-if="record.partsReplaced === 'yes'" label="更换配件详情">
-            <div class="content-text">{{ record.partsReplacedDetail || '-' }}</div>
+          <el-descriptions-item v-if="record.partsReplaced === 'yes' && record.consumedParts && record.consumedParts.length > 0" label="消耗配件">
+            <div class="parts-list">
+              <span v-for="(p, i) in record.consumedParts" :key="i" class="parts-tag">{{ p.sparePartName }} ×{{ p.quantity }}</span>
+            </div>
+          </el-descriptions-item>
+          <el-descriptions-item v-if="record.partsReplaced === 'yes' && record.partsReplacedDetail" label="更换详情补充">
+            <div class="content-text">{{ record.partsReplacedDetail }}</div>
           </el-descriptions-item>
         </el-descriptions>
       </div>
@@ -245,6 +250,20 @@ onMounted(() => {
   white-space: pre-wrap;
   line-height: 1.7;
   color: #606266;
+}
+
+.parts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.parts-tag {
+  display: inline-block;
+  background: #ecf5ff;
+  color: #409eff;
+  border-radius: 4px;
+  padding: 2px 10px;
+  font-size: 13px;
 }
 
 /* ====== 照片展示 ====== */

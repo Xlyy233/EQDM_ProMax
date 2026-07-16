@@ -125,10 +125,12 @@ router.get('/:id', authMiddleware, (req, res) => {
   if (item.imageIds && item.imageIds.length > 0) {
     for (const imgId of item.imageIds) {
       const att = db.findById('attachments', imgId);
-      if (att) {
+      if (att && att.fileName) {
+        // 防止路径遍历攻击
+        const safeName = path.basename(att.fileName);
         images.push({
           id: att.id,
-          url: '/uploads/knowledge/' + att.fileName,
+          url: '/uploads/knowledge/' + safeName,
           originalName: att.originalName
         });
       }
@@ -238,7 +240,13 @@ router.post('/:id/like', authMiddleware, (req, res) => {
     db.update('knowledge', knowledgeId, { likeCount: item.likeCount });
     res.json(success({ liked: false, likeCount: item.likeCount }, '已取消点赞'));
   } else {
-    // 点赞
+    // 点赞：防止重复点赞（再次确认）
+    const recheck = db.findBy('knowledge_likes',
+      l => l.knowledgeId === knowledgeId && l.userId === req.user.id
+    );
+    if (recheck) {
+      return res.json(success({ liked: true, likeCount: item.likeCount || 0 }, '已点赞'));
+    }
     db.insert('knowledge_likes', {
       id: db.genId('kl'),
       knowledgeId,

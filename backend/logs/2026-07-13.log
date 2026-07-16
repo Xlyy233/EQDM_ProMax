@@ -1,0 +1,100 @@
+[2026-07-13 00:35:49] [INFO ] 数据备份完成: eqdm_2026-07-13_08-35-49.json
+[2026-07-13 00:35:49] [INFO ] ========================================
+[2026-07-13 00:35:49] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-13 00:35:49] [INFO ] ========================================
+[2026-07-13 00:35:49] [INFO ]   服务地址: http://localhost:3000
+[2026-07-13 00:35:49] [INFO ]   API 前缀: /api
+[2026-07-13 00:35:49] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-13 00:35:49] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-13 00:35:49] [INFO ]   运行环境: production
+[2026-07-13 00:35:49] [INFO ] ========================================
+[2026-07-13 00:35:49] [INFO ]   默认账号:
+[2026-07-13 00:35:49] [INFO ]     管理员: admin / admin123
+[2026-07-13 00:35:49] [INFO ]     部门经理: manager / manager123
+[2026-07-13 00:35:49] [INFO ]     员工共享: sa / 123456
+[2026-07-13 00:35:49] [INFO ] ========================================
+[2026-07-13 05:06:01] [INFO ] 数据备份完成: eqdm_2026-07-13_13-06-01.json
+[2026-07-13 05:06:01] [INFO ] ========================================
+[2026-07-13 05:06:01] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-13 05:06:01] [INFO ] ========================================
+[2026-07-13 05:06:01] [INFO ]   服务地址: http://localhost:3000
+[2026-07-13 05:06:01] [INFO ]   API 前缀: /api
+[2026-07-13 05:06:01] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-13 05:06:01] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-13 05:06:01] [INFO ]   运行环境: production
+[2026-07-13 05:06:01] [INFO ] ========================================
+[2026-07-13 05:06:01] [INFO ]   默认账号:
+[2026-07-13 05:06:01] [INFO ]     管理员: admin / admin123
+[2026-07-13 05:06:01] [INFO ]     部门经理: manager / manager123
+[2026-07-13 05:06:01] [INFO ]     员工共享: sa / 123456
+[2026-07-13 05:06:01] [INFO ] ========================================
+[2026-07-13 05:07:26] [INFO ] 数据备份完成: eqdm_2026-07-13_13-07-26.json
+[2026-07-13 05:07:26] [INFO ] ========================================
+[2026-07-13 05:07:26] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-13 05:07:26] [INFO ] ========================================
+[2026-07-13 05:07:26] [INFO ]   服务地址: http://localhost:3000
+[2026-07-13 05:07:26] [INFO ]   API 前缀: /api
+[2026-07-13 05:07:26] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-13 05:07:26] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-13 05:07:26] [INFO ]   运行环境: production
+[2026-07-13 05:07:26] [INFO ] ========================================
+[2026-07-13 05:07:26] [INFO ]   默认账号:
+[2026-07-13 05:07:26] [INFO ]     管理员: admin / admin123
+[2026-07-13 05:07:26] [INFO ]     部门经理: manager / manager123
+[2026-07-13 05:07:26] [INFO ]     员工共享: sa / 123456
+[2026-07-13 05:07:26] [INFO ] ========================================
+[2026-07-13 06:45:09] [INFO ] 数据备份完成: eqdm_2026-07-13_14-45-09.json
+[2026-07-13 06:45:38] [WARN ] GET /api/notifications/unread 401 7ms - ::1
+[2026-07-13 06:45:43] [INFO ] POST /api/auth/login 200 136ms - ::1
+[2026-07-13 06:45:43] [INFO ] GET /api/notifications/unread 200 2ms - ::1
+[2026-07-13 06:45:43] [INFO ] GET /api/records?page=1&pageSize=10 200 12ms - ::1
+[2026-07-13 06:45:43] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-07-13 06:45:43] [INFO ] GET /api/statistics/dashboard 200 3ms - ::1
+[2026-07-13 06:45:43] [INFO ] GET /api/announcements/active 200 1ms - ::1
+[2026-07-13 06:45:46] [INFO ] GET /api/files 200 5ms - ::1
+[2026-07-13 06:46:13] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-13 06:46:43] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-13 06:47:13] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-13 06:47:43] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-13 06:48:01] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-13 06:48:13] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-13 06:48:23] [INFO ] GET /api/records?page=1&pageSize=10&startTime=2026-06-24&endTime=2026-06-27 200 4ms - ::1
+[2026-07-13 06:48:28] [INFO ] GET /api/records?page=1&pageSize=10 304 7ms - ::1
+[2026-07-13 06:48:37] [INFO ] GET /api/records?page=1&pageSize=10&startTime=2026-07-01&endTime=2026-07-03 200 4ms - ::1
+[2026-07-13 06:48:39] [INFO ] GET /api/records?page=1&pageSize=10&startTime=2026-07-01&endTime=2026-07-03 304 7ms - ::1
+[2026-07-13 06:48:42] [INFO ] GET /api/records?page=2&pageSize=10&startTime=2026-07-01&endTime=2026-07-03 200 3ms - ::1
+[2026-07-13 06:48:43] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-13 06:48:46] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-13 06:48:48] [INFO ] GET /api/records?page=2&pageSize=10 200 7ms - ::1
+[2026-07-13 06:49:03] [INFO ] GET /api/spare-parts?page=1&pageSize=20 200 4ms - ::1
+[2026-07-13 06:49:05] [INFO ] GET /api/equipments?pageSize=999 200 5ms - ::1
+[2026-07-13 06:49:13] [INFO ] GET /api/notifications/unread 304 7ms - ::1
+[2026-07-13 06:49:21] [INFO ] POST /api/spare-parts 200 175ms - ::1
+[2026-07-13 06:49:21] [INFO ] GET /api/spare-parts?page=1&pageSize=20 200 1ms - ::1
+[2026-07-13 06:49:27] [INFO ] PUT /api/spare-parts/sp_mriv3mazpjot/stock-out 200 113ms - ::1
+[2026-07-13 06:49:28] [INFO ] GET /api/spare-parts?page=1&pageSize=20 200 2ms - ::1
+[2026-07-13 06:49:30] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-13 06:49:30] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-13 06:49:30] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-07-13 06:49:30] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-13 06:49:39] [INFO ] GET /api/spare-parts?page=1&pageSize=20 304 6ms - ::1
+[2026-07-13 06:49:43] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-13 06:50:13] [INFO ] GET /api/notifications/unread 304 5ms - ::1
+[2026-07-13 06:50:43] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-13 06:51:13] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-13 06:51:43] [INFO ] GET /api/notifications/unread 304 4ms - ::1
+[2026-07-13 06:59:04] [INFO ] 数据备份完成: eqdm_2026-07-13_14-59-04.json
+[2026-07-13 06:59:04] [INFO ] ========================================
+[2026-07-13 06:59:04] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-13 06:59:04] [INFO ] ========================================
+[2026-07-13 06:59:04] [INFO ]   服务地址: http://localhost:3000
+[2026-07-13 06:59:04] [INFO ]   API 前缀: /api
+[2026-07-13 06:59:04] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-13 06:59:04] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-13 06:59:04] [INFO ]   运行环境: production
+[2026-07-13 06:59:04] [INFO ] ========================================
+[2026-07-13 06:59:04] [INFO ]   默认账号:
+[2026-07-13 06:59:04] [INFO ]     管理员: admin / admin123
+[2026-07-13 06:59:04] [INFO ]     部门经理: manager / manager123
+[2026-07-13 06:59:04] [INFO ]     员工共享: sa / 123456
+[2026-07-13 06:59:04] [INFO ] ========================================

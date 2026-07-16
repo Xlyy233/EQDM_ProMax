@@ -12,7 +12,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [
           {
-            urlPattern: /^https?:\/\/.*\/api\/.*/i,
+            urlPattern: /^https?:\/\/.*\/api\/(?!files\/(download|batch-download|preview)).*/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',

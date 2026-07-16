@@ -37,7 +37,7 @@ router.get('/templates/:id', authMiddleware, (req, res) => {
 })
 
 // 创建模板
-router.post('/templates', authMiddleware, requireRole('manager', 'admin'), (req, res) => {
+router.post('/templates', authMiddleware, requireRole('manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   try {
     const { name, equipmentType, items } = req.body || {}
     if (!name || !equipmentType || !items || !Array.isArray(items) || items.length === 0) {
@@ -61,7 +61,7 @@ router.post('/templates', authMiddleware, requireRole('manager', 'admin'), (req,
 })
 
 // 更新模板
-router.put('/templates/:id', authMiddleware, requireRole('manager', 'admin'), (req, res) => {
+router.put('/templates/:id', authMiddleware, requireRole('manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   try {
     const existing = findById(TABLE_TEMPLATES, req.params.id)
     if (!existing) return res.status(404).json({ code: 404, data: null, message: '模板不存在' })
@@ -84,7 +84,7 @@ router.put('/templates/:id', authMiddleware, requireRole('manager', 'admin'), (r
 })
 
 // 删除模板
-router.delete('/templates/:id', authMiddleware, requireRole('manager', 'admin'), (req, res) => {
+router.delete('/templates/:id', authMiddleware, requireRole('manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   try {
     const ok = remove(TABLE_TEMPLATES, req.params.id)
     if (!ok) return res.status(404).json({ code: 404, data: null, message: '模板不存在' })
@@ -180,7 +180,7 @@ router.post('/records', authMiddleware, (req, res) => {
 })
 
 // 删除记录
-router.delete('/records/:id', authMiddleware, requireRole('manager', 'admin'), (req, res) => {
+router.delete('/records/:id', authMiddleware, requireRole('manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   try {
     const ok = remove(TABLE_RECORDS, req.params.id)
     if (!ok) return res.status(404).json({ code: 404, data: null, message: '记录不存在' })

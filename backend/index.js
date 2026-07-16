@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const logger = require('./utils/logger');
+const { authMiddleware, requireRole } = require('./middleware/auth');
+const { success } = require('./utils/helper');
 
 const userRoutes = require('./routes/users');
 const equipmentRoutes = require('./routes/equipments');
@@ -22,10 +24,57 @@ const knowledgeRoutes = require('./routes/knowledge');
 const notificationRoutes = require('./routes/notifications');
 const inspectionRoutes = require('./routes/inspections');
 const announcementRoutes = require('./routes/announcements');
+const sparePartRoutes = require('./routes/spareParts');
+const fileRoutes = require('./routes/files');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// ========== 数据自动备份 ==========
+const dataDir = path.join(__dirname, 'data');
+const dbFile = path.join(dataDir, 'eqdm.db');
+const backupDir = path.join(dataDir, 'backups');
+
+function backupData() {
+  try {
+    if (!fs.existsSync(dbFile)) {
+      logger.warn('备份跳过：数据库文件不存在');
+      return;
+    }
+    if (!fs.existsSync(backupDir)) {
+      fs.mkdirSync(backupDir, { recursive: true });
+    }
+    const timestamp = new Date(new Date().getTime() + 8 * 60 * 60 * 1000)
+      .toISOString().replace(/[:.]/g, '-').slice(0, 19).replace('T', '_');
+    const dest = path.join(backupDir, `eqdm_${timestamp}.db`);
+    fs.copyFileSync(dbFile, dest);
+    logger.info(`数据备份完成: eqdm_${timestamp}.db`);
+
+    // 保留最近 30 份备份
+    const files = fs.readdirSync(backupDir)
+      .filter(f => f.startsWith('eqdm_') && f.endsWith('.db'))
+      .sort()
+      .reverse();
+    for (let i = 30; i < files.length; i++) {
+      fs.unlinkSync(path.join(backupDir, files[i]));
+      logger.info(`清理旧备份: ${files[i]}`);
+    }
+  } catch (err) {
+    logger.error('数据备份失败:', err.message);
+  }
+}
+
+// 启动时备份
+backupData();
+
+// 每小时检查一次，凌晨 2:00（北京时间）执行备份
+setInterval(() => {
+  const now = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+  if (now.getHours() === 2 && now.getMinutes() === 0) {
+    backupData();
+  }
+}, 60 * 1000);
 
 // 配置 CORS：自动允许本地网络 + 花生壳外网地址
 const EXTERNAL_ORIGINS = (process.env.CORS_ORIGIN || '').split(',').filter(Boolean);
@@ -100,18 +149,72 @@ app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/inspections', inspectionRoutes);
 app.use('/api/announcements', announcementRoutes);
+app.use('/api/spare-parts', sparePartRoutes);
+app.use('/api/files', fileRoutes);
 
-// 静态文件：上传的附件
+// 系统工具路由
+app.post('/api/system/backup', authMiddleware, requireRole('admin'), (req, res) => {
+  backupData();
+  const files = fs.existsSync(backupDir) ? fs.readdirSync(backupDir).filter(f => f.startsWith('eqdm_')).length : 0;
+  res.json(success({ backupCount: files, message: '备份完成' }));
+});
+
+// 静态文件：上传的附件（始终注册，文件存在时正常返回，不存在时返回404）
 const uploadsPath = path.join(__dirname, 'uploads');
-if (fs.existsSync(uploadsPath)) {
-  app.use('/uploads', express.static(uploadsPath));
-}
+app.use('/uploads', express.static(uploadsPath, {
+  setHeaders: (res, filePath) => {
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeMap = {
+      '.pdf': 'application/pdf',
+      '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+      '.png': 'image/png', '.gif': 'image/gif',
+      '.webp': 'image/webp',
+      '.txt': 'text/plain; charset=utf-8',
+      '.doc': 'application/msword',
+      '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      '.xls': 'application/vnd.ms-excel',
+      '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      '.zip': 'application/zip', '.rar': 'application/x-rar-compressed'
+    };
+    const contentType = mimeMap[ext] || 'application/octet-stream';
+    const isInline = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf', '.txt'].includes(ext);
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', isInline ? 'inline' : 'attachment; filename="' + encodeURIComponent(path.basename(filePath)) + '"');
+  }
+}));
 
 // 服务前端静态文件（生产环境）
 const distPath = path.join(__dirname, '..', 'webapp-new', 'dist');
 if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
+  app.use(express.static(distPath, {
+    setHeaders: (res, filePath) => {
+      // index.html、sw.js、registerSW.js 禁止缓存，确保移动端能获取最新版本
+      const basename = path.basename(filePath);
+      if (basename === 'index.html' || basename === 'sw.js' || basename === 'registerSW.js') {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      } else {
+        // 带hash的静态资源可以长期缓存
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+    }
+  }));
 }
+
+// 根目录文档文件（API文档.md等）开放访问
+const rootPath = path.join(__dirname, '..');
+app.use((req, res, next) => {
+  const requested = req.path.replace(/^\/+/, '');
+  if (/\.md$/i.test(requested)) {
+    const filePath = path.join(rootPath, requested);
+    if (fs.existsSync(filePath)) {
+      res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+      return res.sendFile(filePath);
+    }
+  }
+  next();
+});
 
 // 全局错误处理
 app.use((err, req, res, next) => {
@@ -164,7 +267,7 @@ app.listen(PORT, () => {
     `  服务地址: http://localhost:${PORT}`,
     `  API 前缀: /api`,
     `  健康检查: http://localhost:${PORT}/api/health`,
-    `  数据文件: ./data/eqdm.json`,
+    `  数据文件: ./data/eqdm.db`,
     `  运行环境: ${NODE_ENV}`,
     '========================================',
     '  默认账号:',

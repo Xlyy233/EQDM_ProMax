@@ -32,11 +32,6 @@ onMounted(() => {
     router.replace('/login')
     return
   }
-  if (!hasPermission) {
-    ElMessage.error('您没有权限访问此页面')
-    router.replace('/')
-    return
-  }
   loadData()
 })
 
@@ -166,7 +161,7 @@ function isOverdue(plan: MaintenancePlan): boolean {
           </div>
           <div class="card-info-item">
             <span class="info-label">负责人</span>
-            <span class="info-value">{{ plan.responsibleUserName || '-' }}</span>
+            <span class="info-value">{{ (plan.responsibleUserNames && plan.responsibleUserNames.length > 0) ? plan.responsibleUserNames.join('、') : (plan.responsibleUserName || '-') }}</span>
           </div>
         </div>
 

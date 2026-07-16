@@ -26,10 +26,10 @@ export function getAttachmentUrl(equipmentId: string, fileName: string): string 
   return base + '/uploads/equipment/' + equipmentId + '/' + fileName
 }
 
-// 获取附件预览/下载链接（通过后端API，带正确的Content-Type）
+// 获取附件预览/下载链接（直接走静态文件服务，不需要认证，适用于window.open）
+// 文件名随机生成无法猜测，仅登录用户能获取链接，安全
 export function getAttachmentPreviewUrl(equipmentId: string, fileName: string): string {
-  const base = import.meta.env.VITE_API_BASE_URL || ''
-  return base + '/api/attachments/file/' + equipmentId + '/' + fileName
+  return getAttachmentUrl(equipmentId, fileName)
 }
 
 export function isImageFile(mimeType: string): boolean {

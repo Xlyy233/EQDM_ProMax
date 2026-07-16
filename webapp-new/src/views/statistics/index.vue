@@ -211,12 +211,27 @@ function suggestionClass(type: string) {
         <div class="kpi-card kpi-red">
           <div class="kpi-value">{{ dashboardData?.monthlyRepairCount || 0 }}</div>
           <div class="kpi-label">本月维修</div>
-          <div class="kpi-sub">故障率{{ monthlyData?.monthlyFailureRate || 0 }}%</div>
+          <div class="kpi-sub">
+            <template v-if="dashboardData?.lastMonthRepairCount">
+              环比{{ dashboardData!.monthlyRepairCount > dashboardData!.lastMonthRepairCount ? '↑' : '↓' }}{{ Math.abs(dashboardData!.monthlyRepairCount - dashboardData!.lastMonthRepairCount) }}次
+            </template>
+            <template v-else>故障率{{ monthlyData?.monthlyFailureRate || 0 }}%</template>
+          </div>
         </div>
         <div class="kpi-card kpi-green">
-          <div class="kpi-value">{{ dashboardData?.mttr || 0 }}h</div>
+          <div class="kpi-value">{{ dashboardData?.mttr || 0 }}<small>h</small></div>
           <div class="kpi-label">MTTR</div>
-          <div class="kpi-sub">可用率{{ dashboardData?.availabilityRate || 0 }}%</div>
+          <div class="kpi-sub">平均修复时间</div>
+        </div>
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-value">{{ dashboardData?.mtbf || 0 }}<small>天</small></div>
+          <div class="kpi-label">MTBF</div>
+          <div class="kpi-sub">平均故障间隔</div>
+        </div>
+        <div class="kpi-card kpi-teal">
+          <div class="kpi-value">{{ dashboardData?.availabilityRate || 0 }}<small>%</small></div>
+          <div class="kpi-label">可用率 / 保养执行率</div>
+          <div class="kpi-sub">保养执行率{{ dashboardData?.maintenanceRate || 0 }}%</div>
         </div>
       </div>
 
@@ -535,8 +550,8 @@ function suggestionClass(type: string) {
 
 .kpi-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
   padding: 0 24px;
   margin-bottom: 16px;
 }
@@ -544,7 +559,7 @@ function suggestionClass(type: string) {
 .kpi-card {
   background: #fff;
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 16px 18px;
   border-left: 4px solid #dcdfe6;
   background: linear-gradient(to right, #fff, #fafafa);
 }
@@ -552,13 +567,16 @@ function suggestionClass(type: string) {
 .kpi-card.kpi-blue { border-left-color: #3b82f6; background: linear-gradient(to right, #f0f6ff, #fff); }
 .kpi-card.kpi-red { border-left-color: #ef4444; background: linear-gradient(to right, #fef2f2, #fff); }
 .kpi-card.kpi-green { border-left-color: #10b981; background: linear-gradient(to right, #ecfdf5, #fff); }
+.kpi-card.kpi-purple { border-left-color: #8b5cf6; background: linear-gradient(to right, #f5f3ff, #fff); }
+.kpi-card.kpi-teal { border-left-color: #14b8a6; background: linear-gradient(to right, #f0fdfa, #fff); }
 
 .kpi-value {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #303133;
   line-height: 1.2;
 }
+.kpi-value small { font-size: 14px; font-weight: 400; color: #909399; }
 
 .kpi-label {
   font-size: 13px;
@@ -630,9 +648,10 @@ function suggestionClass(type: string) {
 
 /* 移动端 */
 @media (max-width: 768px) {
-  .kpi-row { grid-template-columns: repeat(2, 1fr); padding: 0 12px; gap: 10px; }
-  .kpi-card { padding: 12px 14px; }
-  .kpi-value { font-size: 22px; }
+  .kpi-row { grid-template-columns: repeat(3, 1fr); padding: 0 12px; gap: 8px; }
+  .kpi-card { padding: 10px 12px; }
+  .kpi-value { font-size: 18px; }
+  .kpi-value small { font-size: 11px; }
   .chart-card { margin: 0 12px 12px; padding: 14px; }
   .filter-bar { padding: 12px; }
   .month-picker { margin-top: 8px; }

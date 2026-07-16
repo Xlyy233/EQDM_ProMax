@@ -20,6 +20,8 @@ const iconMap: Record<string, any> = {
 
 const router = useRouter()
 
+const isMobile = ref(window.innerWidth < 768)
+
 const userName = ref('')
 const userInitial = ref('?')
 const userRole = ref('')
@@ -51,6 +53,7 @@ const upcomingPlans = ref<MaintenancePlan[]>([])
 const upcomingCount = ref(0)
 const activeAnnouncement = ref<Announcement | null>(null)
 const showAnnounceDetail = ref(false)
+const lowStockParts = ref<any[]>([])
 
 const actions = [
   { label: '扫码识别', icon: 'Camera', route: '/equipment/scan', show: true },
@@ -95,6 +98,7 @@ function loadAllData() {
       stats.value[1].value = res.data.monthlyRepairCount || 0
       stats.value[2].value = res.data.monthlyMaintenanceCount || 0
       stats.value[3].value = res.data.monthlyInspectionCount || 0
+      lowStockParts.value = res.data.lowStockParts || []
     }
   }).catch(() => {})
 
@@ -154,6 +158,19 @@ onMounted(() => {
           <div style="font-size:13px;color:#909399;">{{ s.label }}</div>
         </div>
       </div>
+    </div>
+
+    <!-- 低库存预警 -->
+    <div v-if="lowStockParts.length > 0" class="low-stock-alert" @click="router.push('/spare-parts')">
+      <el-icon :size="20" color="#dc2626"><Box /></el-icon>
+      <span style="font-weight:600;color:#dc2626;">备件库存预警：{{ lowStockParts.length }} 种备件库存不足</span>
+      <span class="low-stock-items">
+        <el-tag v-for="p in lowStockParts.slice(0, 3)" :key="p.id" type="danger" size="small">
+          {{ p.name }}({{ p.quantity }}{{ p.unit }})
+        </el-tag>
+        <span v-if="lowStockParts.length > 3" style="font-size:12px;color:#909399;">等{{ lowStockParts.length }}项</span>
+      </span>
+      <el-icon :size="16" color="#dc2626" style="margin-left:auto;"><ArrowRight /></el-icon>
     </div>
 
     <div style="margin-bottom:20px;">
@@ -216,7 +233,7 @@ onMounted(() => {
   </div>
 
   <!-- 公告详情弹窗 -->
-  <el-dialog v-model="showAnnounceDetail" title="系统公告" width="500px">
+  <el-dialog v-model="showAnnounceDetail" title="系统公告" :width="isMobile ? '90%' : '500px'">
     <div style="white-space:pre-wrap;line-height:1.8;font-size:14px;color:#303133;">{{ activeAnnouncement?.content }}</div>
   </el-dialog>
 </template>
@@ -239,6 +256,28 @@ onMounted(() => {
   background: #d9ecff;
 }
 
+.low-stock-alert {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.2s;
+}
+.low-stock-alert:hover {
+  background: #fee2e2;
+}
+.low-stock-items {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .announcement-title {
   font-size: 14px;
   font-weight: 500;
@@ -247,5 +286,17 @@ onMounted(() => {
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
+}
+
+/* ====== 移动端适配 ====== */
+@media (max-width: 768px) {
+  .announcement-banner {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .announcement-title {
+    font-size: 13px;
+  }
 }
 </style>

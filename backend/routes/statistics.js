@@ -9,6 +9,7 @@ router.get('/dashboard', authMiddleware, (req, res) => {
   const equipments = db.getAll('equipments');
   const records = db.getAll('records');
   const inspectionRecords = db.getAll('inspectionRecords');
+  const plans = db.getAll('maintenancePlans');
 
   // 单次遍历设备，同时统计所有状态
   let inUseCount = 0, stoppedCount = 0, scrappedCount = 0;
@@ -21,14 +22,17 @@ router.get('/dashboard', authMiddleware, (req, res) => {
 
   // 单次遍历记录，同时统计所有指标
   const currentMonth = new Date().toISOString().slice(0, 7);
+  const lastMonth = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).toISOString().slice(0, 7);
   let monthlyRepair = 0, monthlyMaintenance = 0, monthlyInspection = 0;
   let pendingRecords = 0, completedRecords = 0;
   let repairHours = 0, repairCount = 0;
+  let totalRepairRecords = 0;
 
   for (const r of records) {
     const isCurrentMonth = (r.createdAt || '').startsWith(currentMonth);
     if (r.type === 'repair') {
       if (isCurrentMonth) monthlyRepair++;
+      totalRepairRecords++;
       if (r.startTime && r.endTime) {
         const diff = (new Date(r.endTime).getTime() - new Date(r.startTime).getTime()) / 3600000;
         if (diff > 0) { repairHours += diff; repairCount++; }
@@ -49,13 +53,51 @@ router.get('/dashboard', authMiddleware, (req, res) => {
     }
   }
 
+  // MTTR: 平均修复时间（小时）
   const mttr = repairCount > 0 ? Math.round((repairHours / repairCount) * 10) / 10 : 0;
-  const availabilityRate = totalEquipments > 0 ? Math.round((inUseCount / totalEquipments) * 1000) / 10 : 0;
+
+  // 可用率: 基于维修停机时间计算
+  // 总运行时间 = 设备总数 × 30天 × 24小时
+  const totalRuntimeHours = totalEquipments * 30 * 24;
+  const availabilityRate = totalRuntimeHours > 0
+    ? Math.round(((totalRuntimeHours - repairHours) / totalRuntimeHours) * 1000) / 10
+    : 100;
+
+  // MTBF: 平均故障间隔（天）
+  // 总运行天数 = 设备总数 × 30天
+  const totalDays = totalEquipments * 30;
+  const mtbf = totalRepairRecords > 0 ? Math.round((totalDays / totalRepairRecords) * 10) / 10 : totalDays;
+
+  // 保养执行率: 本月已完成保养计划 / 本月应执行计划
+  let plannedThisMonth = 0, completedThisMonth = 0;
+  for (const p of plans) {
+    const nextDate = p.nextMaintenanceDate || '';
+    if (nextDate.startsWith(currentMonth)) {
+      plannedThisMonth++;
+      if (p.status === 'completed') completedThisMonth++;
+    }
+  }
+  const maintenanceRate = plannedThisMonth > 0
+    ? Math.round((completedThisMonth / plannedThisMonth) * 1000) / 10
+    : 0;
+
+  // 环比：上月维修次数
+  let lastMonthRepair = 0;
+  for (const r of records) {
+    if (r.type === 'repair' && (r.createdAt || '').startsWith(lastMonth)) {
+      lastMonthRepair++;
+    }
+  }
 
   res.json(success({
     totalEquipments, inUseCount, stoppedCount, scrappedCount,
     monthlyRepairCount: monthlyRepair, monthlyMaintenanceCount: monthlyMaintenance, monthlyInspectionCount: monthlyInspection,
-    mttr, availabilityRate, pendingRecords, completedRecords
+    mttr, mtbf, availabilityRate, maintenanceRate,
+    pendingRecords, completedRecords,
+    lastMonthRepairCount: lastMonthRepair,
+    lowStockParts: (db.getAll('spareParts') || []).filter(s => s.quantity <= s.minStock).map(s => ({
+      id: s.id, name: s.name, spec: s.spec, quantity: s.quantity, minStock: s.minStock, unit: s.unit
+    }))
   }));
 });
 

@@ -26,7 +26,7 @@ const form = ref({
   cycleValue: 1,
   lastMaintenanceDate: '',
   nextMaintenanceDate: '',
-  responsibleUserId: '',
+  responsibleUserIds: [] as string[],
   status: 'active' as string,
   remark: ''
 })
@@ -67,7 +67,7 @@ async function loadData() {
         cycleValue: res.data.cycleValue,
         lastMaintenanceDate: res.data.lastMaintenanceDate || '',
         nextMaintenanceDate: res.data.nextMaintenanceDate || '',
-        responsibleUserId: res.data.responsibleUserId || '',
+        responsibleUserIds: res.data.responsibleUserIds || (res.data.responsibleUserId ? [res.data.responsibleUserId] : []),
         status: res.data.status,
         remark: res.data.remark || ''
       }
@@ -81,12 +81,13 @@ async function handleSubmit() {
   submitting.value = true
   try {
     const eq = equipments.value.find(e => e.id === form.value.equipmentId)
-    const user = users.value.find(u => u.id === form.value.responsibleUserId)
+    const selectedUsers = users.value.filter(u => form.value.responsibleUserIds.includes(u.id))
     const payload = {
       ...form.value,
       equipmentName: eq?.name || '',
       equipmentCode: eq?.code || '',
-      responsibleUserName: user?.realName || user?.username || ''
+      responsibleUserIds: form.value.responsibleUserIds,
+      responsibleUserNames: selectedUsers.map(u => u.realName || u.username)
     }
     if (isEdit.value) {
       await maintenanceApi.updatePlan(route.params.id as string, payload)
@@ -136,7 +137,7 @@ onMounted(async () => {
           </el-form-item>
 
           <el-form-item label="负责人">
-            <el-select v-model="form.responsibleUserId" filterable placeholder="选择负责人" style="width:100%;" clearable>
+            <el-select v-model="form.responsibleUserIds" filterable multiple placeholder="选择负责人（可多选）" style="width:100%;" clearable>
               <el-option
                 v-for="u in users"
                 :key="u.id"

@@ -6,6 +6,8 @@ import { isLoggedIn } from '@/stores/user'
 import type { Equipment } from '@/types'
 import * as api from '@/api/inspection'
 import * as equipmentApi from '@/api/equipment'
+import { compressImage } from '@/utils/compress'
+import { useDraft } from '@/composables/useDraft'
 
 const router = useRouter()
 const loading = ref(false)
@@ -31,6 +33,10 @@ const uploadInput = ref<HTMLInputElement | null>(null)
 const cameraInput = ref<HTMLInputElement | null>(null)
 const afterUploadInput = ref<HTMLInputElement | null>(null)
 const afterCameraInput = ref<HTMLInputElement | null>(null)
+
+// ========== 草稿保护 ==========
+const isEdit = ref(false)
+const { clearDraft } = useDraft(form, 'draft_inspection', isEdit, submitting)
 
 async function loadEquipments() {
   try {
@@ -75,51 +81,6 @@ function onTemplateChange(val: string) {
   }
 }
 
-function compressImage(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const img = new Image()
-      img.onload = () => {
-        const canvas = document.createElement('canvas')
-        const maxW = 1200
-        let w = img.width, h = img.height
-        if (w > maxW) { h = h * maxW / w; w = maxW }
-        canvas.width = w; canvas.height = h
-        const ctx = canvas.getContext('2d')!
-        ctx.drawImage(img, 0, 0, w, h)
-
-        // 水印
-        const now = new Date()
-        const ts = now.getFullYear() + '-' +
-          String(now.getMonth() + 1).padStart(2, '0') + '-' +
-          String(now.getDate()).padStart(2, '0') + ' ' +
-          String(now.getHours()).padStart(2, '0') + ':' +
-          String(now.getMinutes()).padStart(2, '0')
-        const fontSize = Math.max(12, w * 0.035)
-        ctx.font = `bold ${fontSize}px sans-serif`
-        ctx.textAlign = 'right'
-        const tw = ctx.measureText(ts).width
-        const pad = fontSize * 0.5
-        const boxX = w - tw - pad * 2, boxY = h - fontSize - pad * 2
-        const boxW = tw + pad * 2, boxH = fontSize + pad * 2
-        ctx.fillStyle = 'rgba(0,0,0,0.45)'
-        ctx.beginPath()
-        ctx.roundRect(boxX, boxY, boxW, boxH, fontSize * 0.3)
-        ctx.fill()
-        ctx.fillStyle = '#fff'
-        ctx.fillText(ts, w - pad, h - pad)
-
-        resolve(canvas.toDataURL('image/jpeg', 0.8))
-      }
-      img.onerror = reject
-      img.src = e.target?.result as string
-    }
-    reader.onerror = reject
-    reader.readAsDataURL(file)
-  })
-}
-
 function triggerUpload() { uploadInput.value?.click() }
 function triggerCamera() { cameraInput.value?.click() }
 function triggerAfterUpload() { afterUploadInput.value?.click() }
@@ -134,7 +95,7 @@ async function onFileChange(e: Event, target: 'photos' | 'afterPhotos') {
   const toProcess = Array.from(files).slice(0, remaining)
   for (const file of toProcess) {
     if (!file.type.startsWith('image/')) { ElMessage.warning('请选择图片文件'); continue }
-    try { const b64 = await compressImage(file); arr.push(b64) } catch { ElMessage.error('图片处理失败') }
+    try { const b64 = await compressImage(file, { maxW: 1200, maxH: 1200, quality: 0.5 }); arr.push(b64) } catch { ElMessage.error('图片处理失败') }
   }
   if (toProcess.length > 0) ElMessage.success(`已添加 ${toProcess.length} 张图片`)
   input.value = ''
@@ -162,6 +123,7 @@ async function handleSubmit() {
       remark: form.value.remark
     })
     ElMessage.success('巡检记录已提交')
+    clearDraft()
     router.push('/inspections/list')
   } catch { ElMessage.error('提交失败') }
   finally { submitting.value = false }

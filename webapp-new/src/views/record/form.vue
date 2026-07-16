@@ -7,6 +7,9 @@ import { getCurrentUser } from '@/stores/user'
 import type { WorkRecord, Equipment, RecordType } from '@/types'
 import * as recordApi from '@/api/record'
 import * as equipmentApi from '@/api/equipment'
+import { compressImage } from '@/utils/compress'
+import { useDraft } from '@/composables/useDraft'
+import * as sparePartApi from '@/api/sparePart'
 import dayjs from 'dayjs'
 import {
   getTemplatesByType,
@@ -27,6 +30,8 @@ const loading = ref(false)
 const submitting = ref(false)
 
 const equipments = ref<Equipment[]>([])
+const spareParts = ref<{ id: string; name: string; spec: string; quantity: number; unit: string }[]>([])
+const selectedPartIds = ref<string[]>([])
 const currentEquipment = ref<Equipment | null>(null)
 const lastRecord = ref<WorkRecord | null>(null)
 
@@ -50,6 +55,7 @@ const form = ref({
   stopDurationUnit: 'minutes' as 'minutes' | 'hours',
   partsReplaced: 'no' as 'yes' | 'no',
   partsReplacedDetail: '',
+  consumedParts: [] as { sparePartId: string; sparePartName: string; quantity: number }[],
   photos: [] as string[],
   afterPhotos: [] as string[]
 })
@@ -58,6 +64,9 @@ const rules = {
   equipmentId: [{ required: true, message: '请选择设备', trigger: 'change' }],
   startTime: [{ required: true, message: '请选择开始时间', trigger: 'change' }]
 }
+
+// ========== 草稿保护 ==========
+const { clearDraft } = useDraft(form, 'draft_record', isEdit, submitting)
 
 // ========== 常用模板 ==========
 const filteredTemplates = computed(() => {
@@ -175,9 +184,12 @@ async function loadData() {
         stopDurationUnit: res.data.stopDurationUnit || 'minutes',
         partsReplaced: res.data.partsReplaced || 'no',
         partsReplacedDetail: res.data.partsReplacedDetail || '',
+        consumedParts: Array.isArray(res.data.consumedParts) ? res.data.consumedParts : [],
         photos: Array.isArray(res.data.photos) ? res.data.photos : (typeof res.data.photos === 'string' ? (() => { try { return JSON.parse(res.data.photos) } catch { return [] } })() : []),
         afterPhotos: Array.isArray(res.data.afterPhotos) ? res.data.afterPhotos : (typeof res.data.afterPhotos === 'string' ? (() => { try { return JSON.parse(res.data.afterPhotos) } catch { return [] } })() : [])
       }
+      // 同步已选配件ID
+      selectedPartIds.value = (res.data.consumedParts || []).map((p: any) => p.sparePartId)
       try {
         const eqRes = await equipmentApi.getEquipmentById(res.data.equipmentId)
         currentEquipment.value = eqRes.data || null
@@ -203,10 +215,14 @@ async function handleSubmit() {
       ElMessage.success('更新成功')
     } else {
       await recordApi.addRecord({ ...payload, createdBy: user?.id, updatedBy: user?.id } as any)
+      clearDraft()
       ElMessage.success('提交成功')
     }
     router.replace('/record')
-  } catch (e) {} finally { submitting.value = false }
+  } catch (e: any) {
+    const msg = e?.response?.data?.message || e?.message || '提交失败，请重试'
+    ElMessage.error(msg)
+  } finally { submitting.value = false }
 }
 
 function formatRecordDate(dateStr: string) {
@@ -230,70 +246,6 @@ const uploadInput = ref<HTMLInputElement | null>(null)
 const cameraInput = ref<HTMLInputElement | null>(null)
 const afterUploadInput = ref<HTMLInputElement | null>(null)
 const afterCameraInput = ref<HTMLInputElement | null>(null)
-
-function compressImage(file: File): Promise<string> {
-  return new Promise((resolve) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const img = new Image()
-      img.onload = () => {
-        const maxW = 800
-        const maxH = 800
-        let w = img.width
-        let h = img.height
-        if (w > maxW || h > maxH) {
-          if (w > h) { h = Math.round(h * maxW / w); w = maxW }
-          else { w = Math.round(w * maxH / h); h = maxH }
-        }
-        const canvas = document.createElement('canvas')
-        canvas.width = w
-        canvas.height = h
-        const ctx = canvas.getContext('2d')!
-        ctx.drawImage(img, 0, 0, w, h)
-
-        // 水印：拍摄日期时间
-        const now = new Date()
-        const pad = (n: number) => String(n).padStart(2, '0')
-        const text = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes())
-        const fontSize = Math.max(12, Math.round(w * 0.035))
-        const padding = Math.round(w * 0.02)
-        ctx.font = 'bold ' + fontSize + 'px sans-serif'
-        const metrics = ctx.measureText(text)
-        const textW = metrics.width
-        const textH = fontSize * 1.2
-        const x = w - textW - padding * 2
-        const y = h - textH - padding * 2
-        // 半透明背景条
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'
-        const bgX = x - padding
-        const bgY = y - padding
-        const bgW = textW + padding * 2
-        const bgH = textH + padding * 2
-        const radius = Math.round(fontSize * 0.3)
-        ctx.beginPath()
-        ctx.moveTo(bgX + radius, bgY)
-        ctx.lineTo(bgX + bgW - radius, bgY)
-        ctx.quadraticCurveTo(bgX + bgW, bgY, bgX + bgW, bgY + radius)
-        ctx.lineTo(bgX + bgW, bgY + bgH - radius)
-        ctx.quadraticCurveTo(bgX + bgW, bgY + bgH, bgX + bgW - radius, bgY + bgH)
-        ctx.lineTo(bgX + radius, bgY + bgH)
-        ctx.quadraticCurveTo(bgX, bgY + bgH, bgX, bgY + bgH - radius)
-        ctx.lineTo(bgX, bgY + radius)
-        ctx.quadraticCurveTo(bgX, bgY, bgX + radius, bgY)
-        ctx.closePath()
-        ctx.fill()
-        // 白色文字
-        ctx.fillStyle = '#ffffff'
-        ctx.textBaseline = 'top'
-        ctx.fillText(text, x, y)
-
-        resolve(canvas.toDataURL('image/jpeg', 0.6))
-      }
-      img.src = e.target?.result as string
-    }
-    reader.readAsDataURL(file)
-  })
-}
 
 function triggerUpload() {
   uploadInput.value?.click()
@@ -326,10 +278,13 @@ async function onFileChange(e: Event, target: 'photos' | 'afterPhotos') {
       continue
     }
     try {
-      const base64 = await compressImage(file)
-      arr.push(base64)
+      const base64 = await compressImage(file, { maxW: 800, maxH: 800, quality: 0.5 })
+      // 将 base64 转为 Blob 后上传到服务器
+      const blob = await (await fetch(base64)).blob()
+      const fileName = await recordApi.uploadRecordPhoto(blob)
+      arr.push(fileName)
     } catch {
-      ElMessage.error('图片处理失败')
+      ElMessage.error('图片上传失败')
     }
   }
 
@@ -350,10 +305,51 @@ function removeAfterPhoto(index: number) {
 // ========== 处理结果 ==========
 const processResultOptions = getProcessResultOptions()
 
+async function loadSpareParts() {
+  try {
+    const res = await sparePartApi.getSpareParts({ pageSize: 999 })
+    spareParts.value = (res.data?.list || []).map(p => ({
+      id: p.id,
+      name: p.name,
+      spec: p.spec,
+      quantity: p.quantity,
+      unit: p.unit
+    }))
+  } catch { /* ignore */ }
+}
+
+function onPartsReplacedChange(val: string) {
+  if (val === 'no') {
+    selectedPartIds.value = []
+    form.value.consumedParts = []
+  }
+}
+
+function onPartsSelectionChange(ids: string[]) {
+  // 新增的配件
+  const newIds = ids.filter(id => !form.value.consumedParts.some(p => p.sparePartId === id))
+  for (const id of newIds) {
+    const sp = spareParts.value.find(p => p.id === id)
+    if (sp) {
+      form.value.consumedParts.push({ sparePartId: sp.id, sparePartName: sp.name, quantity: 1 })
+    }
+  }
+  // 移除的配件
+  const removedIds = form.value.consumedParts.filter(p => !ids.includes(p.sparePartId)).map(p => p.sparePartId)
+  form.value.consumedParts = form.value.consumedParts.filter(p => !removedIds.includes(p.sparePartId))
+}
+
+function removeConsumedPart(idx: number) {
+  const removed = form.value.consumedParts[idx]
+  form.value.consumedParts.splice(idx, 1)
+  selectedPartIds.value = selectedPartIds.value.filter(id => id !== removed.sparePartId)
+}
+
 onMounted(async () => {
   initDefaultTime()
   await loadData()
   loadEquipments()
+  loadSpareParts()
 })
 </script>
 
@@ -497,18 +493,37 @@ onMounted(async () => {
         <div class="section-card">
           <div class="section-title">配件更换</div>
           <el-form-item label="是否更换配件">
-            <el-radio-group v-model="form.partsReplaced">
+            <el-radio-group v-model="form.partsReplaced" @change="onPartsReplacedChange">
               <el-radio value="no">否</el-radio>
               <el-radio value="yes">是</el-radio>
             </el-radio-group>
           </el-form-item>
 
-          <el-form-item label="更换配件详情" v-if="form.partsReplaced === 'yes'">
-            <div class="voice-input-wrapper">
-              <el-input v-model="form.partsReplacedDetail" type="textarea" :rows="3" placeholder="输入更换的配件名称、配件编号...（可点击键盘麦克风语音输入）" inputmode="text" />
-              <span class="voice-hint">点击键盘 <i class="voice-mic-icon">🎤</i> 按钮即可语音输入</span>
-            </div>
-          </el-form-item>
+          <template v-if="form.partsReplaced === 'yes'">
+            <el-form-item label="选择配件">
+              <el-select v-model="selectedPartIds" multiple filterable placeholder="搜索配件名称..." style="width:100%"
+                @change="onPartsSelectionChange">
+                <el-option v-for="p in spareParts" :key="p.id" :label="p.name + (p.spec ? ' - ' + p.spec : '') + ' (库存:' + p.quantity + p.unit + ')'" :value="p.id" />
+              </el-select>
+            </el-form-item>
+
+            <el-form-item v-if="form.consumedParts.length > 0" label="消耗数量">
+              <div class="parts-quantity-list">
+                <div v-for="(item, idx) in form.consumedParts" :key="item.sparePartId" class="parts-quantity-item">
+                  <span class="parts-name">{{ item.sparePartName }}</span>
+                  <el-input-number v-model="item.quantity" :min="1" size="small" style="width:90px;" />
+                  <el-button size="small" type="danger" text @click="removeConsumedPart(idx)">移除</el-button>
+                </div>
+              </div>
+            </el-form-item>
+
+            <el-form-item label="更换详情补充">
+              <div class="voice-input-wrapper">
+                <el-input v-model="form.partsReplacedDetail" type="textarea" :rows="2" placeholder="其他补充说明（可选，如安装了非库存配件）" inputmode="text" />
+                <span class="voice-hint">点击键盘 <i class="voice-mic-icon">🎤</i> 按钮即可语音输入</span>
+              </div>
+            </el-form-item>
+          </template>
         </div>
 
         <!-- ====== 作业内容卡片 ====== -->
@@ -559,7 +574,7 @@ onMounted(async () => {
               v-for="(photo, index) in form.photos"
               :key="index"
             >
-              <img :src="photo" class="photo-img" loading="lazy" />
+              <img :src="photo.startsWith('data:') ? photo : '/uploads/records/' + photo" class="photo-img" loading="lazy" />
               <div class="photo-delete" @click="removePhoto(index)">
                 <el-icon><Close /></el-icon>
               </div>
@@ -594,7 +609,7 @@ onMounted(async () => {
               v-for="(photo, index) in form.afterPhotos"
               :key="index"
             >
-              <img :src="photo" class="photo-img" loading="lazy" />
+              <img :src="photo.startsWith('data:') ? photo : '/uploads/records/' + photo" class="photo-img" loading="lazy" />
               <div class="photo-delete" @click="removeAfterPhoto(index)">
                 <el-icon><Close /></el-icon>
               </div>
@@ -870,6 +885,25 @@ onMounted(async () => {
 .voice-mic-icon {
   font-style: normal;
   font-size: 13px;
-  vertical-align: -1px;
+}
+
+.parts-quantity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.parts-quantity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f5f7fa;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+.parts-name {
+  flex: 1;
+  font-size: 14px;
+  color: #303133;
 }
 </style>

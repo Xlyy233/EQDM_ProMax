@@ -33,7 +33,7 @@ router.get('/:id', authMiddleware, (req, res) => {
 });
 
 // 创建公告（管理员和经理）
-router.post('/', authMiddleware, requireRole('admin', 'manager'), (req, res) => {
+router.post('/', authMiddleware, requireRole('admin', 'manager', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   const { title, content, isActive } = req.body;
   if (!title || !title.trim()) return res.status(400).json(error('标题不能为空', 400));
   if (!content || !content.trim()) return res.status(400).json(error('内容不能为空', 400));
@@ -42,7 +42,7 @@ router.post('/', authMiddleware, requireRole('admin', 'manager'), (req, res) => 
     id: genId('ann_'),
     title: title.trim(),
     content: content.trim(),
-    isActive: isActive !== false,
+    isActive: typeof isActive === 'boolean' ? isActive : true,
     createdBy: req.user.id,
     createdByName: req.user.realName || req.user.username,
     createdAt: now(),
@@ -53,14 +53,14 @@ router.post('/', authMiddleware, requireRole('admin', 'manager'), (req, res) => 
 });
 
 // 更新公告（管理员和经理）
-router.put('/:id', authMiddleware, requireRole('admin', 'manager'), (req, res) => {
+router.put('/:id', authMiddleware, requireRole('admin', 'manager', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   const item = db.findById('announcements', req.params.id);
   if (!item) return res.status(404).json(error('公告不存在', 404));
 
   const { title, content, isActive } = req.body;
   if (title !== undefined) item.title = title.trim();
   if (content !== undefined) item.content = content.trim();
-  if (isActive !== undefined) item.isActive = isActive;
+  if (isActive !== undefined) item.isActive = typeof isActive === 'boolean' ? isActive : item.isActive;
   item.updatedAt = now();
 
   db.update('announcements', item);
@@ -68,7 +68,7 @@ router.put('/:id', authMiddleware, requireRole('admin', 'manager'), (req, res) =
 });
 
 // 删除公告（管理员和经理）
-router.delete('/:id', authMiddleware, requireRole('admin', 'manager'), (req, res) => {
+router.delete('/:id', authMiddleware, requireRole('admin', 'manager', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   const item = db.findById('announcements', req.params.id);
   if (!item) return res.status(404).json(error('公告不存在', 404));
   db.remove('announcements', req.params.id);

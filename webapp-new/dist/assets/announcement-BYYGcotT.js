@@ -1,0 +1,1 @@
+import{Z as e}from"./index-CZ3FmMtO.js";function c(n){return e.get("/announcements",{params:n})}function o(){return e.get("/announcements/active")}function a(n){return e.post("/announcements",n)}function r(n,t){return e.put("/announcements/"+n,t)}function s(n){return e.delete("/announcements/"+n)}export{c as a,a as c,s as d,o as g,r as u};

@@ -33,6 +33,9 @@ const routes: RouteRecordRaw[] = [
   { path: '/inspections/form', name: 'InspectionForm', component: () => import('@/views/inspections/form.vue'), meta: { title: '开始巡检' } },
   { path: '/inspections/detail/:id', name: 'InspectionDetail', component: () => import('@/views/inspections/detail.vue'), meta: { title: '巡检详情' } },
   { path: '/announcements', name: 'Announcements', component: () => import('@/views/announcements/index.vue'), meta: { title: '系统公告', icon: 'Bell' } },
+  { path: '/spare-parts/list', name: 'SpareParts', component: () => import('@/views/spare-parts/list.vue'), meta: { title: '备件库存', icon: 'Box' } },
+  { path: '/spare-parts/form', name: 'SparePartForm', component: () => import('@/views/spare-parts/form.vue'), meta: { title: '备件表单' } },
+  { path: '/files', name: 'Files', component: () => import('@/views/files/index.vue'), meta: { title: '文件共享', icon: 'Folder' } },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 

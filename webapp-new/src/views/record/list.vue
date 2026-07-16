@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 const router = useRouter()
 const keyword = ref('')
 const filterType = ref('')
+const dateRange = ref<string[]>([])
 const list = ref<WorkRecord[]>([])
 const total = ref(0)
 const page = ref(1)
@@ -22,6 +23,10 @@ function loadData() {
   const params: any = { page: page.value, pageSize: pageSize.value }
   if (keyword.value.trim()) params.keyword = keyword.value.trim()
   if (filterType.value) params.type = filterType.value
+  if (dateRange.value && dateRange.value.length === 2) {
+    params.startTime = dateRange.value[0]
+    params.endTime = dateRange.value[1]
+  }
   if (!canViewAllRecords()) {
     params.createdBy = getCurrentUser()?.id
   }
@@ -73,6 +78,16 @@ onMounted(() => {
           <el-option label="巡检" value="inspection" />
           <el-option label="改善" value="improvement" />
         </el-select>
+        <el-date-picker
+          v-model="dateRange"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          format="YYYY-MM-DD"
+          value-format="YYYY-MM-DD"
+          style="width:260px;"
+        />
         <el-input v-model="keyword" placeholder="搜索标题/设备/内容" clearable style="max-width:300px;flex:1;min-width:200px;" @clear="handleSearch" @keyup.enter="handleSearch">
           <template #prefix><el-icon><Search /></el-icon></template>
         </el-input>

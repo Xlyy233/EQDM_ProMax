@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../config/db');
-const { authMiddleware } = require('../middleware/auth');
+const { authMiddleware, requireRole } = require('../middleware/auth');
 const { success, error } = require('../utils/helper');
 
 const router = express.Router();
@@ -43,14 +43,20 @@ router.put('/batch-types', authMiddleware, (req, res) => {
     if (!updates || !Array.isArray(updates) || updates.length === 0) {
       return res.status(400).json({ code: 400, data: null, message: '更新数据不能为空' });
     }
-    const results = [];
+    const allEquips = db.getAll('equipments');
+    const now = db.now();
+    let count = 0;
     for (const item of updates) {
       const { id, type } = item;
       if (!id || type === undefined) continue;
-      const updated = db.update('equipments', id, { type: type.trim() });
-      if (updated) results.push(updated);
+      const idx = allEquips.findIndex(e => e.id === id);
+      if (idx >= 0) {
+        allEquips[idx] = { ...allEquips[idx], type: type.trim(), updatedAt: now };
+        count++;
+      }
     }
-    res.json(success({ count: results.length }));
+    if (count > 0) db.setAll('equipments', allEquips);
+    res.json(success({ count }));
   } catch (e) {
     res.status(500).json({ code: 500, data: null, message: '批量更新设备类型失败' });
   }
@@ -175,20 +181,26 @@ router.put('/:id', authMiddleware, (req, res) => {
   res.json(success(updated, '设备更新成功'));
 });
 
-router.delete('/all', authMiddleware, (req, res) => {
+router.delete('/all', authMiddleware, requireRole('admin'), (req, res) => {
   const relatedRecords = db.count('records', () => true);
   const relatedPlans = db.count('maintenancePlans', () => true);
+  const relatedInspections = db.count('inspectionRecords', () => true);
   
   db.clear('equipments');
   db.clear('records');
   db.clear('maintenancePlans');
-  res.json(success({ deleted: { equipments: true, records: relatedRecords > 0, plans: relatedPlans > 0 } }, `设备数据已全部清空（同步删除关联记录 ${relatedRecords} 条、维保计划 ${relatedPlans} 条）`));
+  db.clear('inspectionRecords');
+  res.json(success({ deleted: { equipments: true, records: relatedRecords > 0, plans: relatedPlans > 0, inspections: relatedInspections > 0 } }, `设备数据已全部清空（同步删除关联记录 ${relatedRecords} 条、维保计划 ${relatedPlans} 条、巡检记录 ${relatedInspections} 条）`));
 });
 
-router.delete('/:id', authMiddleware, (req, res) => {
+router.delete('/:id', authMiddleware, requireRole('admin', 'manager', 'maintenance_leader', 'inspection_leader', 'coordinator'), (req, res) => {
   const { id } = req.params;
-  const related = db.count('records', r => r.equipmentId === id);
-  if (related > 0) return res.json(error(`该设备关联 ${related} 条运维记录，请先处理后再删除`));
+  const relatedRecords = db.count('records', r => r.equipmentId === id);
+  if (relatedRecords > 0) return res.json(error(`该设备关联 ${relatedRecords} 条运维记录，请先处理后再删除`));
+  const relatedPlans = db.count('maintenancePlans', p => p.equipmentId === id);
+  if (relatedPlans > 0) return res.json(error(`该设备关联 ${relatedPlans} 条维保计划，请先处理后再删除`));
+  const relatedInspections = db.count('inspectionRecords', ir => ir.equipmentId === id);
+  if (relatedInspections > 0) return res.json(error(`该设备关联 ${relatedInspections} 条巡检记录，请先处理后再删除`));
   const result = db.remove('equipments', id);
   if (!result) return res.json(error('设备不存在', 404));
   res.json(success(null, '设备删除成功'));

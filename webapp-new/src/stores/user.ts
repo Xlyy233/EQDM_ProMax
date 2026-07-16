@@ -53,6 +53,11 @@ export function getCurrentUser(): User | null {
   return _user
 }
 
+export function getCurrentUserId(): string {
+  _loadFromStorage()
+  return _user?.id || ''
+}
+
 export function getToken(): string {
   _loadFromStorage()
   return _token
@@ -71,12 +76,14 @@ export function hasRole(role: UserRole | UserRole[]): boolean {
 }
 
 // 权限定义（参考老系统）
-export function canViewAllRecords(): boolean { return hasRole(['manager', 'admin']) }
-export function canExportData(): boolean { return hasRole(['manager', 'admin']) }
-export function canViewStatistics(): boolean { return hasRole(['manager', 'admin']) }
+// 部门经理级权限：manager + 三个新增负责人类别
+const MANAGER_ROLES = ['manager', 'admin', 'maintenance_leader', 'inspection_leader', 'coordinator'] as UserRole[]
+export function canViewAllRecords(): boolean { return hasRole(MANAGER_ROLES) }
+export function canExportData(): boolean { return hasRole(MANAGER_ROLES) }
+export function canViewStatistics(): boolean { return hasRole(MANAGER_ROLES) }
 export function canManageUsers(): boolean { return hasRole(['admin']) }
-export function canManageEquipment(): boolean { return hasRole(['manager', 'admin']) } // 设备管理仅限管理员和部门经理
-export function canManageMaintenance(): boolean { return hasRole(['manager', 'admin']) } // 保养计划仅限管理员和部门经理
+export function canManageEquipment(): boolean { return hasRole(MANAGER_ROLES) }
+export function canManageMaintenance(): boolean { return hasRole(MANAGER_ROLES) }
 export function canViewLogs(): boolean { return hasRole(['admin']) }
 
 export async function login(username: string, password: string): Promise<boolean> {

@@ -498,3 +498,345 @@
 [2026-07-06 06:03:02] [INFO ] GET /assets/detail-Dipojmm4.js 200 1ms - ::1
 [2026-07-06 06:03:02] [INFO ] GET /assets/detail-DBDWoYVJ.css 200 1ms - ::1
 [2026-07-06 06:03:02] [INFO ] GET /assets/detail-CxV9QJst.js 200 1ms - ::1
+[2026-07-06 07:37:07] [INFO ] ========================================
+[2026-07-06 07:37:07] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-06 07:37:07] [INFO ] ========================================
+[2026-07-06 07:37:07] [INFO ]   服务地址: http://localhost:3000
+[2026-07-06 07:37:07] [INFO ]   API 前缀: /api
+[2026-07-06 07:37:07] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-06 07:37:07] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-06 07:37:07] [INFO ]   运行环境: production
+[2026-07-06 07:37:07] [INFO ] ========================================
+[2026-07-06 07:37:07] [INFO ]   默认账号:
+[2026-07-06 07:37:07] [INFO ]     管理员: admin / admin123
+[2026-07-06 07:37:07] [INFO ]     部门经理: manager / manager123
+[2026-07-06 07:37:07] [INFO ]     员工共享: sa / 123456
+[2026-07-06 07:37:07] [INFO ] ========================================
+[2026-07-06 07:37:22] [INFO ] GET /api/notifications/unread 200 16ms - ::1
+[2026-07-06 07:37:22] [INFO ] GET /api/records?page=1&pageSize=10 200 22ms - ::1
+[2026-07-06 07:37:22] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-06 07:37:22] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-07-06 07:37:22] [INFO ] GET /api/announcements/active 200 3ms - ::1
+[2026-07-06 07:37:31] [INFO ] POST /api/auth/login 200 126ms - ::1
+[2026-07-06 07:37:31] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-06 07:37:31] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-06 07:37:31] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 3ms - ::1
+[2026-07-06 07:37:31] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-07-06 07:37:31] [INFO ] GET /api/announcements/active 304 0ms - ::1
+[2026-07-06 07:37:43] [INFO ] GET /api/announcements?page=1&pageSize=10 200 9ms - ::1
+[2026-07-06 07:37:46] [INFO ] GET /api/records?page=1&pageSize=10 304 15ms - ::1
+[2026-07-06 07:37:46] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 07:37:46] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:37:46] [INFO ] GET /api/announcements/active 304 0ms - ::1
+[2026-07-06 07:37:52] [INFO ] POST /api/auth/login 200 133ms - ::1
+[2026-07-06 07:37:52] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-06 07:37:53] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 6ms - ::1
+[2026-07-06 07:37:53] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-06 07:37:53] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:37:53] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 07:37:54] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 12ms - ::1
+[2026-07-06 07:37:55] [INFO ] GET /api/equipments?pageSize=999 200 5ms - ::1
+[2026-07-06 07:37:58] [INFO ] GET /api/equipments?pageSize=999 304 14ms - ::1
+[2026-07-06 07:38:06] [INFO ] GET /api/inspections/templates/by-type/%E6%8C%A4%E5%8E%8B%E6%9C%BA 200 9ms - ::1
+[2026-07-06 07:38:23] [INFO ] GET /api/notifications/unread 304 9ms - ::1
+[2026-07-06 07:38:31] [INFO ] POST /api/inspections/records 200 32ms - ::1
+[2026-07-06 07:38:31] [INFO ] GET /api/inspections/records?page=1&pageSize=20 200 18ms - ::1
+[2026-07-06 07:38:31] [INFO ] GET /api/equipments?pageSize=999 304 3ms - ::1
+[2026-07-06 07:38:34] [INFO ] GET /api/inspections/records/imr8wrvz34i66 200 20ms - ::1
+[2026-07-06 07:38:53] [INFO ] GET /api/notifications/unread 304 26ms - ::1
+[2026-07-06 07:39:10] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 19ms - ::1
+[2026-07-06 07:39:13] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 24ms - ::1
+[2026-07-06 07:39:13] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 07:39:13] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-06 07:39:13] [INFO ] GET /api/announcements/active 304 0ms - ::1
+[2026-07-06 07:39:22] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-06 07:39:33] [INFO ] GET /api/inspections/records?page=1&pageSize=20 304 34ms - ::1
+[2026-07-06 07:39:33] [INFO ] GET /api/equipments?pageSize=999 304 3ms - ::1
+[2026-07-06 07:39:52] [INFO ] POST /api/auth/login 200 96ms - ::1
+[2026-07-06 07:39:52] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-06 07:39:52] [INFO ] GET /api/records?page=1&pageSize=10 304 4ms - ::1
+[2026-07-06 07:39:52] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::1
+[2026-07-06 07:39:52] [INFO ] GET /api/statistics/dashboard 304 0ms - ::1
+[2026-07-06 07:39:52] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 07:39:54] [INFO ] GET /api/inspections/templates 200 15ms - ::1
+[2026-07-06 07:39:55] [INFO ] GET /api/equipments/types 200 3ms - ::1
+[2026-07-06 07:39:59] [INFO ] GET /api/equipments?pageSize=999 304 27ms - ::1
+[2026-07-06 07:40:22] [INFO ] GET /api/notifications/unread 304 27ms - ::1
+[2026-07-06 07:40:34] [INFO ] PUT /api/equipments/batch-types 200 334ms - ::1
+[2026-07-06 07:40:34] [INFO ] GET /api/equipments/types 200 1ms - ::1
+[2026-07-06 07:40:52] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-06 07:41:22] [INFO ] GET /api/notifications/unread 304 27ms - ::1
+[2026-07-06 07:41:28] [INFO ] POST /api/inspections/templates 200 49ms - ::1
+[2026-07-06 07:41:28] [INFO ] GET /api/inspections/templates 200 2ms - ::1
+[2026-07-06 07:41:28] [INFO ] GET /api/equipments/types 304 1ms - ::1
+[2026-07-06 07:41:35] [INFO ] GET /api/knowledge?page=1&pageSize=20 200 23ms - ::1
+[2026-07-06 07:41:35] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/monthly?year=2026&month=7 200 3ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/trend?days=30 200 2ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/cost?months=6 200 5ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/record-type-distribution 200 1ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/parts-replacement 200 2ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/statistics/predictive 200 30ms - ::1
+[2026-07-06 07:41:36] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::1
+[2026-07-06 07:41:37] [INFO ] GET /api/records?page=1&pageSize=10 304 14ms - ::1
+[2026-07-06 07:41:41] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 27ms - ::1
+[2026-07-06 07:41:42] [INFO ] GET /api/equipments?pageSize=999 200 3ms - ::1
+[2026-07-06 07:41:42] [INFO ] GET /api/users?pageSize=999 200 28ms - ::1
+[2026-07-06 07:41:43] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 13ms - ::1
+[2026-07-06 07:41:45] [INFO ] GET /api/maintenance-plans?pageSize=999 200 13ms - ::1
+[2026-07-06 07:41:48] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 14ms - ::1
+[2026-07-06 07:41:50] [INFO ] GET /api/maintenance-plans?pageSize=999 304 21ms - ::1
+[2026-07-06 07:41:51] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 07:41:52] [INFO ] GET /api/maintenance-plans?pageSize=999 304 25ms - ::1
+[2026-07-06 07:41:52] [INFO ] GET /api/notifications/unread 304 2ms - ::1
+[2026-07-06 07:41:52] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 0ms - ::1
+[2026-07-06 07:41:53] [INFO ] GET /api/equipments?pageSize=999 304 28ms - ::1
+[2026-07-06 07:41:53] [INFO ] GET /api/users?pageSize=999 304 1ms - ::1
+[2026-07-06 07:42:22] [INFO ] GET /api/notifications/unread 304 24ms - ::1
+[2026-07-06 07:42:52] [INFO ] GET /api/notifications/unread 304 23ms - ::1
+[2026-07-06 07:43:12] [INFO ] POST /api/maintenance-plans 200 34ms - ::1
+[2026-07-06 07:43:12] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::1
+[2026-07-06 07:43:20] [INFO ] GET /api/maintenance-plans/mmr8wxwqdq8so 200 13ms - ::1
+[2026-07-06 07:43:22] [INFO ] GET /api/notifications/unread 304 26ms - ::1
+[2026-07-06 07:43:26] [INFO ] GET /api/records?page=1&pageSize=10 304 15ms - ::1
+[2026-07-06 07:43:26] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-07-06 07:43:26] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:43:27] [INFO ] GET /api/announcements/active 304 2ms - ::1
+[2026-07-06 07:43:33] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 23ms - ::1
+[2026-07-06 07:43:34] [INFO ] GET /api/records?page=1&pageSize=10 304 18ms - ::1
+[2026-07-06 07:43:35] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 2ms - ::1
+[2026-07-06 07:43:35] [INFO ] GET /api/statistics/dashboard 304 0ms - ::1
+[2026-07-06 07:43:35] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 07:43:52] [INFO ] GET /api/notifications/unread 304 11ms - ::1
+[2026-07-06 07:44:22] [INFO ] GET /api/notifications/unread 304 24ms - ::1
+[2026-07-06 07:44:24] [INFO ] GET /api/maintenance-plans/mmr8wxwqdq8so 304 32ms - ::1
+[2026-07-06 07:44:40] [INFO ] POST /api/auth/login 200 134ms - ::1
+[2026-07-06 07:44:40] [INFO ] GET /api/notifications/unread 200 2ms - ::1
+[2026-07-06 07:44:40] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u003 200 2ms - ::1
+[2026-07-06 07:44:40] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 07:44:40] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:44:40] [INFO ] GET /api/announcements/active 304 0ms - ::1
+[2026-07-06 07:44:49] [INFO ] POST /api/auth/login 200 122ms - ::1
+[2026-07-06 07:44:49] [INFO ] GET /api/notifications/unread 200 2ms - ::1
+[2026-07-06 07:44:49] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 6ms - ::1
+[2026-07-06 07:44:49] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 07:44:49] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:44:49] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 07:44:51] [INFO ] GET /api/maintenance-plans/mmr8wxwqdq8so 304 13ms - ::1
+[2026-07-06 07:58:55] [INFO ] ========================================
+[2026-07-06 07:58:55] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-06 07:58:55] [INFO ] ========================================
+[2026-07-06 07:58:55] [INFO ]   服务地址: http://localhost:3000
+[2026-07-06 07:58:55] [INFO ]   API 前缀: /api
+[2026-07-06 07:58:55] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-06 07:58:55] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-06 07:58:55] [INFO ]   运行环境: production
+[2026-07-06 07:58:55] [INFO ] ========================================
+[2026-07-06 07:58:55] [INFO ]   默认账号:
+[2026-07-06 07:58:55] [INFO ]     管理员: admin / admin123
+[2026-07-06 07:58:55] [INFO ]     部门经理: manager / manager123
+[2026-07-06 07:58:55] [INFO ]     员工共享: sa / 123456
+[2026-07-06 07:58:55] [INFO ] ========================================
+[2026-07-06 07:59:03] [INFO ] GET /api/notifications/unread 200 33ms - ::1
+[2026-07-06 07:59:03] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 16ms - ::1
+[2026-07-06 07:59:03] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-07-06 07:59:03] [INFO ] GET /api/statistics/dashboard 200 2ms - ::1
+[2026-07-06 07:59:03] [INFO ] GET /api/announcements/active 200 2ms - ::1
+[2026-07-06 07:59:08] [INFO ] POST /api/auth/login 200 156ms - ::1
+[2026-07-06 07:59:08] [INFO ] GET /api/notifications/unread 304 6ms - ::1
+[2026-07-06 07:59:09] [INFO ] GET /api/records?page=1&pageSize=10 200 8ms - ::1
+[2026-07-06 07:59:09] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 2ms - ::1
+[2026-07-06 07:59:09] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 07:59:09] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 07:59:11] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 16ms - ::1
+[2026-07-06 07:59:16] [INFO ] POST /api/maintenance-plans/mmr8wxwqdq8so/complete 200 33ms - ::1
+[2026-07-06 07:59:17] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::1
+[2026-07-06 07:59:20] [INFO ] GET /api/notifications/unread 304 16ms - ::1
+[2026-07-06 07:59:21] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 07:59:25] [INFO ] POST /api/maintenance-plans/mmr8wxwqdq8so/complete 200 32ms - ::1
+[2026-07-06 07:59:25] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 1ms - ::1
+[2026-07-06 07:59:28] [INFO ] GET /api/notifications/unread 304 14ms - ::1
+[2026-07-06 07:59:28] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 07:59:29] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-06 07:59:29] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 07:59:29] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-06 07:59:29] [INFO ] GET /api/notifications/unread 304 19ms - ::1
+[2026-07-06 07:59:29] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 07:59:31] [INFO ] DELETE /api/maintenance-plans/mmr8wxwqdq8so 200 30ms - ::1
+[2026-07-06 07:59:31] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 0ms - ::1
+[2026-07-06 07:59:32] [INFO ] GET /api/equipments?pageSize=999 200 18ms - ::1
+[2026-07-06 07:59:32] [INFO ] GET /api/users?pageSize=999 200 1ms - ::1
+[2026-07-06 07:59:59] [INFO ] GET /api/notifications/unread 304 26ms - ::1
+[2026-07-06 08:00:04] [INFO ] POST /api/maintenance-plans 200 35ms - ::1
+[2026-07-06 08:00:04] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 2ms - ::1
+[2026-07-06 08:00:07] [INFO ] GET /api/notifications/unread 304 15ms - ::1
+[2026-07-06 08:00:07] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/dashboard 304 12ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/monthly?year=2026&month=7 200 3ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/trend?days=30 200 2ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/cost?months=6 200 1ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/record-type-distribution 200 1ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/parts-replacement 200 2ms - ::1
+[2026-07-06 08:00:08] [INFO ] GET /api/statistics/predictive 200 12ms - ::1
+[2026-07-06 08:00:09] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 12ms - ::1
+[2026-07-06 08:00:11] [INFO ] GET /api/maintenance-plans?pageSize=999 200 13ms - ::1
+[2026-07-06 08:00:13] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 12ms - ::1
+[2026-07-06 08:00:14] [INFO ] GET /api/maintenance-plans?pageSize=999 304 28ms - ::1
+[2026-07-06 08:00:15] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:00:21] [INFO ] POST /api/auth/login 200 140ms - ::1
+[2026-07-06 08:00:21] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-06 08:00:21] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 5ms - ::1
+[2026-07-06 08:00:21] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-06 08:00:21] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:00:21] [INFO ] GET /api/announcements/active 304 2ms - ::1
+[2026-07-06 08:00:22] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 12ms - ::1
+[2026-07-06 08:00:25] [INFO ] GET /api/equipments?pageSize=999 304 29ms - ::1
+[2026-07-06 08:00:25] [INFO ] GET /api/records?equipmentId=emqwcj0ukij7n&page=1&pageSize=1 200 2ms - ::1
+[2026-07-06 08:00:28] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 13ms - ::1
+[2026-07-06 08:00:29] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 2ms - ::1
+[2026-07-06 08:00:29] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 27ms - ::1
+[2026-07-06 08:00:29] [INFO ] GET /api/statistics/dashboard 304 2ms - ::1
+[2026-07-06 08:00:29] [INFO ] GET /api/announcements/active 304 2ms - ::1
+[2026-07-06 08:00:41] [INFO ] POST /api/auth/login 200 121ms - ::1
+[2026-07-06 08:00:41] [INFO ] GET /api/notifications/unread 200 1ms - ::1
+[2026-07-06 08:00:41] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u005 200 1ms - ::1
+[2026-07-06 08:00:41] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-06 08:00:41] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:00:41] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 08:00:47] [INFO ] PUT /api/notifications/read-all 200 45ms - ::1
+[2026-07-06 08:00:58] [INFO ] POST /api/auth/login 200 116ms - ::1
+[2026-07-06 08:00:58] [INFO ] GET /api/notifications/unread 200 1ms - ::1
+[2026-07-06 08:00:58] [INFO ] GET /api/records?page=1&pageSize=10 304 5ms - ::1
+[2026-07-06 08:00:58] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 0ms - ::1
+[2026-07-06 08:00:58] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:00:58] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 08:00:59] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 13ms - ::1
+[2026-07-06 08:01:03] [INFO ] GET /api/records?page=1&pageSize=10 304 25ms - ::1
+[2026-07-06 08:01:03] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 0ms - ::1
+[2026-07-06 08:01:03] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:01:03] [INFO ] GET /api/announcements/active 304 0ms - ::1
+[2026-07-06 08:01:04] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:01:10] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&status=active 200 24ms - ::1
+[2026-07-06 08:01:10] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:01:11] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&status=paused 200 16ms - ::1
+[2026-07-06 08:01:12] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10&status=completed 200 2ms - ::1
+[2026-07-06 08:01:12] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 14ms - ::1
+[2026-07-06 08:01:13] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:01:14] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 14ms - ::1
+[2026-07-06 08:01:18] [INFO ] PUT /api/maintenance-plans/mmr8xjlinpxdj 200 48ms - ::1
+[2026-07-06 08:01:18] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 2ms - ::1
+[2026-07-06 08:01:20] [INFO ] PUT /api/maintenance-plans/mmr8xjlinpxdj 200 32ms - ::1
+[2026-07-06 08:01:21] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 2ms - ::1
+[2026-07-06 08:01:23] [INFO ] GET /api/equipments?pageSize=999 304 15ms - ::1
+[2026-07-06 08:01:23] [INFO ] GET /api/users?pageSize=999 304 3ms - ::1
+[2026-07-06 08:01:23] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 2ms - ::1
+[2026-07-06 08:01:25] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 11ms - ::1
+[2026-07-06 08:01:28] [INFO ] POST /api/maintenance-plans/mmr8xjlinpxdj/complete 200 33ms - ::1
+[2026-07-06 08:01:28] [INFO ] GET /api/notifications/unread 304 1ms - ::1
+[2026-07-06 08:01:28] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 1ms - ::1
+[2026-07-06 08:01:32] [INFO ] POST /api/maintenance-plans/mmr8xjlinpxdj/complete 200 30ms - ::1
+[2026-07-06 08:01:33] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 1ms - ::1
+[2026-07-06 08:01:38] [INFO ] GET /api/notifications/unread 304 20ms - ::1
+[2026-07-06 08:01:39] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 1ms - ::1
+[2026-07-06 08:09:11] [INFO ] ========================================
+[2026-07-06 08:09:11] [INFO ]   设备台账与运维管理系统 - 后端服务
+[2026-07-06 08:09:11] [INFO ] ========================================
+[2026-07-06 08:09:11] [INFO ]   服务地址: http://localhost:3000
+[2026-07-06 08:09:11] [INFO ]   API 前缀: /api
+[2026-07-06 08:09:11] [INFO ]   健康检查: http://localhost:3000/api/health
+[2026-07-06 08:09:11] [INFO ]   数据文件: ./data/eqdm.json
+[2026-07-06 08:09:11] [INFO ]   运行环境: production
+[2026-07-06 08:09:11] [INFO ] ========================================
+[2026-07-06 08:09:11] [INFO ]   默认账号:
+[2026-07-06 08:09:11] [INFO ]     管理员: admin / admin123
+[2026-07-06 08:09:11] [INFO ]     部门经理: manager / manager123
+[2026-07-06 08:09:11] [INFO ]     员工共享: sa / 123456
+[2026-07-06 08:09:11] [INFO ] ========================================
+[2026-07-06 08:09:24] [INFO ] GET /api/notifications/unread 200 25ms - ::1
+[2026-07-06 08:09:24] [INFO ] GET /api/records?page=1&pageSize=10 200 17ms - ::1
+[2026-07-06 08:09:24] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-06 08:09:24] [INFO ] GET /api/statistics/dashboard 200 1ms - ::1
+[2026-07-06 08:09:24] [INFO ] GET /api/announcements/active 200 2ms - ::1
+[2026-07-06 08:09:31] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 14ms - ::1
+[2026-07-06 08:09:33] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 12ms - ::1
+[2026-07-06 08:09:36] [INFO ] POST /api/maintenance-plans/mmr8xjlinpxdj/complete 200 32ms - ::1
+[2026-07-06 08:09:36] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 3ms - ::1
+[2026-07-06 08:09:40] [INFO ] PUT /api/maintenance-plans/mmr8xjlinpxdj 200 30ms - ::1
+[2026-07-06 08:09:41] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 2ms - ::1
+[2026-07-06 08:09:49] [INFO ] POST /api/maintenance-plans/mmr8xjlinpxdj/complete 200 31ms - ::1
+[2026-07-06 08:09:50] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 1ms - ::1
+[2026-07-06 08:09:51] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 12ms - ::1
+[2026-07-06 08:09:54] [INFO ] GET /api/notifications/unread 304 27ms - ::1
+[2026-07-06 08:10:02] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 304 12ms - ::1
+[2026-07-06 08:10:08] [INFO ] PUT /api/maintenance-plans/mmr8xjlinpxdj 200 50ms - ::1
+[2026-07-06 08:10:08] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 2ms - ::1
+[2026-07-06 08:10:12] [INFO ] POST /api/maintenance-plans/mmr8xjlinpxdj/complete 200 29ms - ::1
+[2026-07-06 08:10:13] [INFO ] GET /api/maintenance-plans/mmr8xjlinpxdj 200 2ms - ::1
+[2026-07-06 08:10:14] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 15ms - ::1
+[2026-07-06 08:10:20] [INFO ] GET /api/equipments?pageSize=999 200 25ms - ::1
+[2026-07-06 08:10:20] [INFO ] GET /api/users?pageSize=999 200 2ms - ::1
+[2026-07-06 08:10:21] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 15ms - ::1
+[2026-07-06 08:10:22] [INFO ] GET /api/maintenance-plans?pageSize=999 200 1ms - ::1
+[2026-07-06 08:10:24] [INFO ] GET /api/notifications/unread 304 26ms - ::1
+[2026-07-06 08:10:25] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 21ms - ::1
+[2026-07-06 08:10:26] [INFO ] GET /api/maintenance-plans?pageSize=999 304 14ms - ::1
+[2026-07-06 08:10:28] [INFO ] GET /api/maintenance-plans?pageSize=999 304 25ms - ::1
+[2026-07-06 08:10:30] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 12ms - ::1
+[2026-07-06 08:10:32] [INFO ] GET /api/maintenance-plans?pageSize=999 304 22ms - ::1
+[2026-07-06 08:10:33] [INFO ] GET /api/maintenance-plans?pageSize=999 304 15ms - ::1
+[2026-07-06 08:10:36] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 29ms - ::1
+[2026-07-06 08:10:41] [INFO ] GET /api/maintenance-plans?pageSize=999 304 14ms - ::1
+[2026-07-06 08:10:42] [INFO ] GET /api/maintenance-plans?pageSize=999 304 27ms - ::1
+[2026-07-06 08:10:43] [INFO ] GET /api/maintenance-plans?pageSize=999 304 1ms - ::1
+[2026-07-06 08:10:44] [INFO ] GET /api/maintenance-plans?pageSize=999 304 30ms - ::1
+[2026-07-06 08:10:45] [INFO ] GET /api/maintenance-plans?pageSize=999 304 1ms - ::1
+[2026-07-06 08:10:46] [INFO ] GET /api/maintenance-plans?pageSize=999 304 24ms - ::1
+[2026-07-06 08:10:46] [INFO ] GET /api/maintenance-plans?pageSize=999 304 0ms - ::1
+[2026-07-06 08:10:48] [INFO ] GET /api/maintenance-plans?pageSize=999 304 23ms - ::1
+[2026-07-06 08:10:48] [INFO ] GET /api/maintenance-plans?pageSize=999 304 0ms - ::1
+[2026-07-06 08:10:49] [INFO ] GET /api/maintenance-plans?pageSize=999 304 20ms - ::1
+[2026-07-06 08:10:50] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 1ms - ::1
+[2026-07-06 08:10:51] [INFO ] GET /api/equipments?pageSize=999 304 13ms - ::1
+[2026-07-06 08:10:51] [INFO ] GET /api/users?pageSize=999 304 1ms - ::1
+[2026-07-06 08:10:54] [INFO ] GET /api/notifications/unread 304 24ms - ::1
+[2026-07-06 08:11:18] [INFO ] POST /api/maintenance-plans 200 46ms - ::1
+[2026-07-06 08:11:19] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 200 2ms - ::1
+[2026-07-06 08:11:21] [INFO ] GET /api/maintenance-plans/mmr8xy1z5jgqf 200 14ms - ::1
+[2026-07-06 08:11:24] [INFO ] GET /api/notifications/unread 304 29ms - ::1
+[2026-07-06 08:11:32] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 13ms - ::1
+[2026-07-06 08:11:34] [INFO ] GET /api/maintenance-plans?pageSize=999 200 21ms - ::1
+[2026-07-06 08:11:35] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 16ms - ::1
+[2026-07-06 08:11:45] [INFO ] POST /api/auth/login 200 134ms - ::1
+[2026-07-06 08:11:45] [INFO ] GET /api/notifications/unread 304 0ms - ::1
+[2026-07-06 08:11:46] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 200 7ms - ::1
+[2026-07-06 08:11:46] [INFO ] GET /api/maintenance-plans/upcoming?days=7 200 1ms - ::1
+[2026-07-06 08:11:46] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:11:46] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 08:11:54] [INFO ] GET /api/maintenance-plans/mmr8xy1z5jgqf 304 24ms - ::1
+[2026-07-06 08:12:10] [INFO ] GET /api/equipments?pageSize=999 304 20ms - ::1
+[2026-07-06 08:12:11] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1 200 3ms - ::1
+[2026-07-06 08:12:15] [INFO ] GET /api/notifications/unread 304 17ms - ::1
+[2026-07-06 08:12:16] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1&type=maintenance 200 3ms - ::1
+[2026-07-06 08:12:19] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1&type=repair 200 14ms - ::1
+[2026-07-06 08:12:22] [INFO ] GET /api/records?equipmentId=emqwcj0udcd92&page=1&pageSize=1&type=maintenance 304 26ms - ::1
+[2026-07-06 08:12:35] [INFO ] GET /api/maintenance-plans/mmr8xy1z5jgqf 304 12ms - ::1
+[2026-07-06 08:12:37] [INFO ] GET /api/records?page=1&pageSize=10&createdBy=u006 304 26ms - ::1
+[2026-07-06 08:12:37] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 08:12:37] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:12:37] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 08:12:41] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 14ms - ::1
+[2026-07-06 08:12:44] [INFO ] GET /api/equipments?pageSize=999 304 24ms - ::1
+[2026-07-06 08:12:44] [INFO ] GET /api/users?pageSize=999 304 1ms - ::1
+[2026-07-06 08:12:45] [INFO ] GET /api/notifications/unread 304 23ms - ::1
+[2026-07-06 08:13:03] [WARN ] POST /api/maintenance-plans 403 1ms - ::1
+[2026-07-06 08:13:09] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 19ms - ::1
+[2026-07-06 08:13:16] [INFO ] GET /api/notifications/unread 304 21ms - ::1
+[2026-07-06 08:13:21] [INFO ] POST /api/auth/login 200 129ms - ::1
+[2026-07-06 08:13:21] [INFO ] GET /api/notifications/unread 304 3ms - ::1
+[2026-07-06 08:13:21] [INFO ] GET /api/records?page=1&pageSize=10 304 3ms - ::1
+[2026-07-06 08:13:21] [INFO ] GET /api/maintenance-plans/upcoming?days=7 304 1ms - ::1
+[2026-07-06 08:13:21] [INFO ] GET /api/statistics/dashboard 304 1ms - ::1
+[2026-07-06 08:13:21] [INFO ] GET /api/announcements/active 304 1ms - ::1
+[2026-07-06 08:13:29] [INFO ] GET /api/maintenance-plans?page=1&pageSize=10 304 13ms - ::1
+[2026-07-06 08:13:31] [INFO ] GET /api/equipments?pageSize=999 304 30ms - ::1
+[2026-07-06 08:13:31] [INFO ] GET /api/users?pageSize=999 304 1ms - ::1

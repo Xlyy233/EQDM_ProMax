@@ -1,7 +1,7 @@
 export type EquipmentStatus = 'in_use' | 'stopped' | 'scrapped'
 export type RecordType = 'repair' | 'maintenance' | 'inspection' | 'improvement'
 export type RecordStatus = 'completed' | 'approved' | 'pending'
-export type UserRole = 'employee' | 'manager' | 'admin'
+export type UserRole = 'employee' | 'manager' | 'admin' | 'maintenance_leader' | 'inspection_leader' | 'coordinator'
 export type MaintenanceCycleType = 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'yearly'
 export type MaintenancePlanStatus = 'active' | 'paused' | 'completed'
 
@@ -72,6 +72,13 @@ export interface WorkRecord {
   stopDurationUnit: 'minutes' | 'hours'
   partsReplaced: 'yes' | 'no'
   partsReplacedDetail: string
+  consumedParts: ConsumedPart[]
+}
+
+export interface ConsumedPart {
+  sparePartId: string
+  sparePartName: string
+  quantity: number
 }
 
 export interface User {
@@ -96,6 +103,8 @@ export interface MaintenancePlan {
   nextMaintenanceDate: string
   responsibleUserId: string
   responsibleUserName: string
+  responsibleUserIds: string[]
+  responsibleUserNames: string[]
   status: MaintenancePlanStatus
   remark: string
   createdAt: string
@@ -111,9 +120,22 @@ export interface DashboardData {
   monthlyMaintenanceCount: number
   monthlyInspectionCount: number
   mttr: number
+  mtbf: number
   availabilityRate: number
+  maintenanceRate: number
   pendingRecords: number
   completedRecords: number
+  lastMonthRepairCount: number
+  lowStockParts: LowStockPart[]
+}
+
+export interface LowStockPart {
+  id: string
+  name: string
+  spec: string
+  quantity: number
+  minStock: number
+  unit: string
 }
 
 export interface TrendData {
@@ -265,6 +287,21 @@ export interface PartsReplacementData {
   equipmentStats: Array<{ name: string; count: number; details: string[] }>
 }
 
+export interface SparePart {
+  id: string
+  name: string
+  spec: string
+  quantity: number
+  minStock: number
+  unit: string
+  location: string
+  equipmentId: string
+  equipmentName: string
+  remark: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface PaginatedResponse<T> {
   list: T[]
   total: number
@@ -281,7 +318,7 @@ export interface ApiResponse<T = any> {
 export const statusMap: Record<EquipmentStatus, string> = { in_use: '在用', stopped: '停用', scrapped: '报废' }
 export const recordTypeMap: Record<RecordType, string> = { repair: '维修', maintenance: '保养', inspection: '巡检', improvement: '改善' }
 export const recordStatusMap: Record<RecordStatus, string> = { completed: '已完成', approved: '已审核', pending: '待处理' }
-export const roleMap: Record<UserRole, string> = { employee: '普通员工', manager: '部门经理', admin: '系统管理员' }
+export const roleMap: Record<UserRole, string> = { employee: '普通员工', manager: '部门经理', admin: '系统管理员', maintenance_leader: '维修负责人', inspection_leader: '保养巡检负责人', coordinator: '总协调主管' }
 export const cycleTypeMap: Record<MaintenanceCycleType, string> = { daily: '每天', weekly: '每周', monthly: '每月', quarterly: '每季度', yearly: '每年' }
 export const maintenanceStatusMap: Record<MaintenancePlanStatus, string> = { active: '进行中', paused: '已暂停', completed: '已完成' }
 

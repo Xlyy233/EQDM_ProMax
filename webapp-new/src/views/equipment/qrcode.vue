@@ -6,6 +6,7 @@ import { canManageEquipment, loadFromStorage, isLoggedIn } from '@/stores/user'
 import type { Equipment } from '@/types'
 import * as equipmentApi from '@/api/equipment'
 import QRCode from 'qrcode'
+import JSZip from 'jszip'
 
 const router = useRouter()
 const list = ref<Equipment[]>([])
@@ -15,6 +16,8 @@ const pageSize = ref(20)
 const loading = ref(false)
 const keyword = ref('')
 const qrCodeImages = ref<Record<string, string>>({})
+const selectedIds = ref(new Set<string>())
+const selectAll = ref(false)
 
 const hasPermission = canManageEquipment()
 
@@ -72,6 +75,44 @@ function handleDownloadOne(eq: Equipment) {
   ElMessage.success('下载成功')
 }
 
+function toggleSelect(id: string) {
+  const s = new Set(selectedIds.value)
+  s.has(id) ? s.delete(id) : s.add(id)
+  selectedIds.value = s
+  selectAll.value = list.value.length > 0 && list.value.every(eq => s.has(eq.id))
+}
+
+function onSelectAll(v: boolean) {
+  selectedIds.value = v ? new Set(list.value.map(eq => eq.id)) : new Set()
+}
+
+async function handleBatchDownload() {
+  const ids = Array.from(selectedIds.value)
+  if (ids.length === 0) {
+    ElMessage.warning('请先选择设备')
+    return
+  }
+  const zip = new JSZip()
+  for (const id of ids) {
+    const dataUrl = qrCodeImages.value[id]
+    if (!dataUrl) continue
+    const base64 = dataUrl.split(',')[1]
+    if (!base64) continue
+    const eq = list.value.find(e => e.id === id)
+    const fileName = `${eq?.code || id}_${eq?.name || ''}.png`.replace(/[\\/:*?"<>|]/g, '_')
+    zip.file(fileName, base64, { base64: true })
+  }
+  const blob = await zip.generateAsync({ type: 'blob' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = `设备二维码_${new Date().toISOString().slice(0, 10)}.zip`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(a.href)
+  ElMessage.success(`已打包下载 ${ids.length} 个设备二维码`)
+}
+
 function handlePageChange(p: number) { page.value = p; loadData() }
 </script>
 
@@ -82,7 +123,11 @@ function handlePageChange(p: number) { page.value = p; loadData() }
         <el-icon :size="22"><PictureFilled /></el-icon>
         <h2 class="page-title">二维码管理</h2>
       </div>
-      
+      <div style="display:flex;gap:8px;">
+        <el-button v-if="selectedIds.size > 0" type="success" @click="handleBatchDownload">
+          <el-icon><Download /></el-icon>批量下载 ({{ selectedIds.size }})
+        </el-button>
+      </div>
     </div>
 
     <!-- 搜索栏 -->
@@ -102,15 +147,22 @@ function handlePageChange(p: number) { page.value = p; loadData() }
       <el-button type="primary" @click="onSearch">
         <el-icon><Search /></el-icon> 搜索
       </el-button>
+      <el-checkbox v-model="selectAll" @change="onSelectAll" style="margin-left:auto;">全选</el-checkbox>
     </div>
 
     <!-- 二维码卡片网格 -->
     <div v-loading="loading" class="qrcode-grid">
       <div
-        class="qrcode-card"
+        :class="['qrcode-card', { selected: selectedIds.has(eq.id) }]"
         v-for="eq in list"
         :key="eq.id"
       >
+        <el-checkbox
+          :model-value="selectedIds.has(eq.id)"
+          @change="toggleSelect(eq.id)"
+          class="card-checkbox"
+          @click.stop
+        />
         <div class="card-qr">
           <img v-if="qrCodeImages[eq.id]" :src="qrCodeImages[eq.id]" class="qr-img" />
           <div v-else class="qr-placeholder">
@@ -187,6 +239,18 @@ function handlePageChange(p: number) { page.value = p; loadData() }
 
 .qrcode-card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.qrcode-card.selected {
+  border-color: var(--el-color-primary);
+  background: var(--el-color-primary-light-9);
+}
+
+.card-checkbox {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
 }
 
 .card-qr {

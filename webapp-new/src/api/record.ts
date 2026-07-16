@@ -37,6 +37,21 @@ export async function deleteRecord(id: string): Promise<ApiResponse<void>> {
   return res.data
 }
 
+export async function uploadRecordPhoto(file: Blob): Promise<string> {
+  const { getToken } = await import('@/stores/user')
+  const token = getToken()
+  const formData = new FormData()
+  formData.append('file', file, 'photo.jpg')
+  const res = await fetch('/api/records/upload-photo', {
+    method: 'POST',
+    headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+    body: formData
+  })
+  const data = await res.json()
+  if (data.code !== 200) throw new Error(data.message || '上传失败')
+  return data.data.fileName
+}
+
 export async function getRecordStats(startTime: string, endTime: string): Promise<ApiResponse<StatisticsData>> {
   const res = await request.get('/records/stats', { params: { startTime, endTime } })
   return res.data

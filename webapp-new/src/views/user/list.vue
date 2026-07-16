@@ -116,6 +116,9 @@ onMounted(loadData)
           <el-select v-model="form.role" style="width:100%;">
             <el-option label="普通员工" value="employee" />
             <el-option label="部门经理" value="manager" />
+            <el-option label="维修负责人" value="maintenance_leader" />
+            <el-option label="保养巡检负责人" value="inspection_leader" />
+            <el-option label="总协调主管" value="coordinator" />
             <el-option label="系统管理员" value="admin" />
           </el-select>
         </el-form-item>

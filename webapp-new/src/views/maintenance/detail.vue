@@ -5,11 +5,13 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 import { cycleTypeMap, maintenanceStatusMap } from '@/types'
 import type { MaintenancePlan } from '@/types'
 import * as maintenanceApi from '@/api/maintenance'
+import { canManageMaintenance } from '@/stores/user'
 
 const route = useRoute()
 const router = useRouter()
 const plan = ref<MaintenancePlan | null>(null)
 const loading = ref(true)
+const canEdit = canManageMaintenance()
 
 function loadData() {
   loading.value = true
@@ -57,6 +59,16 @@ function goToRecord() {
   router.push('/record/new?equipmentId=' + encodeURIComponent(plan.value.equipmentId) + '&equipmentName=' + encodeURIComponent(plan.value.equipmentName))
 }
 
+function handleReactivate() {
+  if (!plan.value) return
+  ElMessageBox.confirm('确定重新激活此保养计划？', '确认', { type: 'info' }).then(() => {
+    maintenanceApi.updatePlan(route.params.id as string, { status: 'active' }).then(() => {
+      ElMessage.success('已重新激活')
+      loadData()
+    }).catch(() => {})
+  }).catch(() => {})
+}
+
 onMounted(loadData)
 </script>
 
@@ -71,21 +83,26 @@ onMounted(loadData)
         <el-button type="primary" @click="goToRecord">
           <el-icon><Edit /></el-icon> 填写保养记录
         </el-button>
-        <el-button v-if="plan.status==='active'" type="success" @click="handleComplete">
-          <el-icon><Check /></el-icon> 完成保养
-        </el-button>
-        <el-button v-if="plan.status==='active'" type="warning" @click="handlePause">
-          <el-icon><VideoPause /></el-icon> 暂停
-        </el-button>
-        <el-button v-if="plan.status==='paused'" type="success" @click="handleResume">
-          <el-icon><VideoPlay /></el-icon> 恢复
-        </el-button>
-        <el-button type="primary" @click="router.push(`/maintenance/${route.params.id}/edit`)">
-          <el-icon><Edit /></el-icon> 编辑
-        </el-button>
-        <el-button type="danger" @click="handleDelete">
-          <el-icon><Delete /></el-icon> 删除
-        </el-button>
+        <template v-if="canEdit">
+          <el-button v-if="plan.status==='active'" type="success" @click="handleComplete">
+            <el-icon><Check /></el-icon> 完成保养
+          </el-button>
+          <el-button v-if="plan.status==='active'" type="warning" @click="handlePause">
+            <el-icon><VideoPause /></el-icon> 暂停
+          </el-button>
+          <el-button v-if="plan.status==='paused'" type="success" @click="handleResume">
+            <el-icon><VideoPlay /></el-icon> 恢复
+          </el-button>
+          <el-button v-if="plan.status==='completed'" type="primary" @click="handleReactivate">
+            <el-icon><RefreshRight /></el-icon> 重新激活
+          </el-button>
+          <el-button type="primary" @click="router.push(`/maintenance/${route.params.id}/edit`)">
+            <el-icon><Edit /></el-icon> 编辑
+          </el-button>
+          <el-button type="danger" @click="handleDelete">
+            <el-icon><Delete /></el-icon> 删除
+          </el-button>
+        </template>
       </div>
     </div>
 
@@ -101,7 +118,7 @@ onMounted(loadData)
           </el-descriptions-item>
           <el-descriptions-item label="设备名称">{{ plan.equipmentName }}</el-descriptions-item>
           <el-descriptions-item label="设备编号">{{ plan.equipmentCode || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="负责人">{{ plan.responsibleUserName || '-' }}</el-descriptions-item>
+          <el-descriptions-item label="负责人">{{ (plan.responsibleUserNames && plan.responsibleUserNames.length > 0) ? plan.responsibleUserNames.join('、') : (plan.responsibleUserName || '-') }}</el-descriptions-item>
           <el-descriptions-item label="创建时间">{{ plan.createdAt || '-' }}</el-descriptions-item>
         </el-descriptions>
       </div>
